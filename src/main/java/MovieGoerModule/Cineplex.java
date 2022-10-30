@@ -1,16 +1,16 @@
-package test.src;
+package MovieGoerModule;
 
 public class Cineplex {
     private Cinema[] room;
 
-    public Cineplex(int numRooms){
+    public Cineplex(int numRooms) {
         room = new Cinema[numRooms];
-        for(int i = 0; i < numRooms; i++){
+        for (int i = 0; i < numRooms; i++) {
             room[i] = new Cinema();
         }
     }
 
-    public static void main(String[] args) {    //test
+    public static void main(String[] args) { // test
         Cineplex c = new Cineplex(2);
         c.room[0].printSeats();
     }
