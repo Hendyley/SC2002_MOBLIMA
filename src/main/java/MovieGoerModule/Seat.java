@@ -1,17 +1,17 @@
-package test.src;
+package MovieGoerModule;
 
 public class Seat {
     private boolean seat;
 
-    public Seat(){
+    public Seat() {
         this.seat = false;
     }
 
-    public boolean isTaken(){
+    public boolean isTaken() {
         return seat;
     }
 
-    public void bookSeat(){
+    public void bookSeat() {
         this.seat = true;
     }
 }
