@@ -1,4 +1,4 @@
-package MovieGoerModuleApp;
+package MovieGoerModule;
 
 public class Transaction {
     private String id;

@@ -1,4 +1,4 @@
-package MovieGoerModuleApp;
+package MovieGoerModule;
 
 import java.util.ArrayList;
 
