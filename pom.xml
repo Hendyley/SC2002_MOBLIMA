@@ -8,8 +8,7 @@
     <artifactId>SC2002_MOBLIMA</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
+        <maven.compiler.release>9</maven.compiler.release>
     </properties>
 
 
