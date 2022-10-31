@@ -19,5 +19,4 @@ public class Staff implements Serializable {
         return staffPassword;
     }
 
-
 }

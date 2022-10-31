@@ -20,7 +20,7 @@ public class AdminModuleApp {
         optionSelected = sc.nextInt();
         sc.nextLine();
 
-        switch(optionSelected){
+        switch (optionSelected) {
             case 1:
                 System.out.println("Sign Up");
                 System.out.print("Username:");
@@ -28,10 +28,10 @@ public class AdminModuleApp {
                 System.out.print("Password:");
                 staffPassword = sc.nextLine();
 
-                //add staff
-                staff1 = new Staff(staffUsername,staffPassword);
+                // add staff
+                staff1 = new Staff(staffUsername, staffPassword);
                 staffList = getStaffListFromFile();
-                addStaffToFile(staffList,staff1);
+                addStaffToFile(staffList, staff1);
                 break;
             case 2:
                 System.out.println("Login");
@@ -40,10 +40,10 @@ public class AdminModuleApp {
                 System.out.print("Password:");
                 staffPassword = sc.nextLine();
 
-                //login
-                staff1 = new Staff(staffUsername,staffPassword);
+                // login
+                staff1 = new Staff(staffUsername, staffPassword);
                 staffList = getStaffListFromFile();
-                login(staffList,staff1);
+                login(staffList, staff1);
 
                 break;
             default:
@@ -51,10 +51,9 @@ public class AdminModuleApp {
                 printStaffList();
         }
 
-
     }
 
-    public static ArrayList<Staff> getStaffListFromFile() throws IOException,ClassNotFoundException {
+    public static ArrayList<Staff> getStaffListFromFile() throws IOException, ClassNotFoundException {
         ArrayList<Staff> staffList = new ArrayList<Staff>();
         try {
             FileInputStream fileInputStream2 = new FileInputStream("staffList.txt");
@@ -75,9 +74,9 @@ public class AdminModuleApp {
         return staffList;
     }
 
-    public static void addStaffToFile(ArrayList<Staff> staffList, Staff staff) throws IOException{
+    public static void addStaffToFile(ArrayList<Staff> staffList, Staff staff) throws IOException {
 
-        if(!isUsernameExist(staffList,staff)){
+        if (!isUsernameExist(staffList, staff)) {
             staffList.add(staff);
             FileOutputStream fileOutputStream = new FileOutputStream("staffList.txt");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -93,7 +92,7 @@ public class AdminModuleApp {
 
     public static boolean isUsernameExist(ArrayList<Staff> staffList, Staff staffToAdd) {
         String staffUsername = staffToAdd.getStaffUsername();
-        for (Staff s : staffList){
+        for (Staff s : staffList) {
             if (s.getStaffUsername().equals(staffUsername)) {
                 return true;
             }
@@ -101,10 +100,10 @@ public class AdminModuleApp {
         return false;
     }
 
-    public static boolean login(ArrayList<Staff>staffList, Staff staffToLogin){
+    public static boolean login(ArrayList<Staff> staffList, Staff staffToLogin) {
         String staffUsername = staffToLogin.getStaffUsername();
         String staffPassword = staffToLogin.getStaffPassword();
-        for (Staff s : staffList){
+        for (Staff s : staffList) {
             if (s.getStaffUsername().equals(staffUsername)
                     && s.getStaffPassword().equals(staffPassword)) {
                 System.out.println("Login Success");
@@ -116,10 +115,10 @@ public class AdminModuleApp {
     }
 
     public static void printStaffList() throws IOException, ClassNotFoundException {
-        //get updated staffList from file
+        // get updated staffList from file
         ArrayList<Staff> staffList = getStaffListFromFile();
-        for(Staff s: staffList){
-            System.out.printf("username: %s, password: %s\n",s.getStaffUsername(),s.getStaffPassword());
+        for (Staff s : staffList) {
+            System.out.printf("username: %s, password: %s\n", s.getStaffUsername(), s.getStaffPassword());
         }
     }
 
