@@ -1,15 +1,23 @@
 package MovieGoerModule;
 
+import java.util.Calendar;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MovieGoerModuleApp {
     public static void main(String[] args) {
         // Initialisation
+        Calendar today = Calendar.getInstance();
+
         Cineplex cathay = new Cineplex(3);
 
         Day day;
         int TimeSlot; // we use 24h timing. 5pm = 1700;
         int numOfMovies = 3;
+
+        String Date1 = "31/10/2022";
+
         Movie movie1 = new Movie("Batman");
         Movie movie2 = new Movie("Joker");
         Movie movie3 = new Movie("Superman");
@@ -46,6 +54,8 @@ public class MovieGoerModuleApp {
                     break;
                 case 3:
                     System.out.println("3. Seat Availability and Selection of Seats");
+                    Calendar bookingDay = Calendar.getInstance();
+                    bookingDay.set(2022, 10, 25); //
                     System.out.println("Which Day?");
                     System.out.println("Which Movie?");
                     System.out.println("Which time slot?");
