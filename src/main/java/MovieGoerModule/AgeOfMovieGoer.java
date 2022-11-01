@@ -1,5 +1,5 @@
 package MovieGoerModule;
 
 public enum AgeOfMovieGoer {
-    CHILD, ADULT, SENIOR
+    CHILD, ADULT, SENIOR, STUDENT
 }
