@@ -4,12 +4,16 @@ import java.util.ArrayList;
 
 public class Movie {
     private String title;
-    private Status status;
-    private String synopsis;
-    private String director;
+    private Status status = Status.NOW_SHOWING;
+    private String synopsis = "NA";
+    private String director = "NA";
     private ArrayList<String> cast;
-    private float rating;
+    private float rating = -1;
     private ArrayList<Review> allreviews;
+
+    public Movie(String title) {
+        this.title = title;
+    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -41,5 +45,14 @@ public class Movie {
 
     public void addReview(Review review) {
         allreviews.add(review);
+    }
+
+    public void printDetails() {
+        System.out.println("Movie title: " + title);
+        System.out.println("Status: " + status);
+        System.out.println("Synopsis: " + synopsis);
+        System.out.println("Director: " + director);
+        System.out.println("Cast: ");
+        System.out.println("Rating: " + rating);
     }
 }

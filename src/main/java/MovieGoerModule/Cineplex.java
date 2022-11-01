@@ -10,8 +10,12 @@ public class Cineplex {
         }
     }
 
-    public static void main(String[] args) { // test
-        Cineplex c = new Cineplex(2);
-        c.room[0].printSeats();
+    public Cinema getRoom(int i) {
+        return this.room[i];
     }
+
+    // public static void main(String[] args) { // test
+    // Cineplex c = new Cineplex(2);
+    // c.room[0].printSeats();
+    // }
 }
