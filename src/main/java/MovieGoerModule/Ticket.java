@@ -8,8 +8,6 @@ public class Ticket {
     private ClassOfCinama cinemaClass;
     private Day day;
 
-    private double[][][][] priceList = new double[4][4][4][4];
-
     public Ticket() {
 
     }
@@ -23,7 +21,137 @@ public class Ticket {
     }
 
     public double calcPrice() {
-        price = priceList[age.ordinal()][movieType.ordinal()][cinemaClass.ordinal()][day.ordinal()];
+
+        // switch case give the output of usual adult prices with diff days;
+        switch (day) {
+            case REMAINING_DAYS:
+                if (movieType == TypeOfMovie.REGULAR_2D) {
+                    price = 11;
+                }
+
+                if (movieType == TypeOfMovie.REGULAR_3D) {
+                    price = 15;
+                }
+
+                if (movieType == TypeOfMovie.BLOCKBUSTER_2D) {
+                    price = 15;
+                }
+
+                if (movieType == TypeOfMovie.BLOCKBUSTER_3D) {
+                    price = 20;
+                }
+                break;
+            case MON_TO_WED:
+                if (movieType == TypeOfMovie.REGULAR_2D) {
+                    price = 8.5;
+                }
+
+                if (movieType == TypeOfMovie.REGULAR_3D) {
+                    price = 11;
+                }
+
+                if (movieType == TypeOfMovie.BLOCKBUSTER_2D) {
+                    price = 11;
+                }
+
+                if (movieType == TypeOfMovie.BLOCKBUSTER_3D) {
+                    price = 16;
+                }
+                break;
+
+            case THURS:
+                if (movieType == TypeOfMovie.REGULAR_2D) {
+                    price = 9.5;
+                }
+
+                if (movieType == TypeOfMovie.REGULAR_3D) {
+                    price = 11;
+                }
+
+                if (movieType == TypeOfMovie.BLOCKBUSTER_2D) {
+                    price = 11;
+                }
+
+                if (movieType == TypeOfMovie.BLOCKBUSTER_3D) {
+                    price = 16;
+                }
+                break;
+
+            case FRI_BEFORE_6:
+                if (movieType == TypeOfMovie.REGULAR_2D) {
+                    price = 9.5;
+                }
+
+                if (movieType == TypeOfMovie.REGULAR_3D) {
+                    price = 15;
+                }
+
+                if (movieType == TypeOfMovie.BLOCKBUSTER_2D) {
+                    price = 15;
+                }
+
+                if (movieType == TypeOfMovie.BLOCKBUSTER_3D) {
+                    price = 20;
+                }
+
+            default:
+                price = 11;
+        }
+
+        // student prices
+        if (age == AgeOfMovieGoer.STUDENT && day != Day.REMAINING_DAYS) {
+            if (movieType == TypeOfMovie.REGULAR_2D) {
+                price = 7;
+            }
+
+            if (movieType == TypeOfMovie.REGULAR_3D) {
+                price = 9;
+            }
+
+            if (movieType == TypeOfMovie.BLOCKBUSTER_2D) {
+                price = 9;
+            }
+
+            if (movieType == TypeOfMovie.BLOCKBUSTER_3D) {
+                price = 11;
+            }
+        }
+
+        // SENIOR prices
+        if (age == AgeOfMovieGoer.SENIOR && day != Day.REMAINING_DAYS) {
+            if (movieType == TypeOfMovie.REGULAR_2D) {
+                price = 4;
+            }
+        }
+
+        // CHILD prices
+        if (age == AgeOfMovieGoer.STUDENT && day != Day.REMAINING_DAYS) {
+            if (movieType == TypeOfMovie.REGULAR_2D) {
+                price = 5;
+            }
+
+            if (movieType == TypeOfMovie.REGULAR_3D) {
+                price = 7;
+            }
+
+            if (movieType == TypeOfMovie.BLOCKBUSTER_2D) {
+                price = 7;
+            }
+
+            if (movieType == TypeOfMovie.BLOCKBUSTER_3D) {
+                price = 7;
+            }
+        }
+
+        // just add final constant price value of cinema class
+        if (cinemaClass == ClassOfCinama.PLATINUM) {
+            price += 10;
+        }
+
+        if (cinemaClass == ClassOfCinama.DOLBY) {
+            price += 5;
+        }
+
         return price * quantity;
     }
 
