@@ -1,9 +1,12 @@
 package MovieGoerModule;
 
 public class Cineplex {
+    private String name;
     private Cinema[] room;
 
-    public Cineplex(int numRooms) {
+    public Cineplex(int numRooms, String name) {
+        this.name = name;
+
         room = new Cinema[numRooms];
         for (int i = 0; i < numRooms; i++) {
             room[i] = new Cinema();
@@ -14,8 +17,7 @@ public class Cineplex {
         return this.room[i];
     }
 
-    // public static void main(String[] args) { // test
-    // Cineplex c = new Cineplex(2);
-    // c.room[0].printSeats();
-    // }
+    public String getName() {
+        return this.name;
+    }
 }

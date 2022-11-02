@@ -8,6 +8,7 @@ public class Movie {
     private String synopsis = "NA";
     private String director = "NA";
     private ArrayList<String> cast;
+    private double sales;
     private float rating = -1;
     private ArrayList<Review> allreviews;
     private ArrayList<TimeSlot> timeslots;
@@ -46,6 +47,22 @@ public class Movie {
 
     public void addReview(Review review) {
         allreviews.add(review);
+    }
+
+    public void addSlot(TimeSlot slot) {
+        for (int i = 0; i < timeslots.size(); i++) {
+            // if (slot.getStringDate().compareTo(director))
+        }
+
+        timeslots.add(slot);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void incrementSales(double sale) {
+        this.sales += sale;
     }
 
     public void printDetails() {
