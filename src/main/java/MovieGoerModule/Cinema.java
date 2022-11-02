@@ -45,9 +45,4 @@ public class Cinema {
         seats[row][col].bookSeat();
     }
 
-    public static void main(String[] args) { // test
-        Cinema c = new Cinema(10, 16);
-        c.book(5, 10);
-        c.printSeats();
-    }
 }

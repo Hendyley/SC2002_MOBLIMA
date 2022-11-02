@@ -1,6 +1,5 @@
 package MovieGoerModule;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -12,31 +11,28 @@ public class MovieGoerModuleApp {
         // Initialisation
         Calendar today = Calendar.getInstance();
 
-        Cineplex cineleisure = new Cineplex(3, "Cineleisure");
-        TimeSlot newSlot = new TimeSlot("02/11/2022", 1700, TypeOfMovie.REGULAR_2D, ClassOfCinama.PLATINUM);
+        Cineplex cathay = new Cineplex(3);
+        TimeSlot newSlot = new TimeSlot("02/11/2022", 1700);
 
         String Date1 = "31/10/2022";
 
-        int numOfMovies = 3;
         Movie movie1 = new Movie("Batman");
         Movie movie2 = new Movie("Joker");
         Movie movie3 = new Movie("Superman");
 
-        Movie[] movieArr = new Movie[numOfMovies];
-        movieArr[0] = movie1;
-        movieArr[1] = movie2;
-        movieArr[2] = movie3;
+        Movie[] movieArr = new Movie[3];
 
         // *************************
         Scanner sc = new Scanner(System.in);
 
         System.out.println("********************");
         System.out.println("Movie Goer Module");
-        System.out.println("1. List Movies and View Movie Details");
-        System.out.println("2. Seat Availability and Booking");
-        System.out.println("3. View Booking History");
-        System.out.println("4. List Top 5 Movies by sales OR by overall ratings");
-        System.out.println("5. Exit");
+        System.out.println("1. Search/List movie");
+        System.out.println("2. View Movie details");
+        System.out.println("3. Seat Availability and Booking");
+        System.out.println("4. View Booking History");
+        System.out.println("5. List Top 5 Movies by sales OR by overall ratings");
+        System.out.println("6. Exit");
         System.out.println("********************");
 
         int option = 0;
@@ -46,38 +42,36 @@ public class MovieGoerModuleApp {
 
             switch (option) {
                 case 1:
-                    System.out.println("Search/List movie");
+                    System.out.println("1. Search/List movie");
 
-                    for (int i = 1; i < numOfMovies + 1; i++) {
-                        System.out.println(i + ". " + movieArr[i - 1].getTitle());
-                    }
-                    System.out.println("Select Movie to view details");
-                    int movieSelection = sc.nextInt();
-                    movieArr[movieSelection - 1].printDetails();
-                    System.out.println();
                     break;
-
                 case 2:
-                    System.out.println("Seat Availability and Booking");
+                    System.out.println("2. View Movie details");
+
+                    break;
+                case 3:
+                    System.out.println("3. Seat Availability and Booking");
+                    Calendar bookingDay = Calendar.getInstance();
+                    bookingDay.set(2022, 10, 25); //
                     System.out.println("Which Day?");
                     System.out.println("Which Movie?");
                     System.out.println("Which time slot?");
 
                     break;
-                case 3:
-                    System.out.println("View Booking History");
+                case 4:
+                    System.out.println("4. View Booking History");
 
                     break;
 
-                case 4:
-                    System.out.println("List Top 5 Movies by sales OR by overall ratings");
+                case 5:
+                    System.out.println("6. List Top 5 Movies by sales OR by overall ratings");
 
                     break;
                 default:
                     break;
             }
 
-        } while (option != 5);
+        } while (option != 6);
 
     }
 }
