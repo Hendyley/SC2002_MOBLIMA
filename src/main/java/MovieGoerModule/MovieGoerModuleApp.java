@@ -50,7 +50,7 @@ public class MovieGoerModuleApp {
 
                     break;
                 case 3:
-                    System.out.println("3. Seat Availability and Selection of Seats");
+                    System.out.println("3. Seat Availability and Booking");
                     Calendar bookingDay = Calendar.getInstance();
                     bookingDay.set(2022, 10, 25); //
                     System.out.println("Which Day?");
@@ -59,7 +59,7 @@ public class MovieGoerModuleApp {
 
                     break;
                 case 4:
-                    System.out.println("4. Seat Availability and Booking");
+                    System.out.println("4. View Booking History");
 
                     break;
 
