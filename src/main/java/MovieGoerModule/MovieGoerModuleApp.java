@@ -2,8 +2,6 @@ package MovieGoerModule;
 
 import java.util.Calendar;
 import java.util.Scanner;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MovieGoerModuleApp {
     public String[] holidays = { "01/01/2022", "01/02/2022", "02/02/2022", "15/04/2022", "01/05/2022", "03/05/2022",
@@ -31,11 +29,10 @@ public class MovieGoerModuleApp {
         System.out.println("Movie Goer Module");
         System.out.println("1. Search/List movie");
         System.out.println("2. View Movie details");
-        System.out.println("3. Seat Availability and Selection of Seats");
-        System.out.println("4. Book and Purhcase Tickets");
-        System.out.println("5. View Booking History");
-        System.out.println("6. List Top 5 Movies by sales OR by overall ratings");
-        System.out.println("7. Exit");
+        System.out.println("3. Seat Availability and Booking");
+        System.out.println("4. View Booking History");
+        System.out.println("5. List Top 5 Movies by sales OR by overall ratings");
+        System.out.println("6. Exit");
         System.out.println("********************");
 
         int option = 0;
@@ -62,14 +59,11 @@ public class MovieGoerModuleApp {
 
                     break;
                 case 4:
-                    System.out.println("4. Book and Purchase Tickets");
+                    System.out.println("4. Seat Availability and Booking");
 
                     break;
+
                 case 5:
-                    System.out.println("5. View Booking History");
-
-                    break;
-                case 6:
                     System.out.println("6. List Top 5 Movies by sales OR by overall ratings");
 
                     break;
@@ -77,7 +71,7 @@ public class MovieGoerModuleApp {
                     break;
             }
 
-        } while (option != 7);
+        } while (option != 6);
 
     }
 }
