@@ -1,8 +1,11 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 import MovieGoerModule.Account;
+import MovieGoerModule.Movie;
 import MovieGoerModule.MovieGoer;
+import MovieGoerModule.Role;
 import AdminModule.Staff;
 
 public class testLoginApp {
@@ -12,13 +15,14 @@ public class testLoginApp {
     private static String username;
     private static String password;
     private static Account account;
+    private static boolean isLogined = false;
     public static void main(String[] args) throws ClassNotFoundException, IOException{
         
         int accountOption;
         
         //generateDummyData();
         printAccountList();
-        // do{
+        do{
             System.out.println("    testLoginApp    ");
             System.out.println("********************");
             System.out.println("1. Login into Account");
@@ -38,7 +42,7 @@ public class testLoginApp {
                 default:
                     break;
             } 
-        // }while(accountOption != 3);
+        }while(accountOption != 3);
 
         sc.close();
     }
@@ -51,10 +55,18 @@ public class testLoginApp {
         System.out.print("Password:");
         password = sc.nextLine();
 
-        account = new MovieGoer(username, password);
+        account = new Account(username, password);
         accountList = getAccountListFromFile();
-        login(accountList,account);
-        System.out.println();
+        if(!login(accountList,account)){
+            return;
+        }
+
+        if(account.getRole() == Role.ADMIN){
+            //switch_case_admin
+            System.out.println("switch_case_admin");
+        }else{
+            switch_case_moviegoer();
+        }
 
     }
 
@@ -132,10 +144,14 @@ public class testLoginApp {
             if (acc.getUsername().equals(username)
                     && acc.getPassword().equals(password)) {
                 System.out.println("Login Success");
+                System.out.println();
+                isLogined = true;
+                account = acc;
                 return true;
             }
         }
         System.out.println("Incorrect Username or Password");
+        System.out.println();
         return false;
     }
 
@@ -143,9 +159,78 @@ public class testLoginApp {
         // get updated staffList from file
         accountList = getAccountListFromFile();
         for (Account acc : accountList) {
-            System.out.printf("username: %s, password: %s\n", acc.getUsername(), acc.getPassword());
+            System.out.printf("username: %s, password: %s, role: %s\n", acc.getUsername(), acc.getPassword(),acc.getRole());
         }
         System.out.println();
+    }
+
+    public static void switch_case_moviegoer(){
+                // Initialisation
+                Calendar today = Calendar.getInstance();
+
+                // Cineplex cathay = new Cineplex(3);
+                // TimeSlot newSlot = new TimeSlot("02/11/2022", 1700);
+        
+                String Date1 = "31/10/2022";
+        
+                Movie movie1 = new Movie("Batman");
+                Movie movie2 = new Movie("Joker");
+                Movie movie3 = new Movie("Superman");
+        
+                Movie[] movieArr = new Movie[3];
+        
+                // *************************
+        
+                System.out.println("********************");
+                System.out.println("Movie Goer Module");
+                System.out.println("1. Search/List movie");
+                System.out.println("2. View Movie details");
+                System.out.println("3. Seat Availability and Booking");
+                System.out.println("4. View Booking History");
+                System.out.println("5. List Top 5 Movies by sales OR by overall ratings");
+                System.out.println("6. Log Out");
+                System.out.println("********************");
+        
+                int option = 0;
+                do {
+                    System.out.println("Enter Option");
+                    option = sc.nextInt();
+        
+                    switch (option) {
+                        case 1:
+                            System.out.println("1. Search/List movie");
+        
+                            break;
+                        case 2:
+                            System.out.println("2. View Movie details");
+        
+                            break;
+                        case 3:
+                            System.out.println("3. Seat Availability and Booking");
+                            Calendar bookingDay = Calendar.getInstance();
+                            bookingDay.set(2022, 10, 25); //
+                            System.out.println("Which Day?");
+                            System.out.println("Which Movie?");
+                            System.out.println("Which time slot?");
+        
+                            break;
+                        case 4:
+                            System.out.println("4. View Booking History");
+        
+                            break;
+        
+                        case 5:
+                            System.out.println("6. List Top 5 Movies by sales OR by overall ratings");
+        
+                            break;
+                        case 6:
+                            System.out.println("Logged Out Successfully!");
+                            isLogined = false;
+                        default:
+                            break;
+                    }
+        
+                } while(isLogined);
     }
 
 }
