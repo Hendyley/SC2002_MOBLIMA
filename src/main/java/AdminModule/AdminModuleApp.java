@@ -91,9 +91,9 @@ public class AdminModuleApp {
     }
 
     public static boolean isUsernameExist(ArrayList<Staff> staffList, Staff staffToAdd) {
-        String staffUsername = staffToAdd.getStaffUsername();
+        String staffUsername = staffToAdd.getUsername();
         for (Staff s : staffList) {
-            if (s.getStaffUsername().equals(staffUsername)) {
+            if (s.getUsername().equals(staffUsername)) {
                 return true;
             }
         }
@@ -101,11 +101,11 @@ public class AdminModuleApp {
     }
 
     public static boolean login(ArrayList<Staff> staffList, Staff staffToLogin) {
-        String staffUsername = staffToLogin.getStaffUsername();
-        String staffPassword = staffToLogin.getStaffPassword();
+        String staffUsername = staffToLogin.getUsername();
+        String staffPassword = staffToLogin.getPassword();
         for (Staff s : staffList) {
-            if (s.getStaffUsername().equals(staffUsername)
-                    && s.getStaffPassword().equals(staffPassword)) {
+            if (s.getUsername().equals(staffUsername)
+                    && s.getPassword().equals(staffPassword)) {
                 System.out.println("Login Success");
                 return true;
             }
@@ -118,7 +118,7 @@ public class AdminModuleApp {
         // get updated staffList from file
         ArrayList<Staff> staffList = getStaffListFromFile();
         for (Staff s : staffList) {
-            System.out.printf("username: %s, password: %s\n", s.getStaffUsername(), s.getStaffPassword());
+            System.out.printf("username: %s, password: %s\n", s.getUsername(), s.getPassword());
         }
     }
 

@@ -1,22 +1,18 @@
 package AdminModule;
-
+import MovieGoerModule.Account;
+import MovieGoerModule.Role;
 import java.io.Serializable;
 
-public class Staff implements Serializable {
-    private String staffUsername;
-    private String staffPassword;
 
-    public Staff(String staffUsername, String staffPassword) {
-        this.staffUsername = staffUsername;
-        this.staffPassword = staffPassword;
+
+
+public class Staff extends Account {
+
+
+    public Staff(String username, String password) {
+        super(username,password);
+        super.setRole(Role.ADMIN);
     }
 
-    public String getStaffUsername() {
-        return staffUsername;
-    }
-
-    public String getStaffPassword() {
-        return staffPassword;
-    }
 
 }

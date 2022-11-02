@@ -11,8 +11,8 @@ public class MovieGoerModuleApp {
         // Initialisation
         Calendar today = Calendar.getInstance();
 
-        Cineplex cathay = new Cineplex(3);
-        TimeSlot newSlot = new TimeSlot("02/11/2022", 1700);
+        // Cineplex cathay = new Cineplex(3);
+        // TimeSlot newSlot = new TimeSlot("02/11/2022", 1700);
 
         String Date1 = "31/10/2022";
 

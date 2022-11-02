@@ -1,18 +1,21 @@
 package MovieGoerModule;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MovieGoer {
+public class MovieGoer extends Account{
     private String name;
     private double mobile;
     private String email;
     private ArrayList<Transaction> history;
 
-    public MovieGoer() {
-
+    public MovieGoer(String username, String password) {
+        super(username,password);
+        super.setRole(Role.MOVIEGOER);
     }
 
-    public MovieGoer(String name, double mobile, String email) {
+    public MovieGoer(String username, String password, Role role, String name, double mobile, String email) {
+        super(username,password);
         this.name = name;
         this.mobile = mobile;
         this.email = email;
