@@ -1,6 +1,25 @@
 package MovieGoerModule;
 
-public class TimeSlot {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
+public class TimeSlot {
+    private String stringDate;
+    private Calendar date;
     private int time;
+
+    public TimeSlot(String dateOfSlot, int time) throws Exception {
+        stringDate = dateOfSlot;
+        SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(formatter1.parse(dateOfSlot));
+        date = cal;
+        // System.out.println(cal.get(Calendar.DAY_OF_WEEK));
+    }
+
+    public String getStringDate() {
+        return stringDate;
+    }
 }

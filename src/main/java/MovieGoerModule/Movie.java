@@ -10,6 +10,7 @@ public class Movie {
     private ArrayList<String> cast;
     private float rating = -1;
     private ArrayList<Review> allreviews;
+    private ArrayList<TimeSlot> timeslots;
 
     public Movie(String title) {
         this.title = title;

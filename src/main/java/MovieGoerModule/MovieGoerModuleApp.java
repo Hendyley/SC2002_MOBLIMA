@@ -6,15 +6,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MovieGoerModuleApp {
-    public static void main(String[] args) {
+    public String[] holidays = { "01/01/2022", "01/02/2022", "02/02/2022", "15/04/2022", "01/05/2022", "03/05/2022",
+            "15/05/2022", "10/07/2022", "09/08/2022", "24/10/2022", "25/12/2022" };
+
+    public static void main(String[] args) throws Exception {
         // Initialisation
         Calendar today = Calendar.getInstance();
 
         Cineplex cathay = new Cineplex(3);
-
-        Day day;
-        int TimeSlot; // we use 24h timing. 5pm = 1700;
-        int numOfMovies = 3;
+        TimeSlot newSlot = new TimeSlot("02/11/2022", 1700);
 
         String Date1 = "31/10/2022";
 
