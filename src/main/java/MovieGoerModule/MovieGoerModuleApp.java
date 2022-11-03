@@ -119,7 +119,6 @@ public class MovieGoerModuleApp {
                         }
 
                     }
-
                     break;
                 case 7:
                     System.out.println("7. Give a movie review");
