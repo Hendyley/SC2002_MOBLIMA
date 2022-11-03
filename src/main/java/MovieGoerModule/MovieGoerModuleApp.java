@@ -1,12 +1,16 @@
 package MovieGoerModule;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
+
 
 public class MovieGoerModuleApp {
     public String[] holidays = { "01/01/2022", "01/02/2022", "02/02/2022", "15/04/2022", "01/05/2022", "03/05/2022",
             "15/05/2022", "10/07/2022", "09/08/2022", "24/10/2022", "25/12/2022" };
 
+    private static final DecimalFormat df = new DecimalFormat("0.0");
     public static void main(String[] args) throws Exception {
         // Initialisation
         Calendar today = Calendar.getInstance();
@@ -21,6 +25,9 @@ public class MovieGoerModuleApp {
         Movie movie3 = new Movie("Superman");
 
         Movie[] movieArr = new Movie[3];
+        movieArr[0] = new Movie("Batman");
+        movieArr[1] = new Movie("Joker");
+        movieArr[2] = new Movie("Superman");
 
         // *************************
         Scanner sc = new Scanner(System.in);
@@ -30,9 +37,12 @@ public class MovieGoerModuleApp {
         System.out.println("1. Search/List movie");
         System.out.println("2. View Movie details");
         System.out.println("3. Seat Availability and Booking");
-        System.out.println("4. View Booking History");
-        System.out.println("5. List Top 5 Movies by sales OR by overall ratings");
-        System.out.println("6. Exit");
+        System.out.println("4. Book a ticket");
+        System.out.println("5. View Booking History");
+        System.out.println("6. List Top 5 Movies by sales OR by overall ratings");
+
+        System.out.println("7. Give a movie review");
+        System.out.println("8. Exit");
         System.out.println("********************");
 
         int option = 0;
@@ -43,6 +53,9 @@ public class MovieGoerModuleApp {
             switch (option) {
                 case 1:
                     System.out.println("1. Search/List movie");
+                    for(int i=0; i<movieArr.length;i++){
+                        System.out.println(i+" Movie "+movieArr[i].getTitle() );
+                    }
 
                     break;
                 case 2:
@@ -59,19 +72,90 @@ public class MovieGoerModuleApp {
 
                     break;
                 case 4:
+
+                    break;
+                case 5:
                     System.out.println("4. View Booking History");
 
                     break;
 
-                case 5:
+                case 6:
                     System.out.println("6. List Top 5 Movies by sales OR by overall ratings");
+
+                    //array for sorting
+                    Movie[] top5m = movieArr;
+                    System.out.println("1. by sales");
+                    System.out.println("2. by rating");
+                    int choice = sc.nextInt();
+
+                    switch(choice) {
+                        case 1:
+                            //Sort by sales only
+                            break;
+                        case 2:
+                            //Sort by Rating only
+                            Movie key; int j;
+                            for(int i=1; i<top5m.length;i++){
+                                key = top5m[i];
+                                j=i-1;
+                                while (j >= 0 && top5m[j].getRating() < key.getRating())
+                                {
+                                    top5m[j + 1] = top5m[j];
+                                    j = j - 1;
+                                }
+                                top5m[j + 1] = key;
+                            }
+                            break;
+                    }
+                    System.out.println("Here are the top 5 list: ");
+                    for(int i=0;i<top5m.length;i++){
+                        ArrayList<Review> reviewlist = top5m[i].getreviewlist();
+                        double num = movieArr[i].getRating();
+                        String word="Nan";
+                        if(num>0 && reviewlist.size()>1){
+                            System.out.println(i+" Movie: "+top5m[i].getTitle()+" Rating: "+df.format(top5m[i].getRating())+" Sales: "+top5m[i].getSales()+" Number of reviewer: "+reviewlist.size());
+                        }else {
+                            System.out.println(i+" Movie: "+top5m[i].getTitle()+" Rating: Nan Sales: "+top5m[i].getSales()+" Number of reviewer: "+reviewlist.size());
+                        }
+
+                    }
+
+                    break;
+                case 7:
+                    System.out.println("7. Give a movie review");
+                    System.out.println("List of all current movie");
+                    for(int i=0; i<movieArr.length;i++){
+                        ArrayList<Review> reviewlist = movieArr[i].getreviewlist();
+                        double num = movieArr[i].getRating();
+                        String word="Nan";
+                        if(num>0 && reviewlist.size()>1){
+                            System.out.println(i+" Movie "+movieArr[i].getTitle()+" current rating "+ df.format(num) +" number of reviewer: "+reviewlist.size());
+                        }else {
+                            System.out.println(i+" Movie "+movieArr[i].getTitle()+" current rating "+ "Nan" +" number of reviewer: "+reviewlist.size());
+                        }
+
+                    }
+                    int choose = sc.nextInt();
+
+                    System.out.println("Give a rating from 1-5");
+                    int rating = sc.nextInt();
+                    sc= new Scanner(System.in);
+                    System.out.println("Give a review");
+                    String review = sc.nextLine();
+
+                    Review rv = new Review(rating,review);
+                    movieArr[choose].addReview(rv);
+                    ArrayList<Review> reviewlist = movieArr[choose].getreviewlist();
+                    movieArr[choose].addreviewscore(reviewlist);
+
+                    System.out.println("Thank you for the review.");
 
                     break;
                 default:
                     break;
             }
 
-        } while (option != 6);
+        } while (option != 8);
 
     }
 }
