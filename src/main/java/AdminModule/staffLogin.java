@@ -1,12 +1,11 @@
 package AdminModule;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 public class staffLogin {
     public static void main(String[] args) throws ClassNotFoundException, IOException {
         int choice;
-        String title;
-        changeMovieApp app = new changeMovieApp();
         Scanner sc = new Scanner(System.in);
         do{
             System.out.println("What would you like to do?");
@@ -20,33 +19,26 @@ public class staffLogin {
             switch(choice){
                 case 1:
                     //add movie
-                    app.createMovie();
+                    createMovie.main(args);
                     break;
 
                 case 2:
                     //update movie
-
                     //clear buffer
                     sc.nextLine();
-                    System.out.println("Enter the title of the movie");
-                    title = sc.nextLine();
-                    //find movie
-                    app.updateMovie(title);
+                    updateMovie.main(args);;
                     break;
 
                 case 3:
                     //delete movie
-
                     //clear buffer
                     sc.nextLine();
-                    System.out.println("Enter the title of the movie");
-                    title = sc.nextLine();
-                    //find movie
-                    app.deleteMovie(title);
+                    deleteMovie.main(args);;
                     break;
 
                 case 4:
                     //configure settings (change ticket prices, holidays, movie type)
+                    configureSettings.main(args);
                     break;
 
                 case 5:
