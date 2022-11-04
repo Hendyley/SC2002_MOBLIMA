@@ -1,6 +1,7 @@
 package MovieGoerModule;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Movie implements Serializable {
@@ -15,7 +16,12 @@ public class Movie implements Serializable {
     private ArrayList<Review> allreviews = new ArrayList<>();
     private ArrayList<TimeSlot> timeslots = new ArrayList<>();
 
-    public Movie(String title) {
+
+   
+    private static final DecimalFormat df = new DecimalFormat("0.0");
+
+    public Movie(String title ) {
+
         this.title = title;
     }
 
@@ -51,9 +57,41 @@ public class Movie implements Serializable {
         this.type = type;
     }
 
+
     public double getSales() {
         return sales;
     }
+
+
+    public void updatereviewscore(ArrayList<Review> allreviews){
+        int rate=0;
+        for(int i=0;i<allreviews.size();i++){
+            rate = rate + allreviews.get(i).getUserRating();
+        }
+        rating = (float) rate / allreviews.size();
+        //return rating;
+    }
+
+    public String getRating(){
+
+        if(allreviews.size()>1){
+            return df.format(rating);
+        }else {
+            return "Nan";
+        }
+    }
+
+    public double getrealrating(){
+        return rating;
+    }
+
+    public int getnumberofreviewer(){
+        return allreviews.size();
+    }
+
+
+    public double getSales(){ return sales;}
+
 
     public ArrayList<Review> getreviewlist() {
         return allreviews;
@@ -62,6 +100,7 @@ public class Movie implements Serializable {
     public ArrayList<TimeSlot> getTimeSlots() {
         return timeslots;
     }
+
 
     public double addreviewscore(ArrayList<Review> allreviews) {
         int rate = 0;
@@ -74,6 +113,11 @@ public class Movie implements Serializable {
 
     public double getRating() {
         return rating;
+
+
+    public String getDirector(){
+        return director;
+
     }
 
     public void addReview(Review review) {
@@ -90,6 +134,14 @@ public class Movie implements Serializable {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getSynopsis(){
+        return synopsis;
+    }
+
+    public Status getStatus(){
+        return status;
     }
 
     public void incrementSales(double sale) {
