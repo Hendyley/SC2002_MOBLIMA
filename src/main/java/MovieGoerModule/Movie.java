@@ -10,13 +10,12 @@ public class Movie {
     private ArrayList<String> cast;
     private double sales;
     private float rating = -1;
+    private TypeOfMovie type;
     private ArrayList<Review> allreviews = new ArrayList<>();
     private ArrayList<TimeSlot> timeslots = new ArrayList<>();
 
     public Movie(String title ) {
-
         this.title = title;
-
     }
 
     public void setTitle(String title) {
@@ -46,6 +45,10 @@ public class Movie {
     public void setRating(float rating) {
         this.rating = rating;
     }
+    
+    public void setType(TypeOfMovie type){
+        this.type = type;
+    }
 
     public double getSales(){ return sales;}
 
@@ -65,7 +68,6 @@ public class Movie {
     public double getRating(){
         return rating;
     }
-
 
     public void addReview(Review review) {
         allreviews.add(review);
@@ -93,6 +95,10 @@ public class Movie {
         System.out.println("Synopsis: " + synopsis);
         System.out.println("Director: " + director);
         System.out.println("Cast: ");
+        for (int i = 0; i < cast.size()-1; i++){
+            System.out.print(cast[i] + ", ");
+        }
+        System.out.println(cast[cast.size()-1]);
         System.out.println("Rating: " + rating);
     }
 }
