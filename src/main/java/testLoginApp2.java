@@ -17,14 +17,14 @@ public class testLoginApp2 {
     public static void main(String[] args) throws ClassNotFoundException, IOException{
         
         int loginOption;
-        ArrayList<Integer> result = new ArrayList<>();
+        // ArrayList<Integer> result = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("userdata.csv"))) {
-            while (br.ready()) {
-                result.add(br.read());
-            }
-        }
-        System.out.println("Userdata size: "+result);
+        // try (BufferedReader br = new BufferedReader(new FileReader("userdata.csv"))) {
+        //     while (br.ready()) {
+        //         result.add(br.read());
+        //     }
+        // }
+        // System.out.println("Userdata size: "+result);
 
         
         generateDummyData();

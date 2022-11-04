@@ -1,14 +1,15 @@
 package MovieGoerModule;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Movie {
+public class Movie implements Serializable{
     private String title;
     private Status status = Status.NOW_SHOWING;
     private String synopsis = "NA";
     private String director = "NA";
-    private ArrayList<String> cast;
-    private double sales;
+    private ArrayList<String> cast = new ArrayList<>();
+    private double sales = 0;
     private float rating = -1;
     private TypeOfMovie type;
     private ArrayList<Review> allreviews = new ArrayList<>();
@@ -56,6 +57,10 @@ public class Movie {
         return allreviews;
     }
 
+    public ArrayList<TimeSlot> getTimeSlots(){
+        return timeslots;
+    }
+
     public double addreviewscore(ArrayList<Review> allreviews){
         int rate=0;
         for(int i=0;i<allreviews.size();i++){
@@ -99,6 +104,8 @@ public class Movie {
             System.out.print(cast.get(i) + ", ");
         }
         System.out.println(cast.get(cast.size()-1));
+        System.out.println("Movie Type: " +type);
         System.out.println("Rating: " + rating);
+        System.out.println("");
     }
 }
