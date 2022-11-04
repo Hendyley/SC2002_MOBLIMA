@@ -1,6 +1,5 @@
 package MovieGoerModule;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MovieGoer extends Account{
