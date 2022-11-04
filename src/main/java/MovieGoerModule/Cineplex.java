@@ -1,8 +1,11 @@
 package MovieGoerModule;
 
+import java.util.ArrayList;
+
 public class Cineplex {
     private String name;
     private Cinema[] room;
+    private ArrayList<Movie> listOfMovies = new ArrayList<Movie>();
 
     public Cineplex(int numRooms, String name) {
         this.name = name;
@@ -19,5 +22,13 @@ public class Cineplex {
 
     public String getName() {
         return this.name;
+    }
+
+    public void addMovie(Movie movie) {
+        listOfMovies.add(movie);
+    }
+
+    public ArrayList<Movie> getMovieList() {
+        return listOfMovies;
     }
 }
