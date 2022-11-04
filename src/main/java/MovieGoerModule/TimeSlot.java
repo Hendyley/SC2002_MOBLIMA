@@ -10,12 +10,12 @@ import java.util.Locale;
 public class TimeSlot {
     private String stringDate;
     private LocalDate date;
-    private int startTime;
-    private int endTime;
+    private String startTime;
+    private String endTime;
     private ClassOfCinama movieClass;
     private Cinema room;
 
-    public TimeSlot(String dateOfSlot, int startTime, int endTime, ClassOfCinama movieClass) {
+    public TimeSlot(String dateOfSlot, String startTime, String endTime, ClassOfCinama movieClass) {
         room = new Cinema();
         stringDate = dateOfSlot;
 
@@ -24,12 +24,24 @@ public class TimeSlot {
         this.endTime = endTime;
 
         this.date = LocalDate.parse(dateOfSlot);
-        System.out.println(date);
-        System.out.println(date.getDayOfWeek());
+        // System.out.println(date);
+        // System.out.println(date.getDayOfWeek());
 
     }
 
     public String getStringDate() {
         return stringDate;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public ClassOfCinama getMovieClass() {
+        return movieClass;
     }
 }

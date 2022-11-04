@@ -3,7 +3,7 @@ package MovieGoerModule;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Movie implements Serializable{
+public class Movie implements Serializable {
     private String title;
     private Status status = Status.NOW_SHOWING;
     private String synopsis = "NA";
@@ -15,7 +15,7 @@ public class Movie implements Serializable{
     private ArrayList<Review> allreviews = new ArrayList<>();
     private ArrayList<TimeSlot> timeslots = new ArrayList<>();
 
-    public Movie(String title ) {
+    public Movie(String title) {
         this.title = title;
     }
 
@@ -46,31 +46,33 @@ public class Movie implements Serializable{
     public void setRating(float rating) {
         this.rating = rating;
     }
-    
-    public void setType(TypeOfMovie type){
+
+    public void setType(TypeOfMovie type) {
         this.type = type;
     }
 
-    public double getSales(){ return sales;}
+    public double getSales() {
+        return sales;
+    }
 
-    public ArrayList<Review> getreviewlist(){
+    public ArrayList<Review> getreviewlist() {
         return allreviews;
     }
 
-    public ArrayList<TimeSlot> getTimeSlots(){
+    public ArrayList<TimeSlot> getTimeSlots() {
         return timeslots;
     }
 
-    public double addreviewscore(ArrayList<Review> allreviews){
-        int rate=0;
-        for(int i=0;i<allreviews.size();i++){
+    public double addreviewscore(ArrayList<Review> allreviews) {
+        int rate = 0;
+        for (int i = 0; i < allreviews.size(); i++) {
             rate = rate + allreviews.get(i).getUserRating();
         }
         rating = (float) rate / allreviews.size();
         return rating;
     }
 
-    public double getRating(){
+    public double getRating() {
         return rating;
     }
 
@@ -100,11 +102,11 @@ public class Movie implements Serializable{
         System.out.println("Synopsis: " + synopsis);
         System.out.println("Director: " + director);
         System.out.println("Cast: ");
-        for (int i = 0; i < cast.size()-1; i++){
+        for (int i = 0; i < cast.size() - 1; i++) {
             System.out.print(cast.get(i) + ", ");
         }
-        System.out.println(cast.get(cast.size()-1));
-        System.out.println("Movie Type: " +type);
+        System.out.println(cast.get(cast.size() - 1));
+        System.out.println("Movie Type: " + type);
         System.out.println("Rating: " + rating);
         System.out.println("");
     }

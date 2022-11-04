@@ -14,23 +14,36 @@ public class MovieGoerModuleApp {
 
     public static void main(String[] args) throws Exception {
         // Initialisation
-        Calendar today = Calendar.getInstance();
 
-        // Cineplex cathay = new Cineplex(3);
+        Cineplex cathay = new Cineplex(3, "jcube");
+
         // TimeSlot newSlot = new TimeSlot("2022-02-20", 1700, 1800,
         // ClassOfCinama.PLATINUM);
 
-        String Date1 = "31/10/2022";
+        String Date1 = "2022-03-10";
 
         Movie movie1 = new Movie("Batman");
         Movie movie2 = new Movie("Joker");
         Movie movie3 = new Movie("Superman");
+
+        movie1.addSlot(new TimeSlot("2022-10-31", "1500", "1700", ClassOfCinama.DOLBY));
+        movie1.addSlot(new TimeSlot("2022-10-31", "1300", "1500", ClassOfCinama.DOLBY));
+        movie1.addSlot(new TimeSlot("2022-11-02", "0900", "1100", ClassOfCinama.DOLBY));
+        movie2.addSlot(new TimeSlot("2022-10-31", "1700", "1900", ClassOfCinama.DOLBY));
+        movie2.addSlot(new TimeSlot("2022-11-01", "2000", "2200", ClassOfCinama.DOLBY));
+        movie2.addSlot(new TimeSlot("2022-11-02", "0900", "1100", ClassOfCinama.DOLBY));
+        movie3.addSlot(new TimeSlot("2022-10-31", "1700", "1900", ClassOfCinama.DOLBY));
+        movie3.addSlot(new TimeSlot("2022-11-05", "2000", "2200", ClassOfCinama.DOLBY));
+        movie3.addSlot(new TimeSlot("2022-11-06", "900", "1100", ClassOfCinama.DOLBY));
 
         Movie[] movieArr = new Movie[3];
         movieArr[0] = new Movie("Batman");
         movieArr[1] = new Movie("Joker");
         movieArr[2] = new Movie("Superman");
 
+        cathay.addMovie(movie1);
+        cathay.addMovie(movie2);
+        cathay.addMovie(movie3);
         // *************************
         Scanner sc = new Scanner(System.in);
 
@@ -56,7 +69,7 @@ public class MovieGoerModuleApp {
                 case 1:
                     System.out.println("1. Search/List movie");
                     for (int i = 0; i < movieArr.length; i++) {
-                        System.out.println(i + " Movie " + movieArr[i].getTitle());
+                        System.out.println(i + " Movie " + cathay.getMovieList().get(i).getTitle());
                     }
 
                     break;
@@ -65,13 +78,45 @@ public class MovieGoerModuleApp {
 
                     break;
                 case 3:
+                    ArrayList<String> dateList = new ArrayList<String>(); // List of non-duplicated dates
+                    ArrayList<TimeSlot> timeList;
+                    int counter = 1;
                     System.out.println("3. Seat Availability and Booking");
-                    Calendar bookingDay = Calendar.getInstance();
-                    bookingDay.set(2022, 10, 25); //
-                    System.out.println("Which Day?");
-                    System.out.println("Which Movie?");
-                    System.out.println("Which time slot?");
+                    System.out.println("Select Movie:");
+                    for (int i = 0; i < cathay.getMovieList().size(); i++) {
+                        System.out.println(i + " Movie " + cathay.getMovieList().get(i).getTitle());
+                    }
+                    int movieSelection = sc.nextInt();
+                    if (cathay.getMovieList().get(movieSelection).getTimeSlots().size() == 0) {
+                        System.out.println("No Available slots");
+                        break;
+                    } else {
+                        System.out.println("Select Day");
 
+                        timeList = cathay.getMovieList().get(movieSelection).getTimeSlots();
+
+                        System.out.println("0 " + timeList.get(0).getStringDate());
+                        dateList.add(timeList.get(0).getStringDate());
+                        for (int j = 1; j < timeList.size(); j++) {
+
+                            if (timeList.get(j).getStringDate() != timeList.get(j - 1).getStringDate()) {
+                                System.out.println(counter + " " + timeList.get(j).getStringDate());
+                                dateList.add(timeList.get(j).getStringDate());
+                                counter++;
+                            }
+                        }
+                    }
+                    int daySelection = sc.nextInt();
+                    System.out.println("Select Timeslot");
+                    for (int j = 0; j < timeList.size(); j++) {
+
+                        if (dateList.get(daySelection) == timeList.get(j).getStringDate()) {
+                            System.out.println(j + " " + timeList.get(j).getStartTime() + "-"
+                                    + timeList.get(j).getEndTime() + " " + timeList.get(j).getMovieClass());
+                        }
+                    }
+                    int slotSelection = sc.nextInt();
+                    System.out.println(Date1);
                     break;
                 case 4:
 
