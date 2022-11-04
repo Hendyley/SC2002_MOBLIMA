@@ -5,18 +5,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
-
 public class MovieGoerModuleApp {
-    public String[] holidays = { "01/01/2022", "01/02/2022", "02/02/2022", "15/04/2022", "01/05/2022", "03/05/2022",
-            "15/05/2022", "10/07/2022", "09/08/2022", "24/10/2022", "25/12/2022" };
+
+    public String[] holidays = { "2022-01-01", "2022-02-01", "2022-02-02", "2022-04-15", "2022-05-01", "2022-05-03",
+            "2022-05-15", "2022-05-15", "2022-07-10", "2022-09-09", "2022-10-24", "2022-12-25" };
 
     private static final DecimalFormat df = new DecimalFormat("0.0");
+
     public static void main(String[] args) throws Exception {
         // Initialisation
         Calendar today = Calendar.getInstance();
 
         // Cineplex cathay = new Cineplex(3);
-        // TimeSlot newSlot = new TimeSlot("02/11/2022", 1700);
+        // TimeSlot newSlot = new TimeSlot("2022-02-20", 1700, 1800,
+        // ClassOfCinama.PLATINUM);
 
         String Date1 = "31/10/2022";
 
@@ -53,8 +55,8 @@ public class MovieGoerModuleApp {
             switch (option) {
                 case 1:
                     System.out.println("1. Search/List movie");
-                    for(int i=0; i<movieArr.length;i++){
-                        System.out.println(i+" Movie "+movieArr[i].getTitle() );
+                    for (int i = 0; i < movieArr.length; i++) {
+                        System.out.println(i + " Movie " + movieArr[i].getTitle());
                     }
 
                     break;
@@ -82,24 +84,24 @@ public class MovieGoerModuleApp {
                 case 6:
                     System.out.println("6. List Top 5 Movies by sales OR by overall ratings");
 
-                    //array for sorting
+                    // array for sorting
                     Movie[] top5m = movieArr;
                     System.out.println("1. by sales");
                     System.out.println("2. by rating");
                     int choice = sc.nextInt();
 
-                    switch(choice) {
+                    switch (choice) {
                         case 1:
-                            //Sort by sales only
+                            // Sort by sales only
                             break;
                         case 2:
-                            //Sort by Rating only
-                            Movie key; int j;
-                            for(int i=1; i<top5m.length;i++){
+                            // Sort by Rating only
+                            Movie key;
+                            int j;
+                            for (int i = 1; i < top5m.length; i++) {
                                 key = top5m[i];
-                                j=i-1;
-                                while (j >= 0 && top5m[j].getRating() < key.getRating())
-                                {
+                                j = i - 1;
+                                while (j >= 0 && top5m[j].getRating() < key.getRating()) {
                                     top5m[j + 1] = top5m[j];
                                     j = j - 1;
                                 }
@@ -108,14 +110,17 @@ public class MovieGoerModuleApp {
                             break;
                     }
                     System.out.println("Here are the top 5 list: ");
-                    for(int i=0;i<top5m.length;i++){
+                    for (int i = 0; i < top5m.length; i++) {
                         ArrayList<Review> reviewlist = top5m[i].getreviewlist();
                         double num = movieArr[i].getRating();
-                        String word="Nan";
-                        if(num>0 && reviewlist.size()>1){
-                            System.out.println(i+" Movie: "+top5m[i].getTitle()+" Rating: "+df.format(top5m[i].getRating())+" Sales: "+top5m[i].getSales()+" Number of reviewer: "+reviewlist.size());
-                        }else {
-                            System.out.println(i+" Movie: "+top5m[i].getTitle()+" Rating: Nan Sales: "+top5m[i].getSales()+" Number of reviewer: "+reviewlist.size());
+                        String word = "Nan";
+                        if (num > 0 && reviewlist.size() > 1) {
+                            System.out.println(i + " Movie: " + top5m[i].getTitle() + " Rating: "
+                                    + df.format(top5m[i].getRating()) + " Sales: " + top5m[i].getSales()
+                                    + " Number of reviewer: " + reviewlist.size());
+                        } else {
+                            System.out.println(i + " Movie: " + top5m[i].getTitle() + " Rating: Nan Sales: "
+                                    + top5m[i].getSales() + " Number of reviewer: " + reviewlist.size());
                         }
 
                     }
@@ -123,14 +128,16 @@ public class MovieGoerModuleApp {
                 case 7:
                     System.out.println("7. Give a movie review");
                     System.out.println("List of all current movie");
-                    for(int i=0; i<movieArr.length;i++){
+                    for (int i = 0; i < movieArr.length; i++) {
                         ArrayList<Review> reviewlist = movieArr[i].getreviewlist();
                         double num = movieArr[i].getRating();
-                        String word="Nan";
-                        if(num>0 && reviewlist.size()>1){
-                            System.out.println(i+" Movie "+movieArr[i].getTitle()+" current rating "+ df.format(num) +" number of reviewer: "+reviewlist.size());
-                        }else {
-                            System.out.println(i+" Movie "+movieArr[i].getTitle()+" current rating "+ "Nan" +" number of reviewer: "+reviewlist.size());
+                        String word = "Nan";
+                        if (num > 0 && reviewlist.size() > 1) {
+                            System.out.println(i + " Movie " + movieArr[i].getTitle() + " current rating "
+                                    + df.format(num) + " number of reviewer: " + reviewlist.size());
+                        } else {
+                            System.out.println(i + " Movie " + movieArr[i].getTitle() + " current rating " + "Nan"
+                                    + " number of reviewer: " + reviewlist.size());
                         }
 
                     }
@@ -138,11 +145,11 @@ public class MovieGoerModuleApp {
 
                     System.out.println("Give a rating from 1-5");
                     int rating = sc.nextInt();
-                    sc= new Scanner(System.in);
+                    sc = new Scanner(System.in);
                     System.out.println("Give a review");
                     String review = sc.nextLine();
 
-                    Review rv = new Review(rating,review);
+                    Review rv = new Review(rating, review);
                     movieArr[choose].addReview(rv);
                     ArrayList<Review> reviewlist = movieArr[choose].getreviewlist();
                     movieArr[choose].addreviewscore(reviewlist);
