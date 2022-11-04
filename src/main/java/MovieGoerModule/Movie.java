@@ -7,12 +7,15 @@ import java.util.ArrayList;
 public class Movie implements Serializable{
     private String title;
     private Status status = Status.NOW_SHOWING;
+
+    //Agetype?
+    private AgeOfMovieGoer age_restriction = AgeOfMovieGoer.ADULT;
     private String synopsis = "NA";
     private String director = "NA";
     private ArrayList<String> cast = new ArrayList<>();
     private double sales = 0;
     private float rating = -1;
-    private TypeOfMovie type;
+    private TypeOfMovie type = TypeOfMovie.BLOCKBUSTER_3D;
     private ArrayList<Review> allreviews = new ArrayList<>();
     private ArrayList<TimeSlot> timeslots = new ArrayList<>();
 
@@ -54,6 +57,16 @@ public class Movie implements Serializable{
         this.type = type;
     }
 
+    public TypeOfMovie getType(){
+        return type;
+    }
+
+    public AgeOfMovieGoer getAge_restriction(){
+        return age_restriction;
+    }
+    public void setAgetype(AgeOfMovieGoer agetype){
+        this.age_restriction = agetype;
+    }
 
     public void updatereviewscore(ArrayList<Review> allreviews){
         int rate=0;

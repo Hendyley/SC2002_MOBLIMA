@@ -26,6 +26,7 @@ public class Cinema {
     }
 
     public void printSeats() { // maybe a separate class?
+        System.out.println("   1  2  3  4  5  6  7  8  9  10 11 12");
         char alpha = 'A';
         for (int i = 0; i < seats.length; i++) {
             System.out.print(alpha + " ");
@@ -43,6 +44,10 @@ public class Cinema {
 
     public void book(int row, int col) {
         seats[row][col].bookSeat();
+    }
+
+    public boolean checkseat(int row, int col){
+        return  seats[row][col].isTaken();
     }
 
 }
