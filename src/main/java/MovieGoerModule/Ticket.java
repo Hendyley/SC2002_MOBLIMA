@@ -1,5 +1,7 @@
 package MovieGoerModule;
 
+import java.util.ArrayList;
+
 public class Ticket {
     private int quantity;
     private AgeOfMovieGoer age;
@@ -7,6 +9,7 @@ public class Ticket {
     private double price;
     private ClassOfCinama cinemaClass;
     private Day day;
+
 
     public Ticket() {
 

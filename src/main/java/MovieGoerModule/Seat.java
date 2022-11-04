@@ -3,6 +3,8 @@ package MovieGoerModule;
 public class Seat {
     private boolean seat;
 
+    private Seattype seattype;
+
     public Seat() {
         this.seat = false;
     }
@@ -13,5 +15,12 @@ public class Seat {
 
     public void bookSeat() {
         this.seat = true;
+    }
+
+    private void setSeattype(Seattype seattype){
+        this.seattype = seattype;
+    }
+    public Seattype getSeattype(){
+        return seattype;
     }
 }

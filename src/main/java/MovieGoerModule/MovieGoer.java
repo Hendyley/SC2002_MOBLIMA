@@ -4,9 +4,13 @@ import java.util.ArrayList;
 
 public class MovieGoer extends Account{
     private String name;
+
+    private int age; //see how
     private int mobile;
     private String email;
     private ArrayList<Transaction> history;
+
+    private ArrayList<Ticket> ticket;
 
     public MovieGoer(String username, String password) {
         super(username,password);
@@ -36,6 +40,11 @@ public class MovieGoer extends Account{
     public String getEmail() {
         return email;
     }
+
+    public void setAge(int age){
+        this.age = age;
+    }
+    public int getAge(){return age;}
 
     public ArrayList<Transaction> getTransactionHistory(){
         return this.history;

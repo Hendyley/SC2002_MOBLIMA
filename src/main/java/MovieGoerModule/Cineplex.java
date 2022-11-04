@@ -7,6 +7,9 @@ public class Cineplex {
     private Cinema[] room;
     private ArrayList<Movie> listOfMovies = new ArrayList<Movie>();
 
+    //each roo have their own timeslot???
+    private ArrayList<TimeSlot> timeslots = new ArrayList<>();
+
     public Cineplex(int numRooms, String name) {
         this.name = name;
 
@@ -24,11 +27,20 @@ public class Cineplex {
         return this.name;
     }
 
-    public void addMovie(Movie movie) {
-        listOfMovies.add(movie);
+    public void addSlot(TimeSlot ts) {
+
+        timeslots.add(ts);
+    }
+
+    public ArrayList<TimeSlot> getTimeslots(){
+        return timeslots;
     }
 
     public ArrayList<Movie> getMovieList() {
         return listOfMovies;
     }
+
+
+
+
 }
