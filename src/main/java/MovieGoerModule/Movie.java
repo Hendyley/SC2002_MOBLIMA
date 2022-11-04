@@ -96,9 +96,9 @@ public class Movie {
         System.out.println("Director: " + director);
         System.out.println("Cast: ");
         for (int i = 0; i < cast.size()-1; i++){
-            System.out.print(cast[i] + ", ");
+            System.out.print(cast.get(i) + ", ");
         }
-        System.out.println(cast[cast.size()-1]);
+        System.out.println(cast.get(cast.size()-1));
         System.out.println("Rating: " + rating);
     }
 }
