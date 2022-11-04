@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
-
 public class MovieGoerModuleApp {
     public String[] holidays = { "01/01/2022", "01/02/2022", "02/02/2022", "15/04/2022", "01/05/2022", "03/05/2022",
             "15/05/2022", "10/07/2022", "09/08/2022", "24/10/2022", "25/12/2022" };
-
 
     public static void main(String[] args) throws Exception {
         // Initialisation
@@ -41,7 +39,7 @@ public class MovieGoerModuleApp {
         movie3.addSlot(new TimeSlot("2022-11-05", "2000", "2200", ClassOfCinama.DOLBY));
         movie3.addSlot(new TimeSlot("2022-11-06", "900", "1100", ClassOfCinama.DOLBY));
 
-        Movie[] movieArr = new Movie[3];
+        
 
         Movie[] movieArr = new Movie[7];
 
