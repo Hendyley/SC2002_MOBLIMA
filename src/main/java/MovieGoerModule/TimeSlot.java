@@ -20,17 +20,16 @@ public class TimeSlot {
 
     DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public TimeSlot(String dateOfSlot, String startTime, String endTime, ClassOfCinama movieClass, Movie movie) {
+    public TimeSlot(String dateOfSlot, String startTime, String endTime, ClassOfCinama movieClass, Cinema roomStyle) {
         room = new Cinema();
         stringDate = dateOfSlot;
 
-
-        this.airingmovie = movie;  ///set to which movie in this time slot
         this.movieClass = movieClass;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.room = roomStyle;
 
-        this.date = LocalDate.parse(dateOfSlot,df);
+        this.date = LocalDate.parse(dateOfSlot, df);
         // System.out.println(date);
         // System.out.println(date.getDayOfWeek());
         this.room = new Cinema();
@@ -49,19 +48,19 @@ public class TimeSlot {
         return endTime;
     }
 
-    public String getairingtimeformat(){
-        return stringDate+" at "+startTime+"-"+endTime;
+    public String getairingtimeformat() {
+        return stringDate + " at " + startTime + "-" + endTime;
     }
 
     public ClassOfCinama getMovieClass() {
         return movieClass;
     }
 
-    public Movie getAiringmovie(){
+    public Movie getAiringmovie() {
         return airingmovie;
     }
 
-    public Cinema getRoom(){
+    public Cinema getRoom() {
         return room;
     }
 }
