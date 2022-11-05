@@ -15,6 +15,7 @@ public class staffLogin {
             System.out.println("4: Configure system settings");
             System.out.println("5: Sign Out");
             choice = sc.nextInt();
+            sc.nextLine(); //clear buffer
 
             switch(choice){
                 case 1:
@@ -24,16 +25,12 @@ public class staffLogin {
 
                 case 2:
                     //update movie
-                    //clear buffer
-                    sc.nextLine();
-                    updateMovie.main(args);;
+                    updateMovie.main(args);
                     break;
 
                 case 3:
                     //delete movie
-                    //clear buffer
-                    sc.nextLine();
-                    deleteMovie.main(args);;
+                    deleteMovie.main(args);
                     break;
 
                 case 4:
