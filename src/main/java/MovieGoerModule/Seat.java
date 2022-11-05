@@ -17,10 +17,12 @@ public class Seat {
         this.seat = true;
     }
 
-    private void setSeattype(Seattype seattype){
+    public void setSeatt(Seattype seattype) {
         this.seattype = seattype;
     }
-    public Seattype getSeattype(){
+    public Seattype getSeatt(){
         return seattype;
     }
+
+
 }

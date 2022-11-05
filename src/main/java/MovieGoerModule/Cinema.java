@@ -1,9 +1,12 @@
 package MovieGoerModule;
 
+import java.util.ArrayList;
+
 public class Cinema {
     final int ROW = 10;
     final int COL = 12;
     private Seat[][] seats;
+
 
     // set a default layout
     public Cinema() {
@@ -11,6 +14,7 @@ public class Cinema {
         for (int i = 0; i < ROW; i++) {
             for (int j = 0; j < COL; j++) {
                 seats[i][j] = new Seat();
+                seats[i][j].setSeatt(Seattype.SEAT);
             }
         }
     }
@@ -43,11 +47,57 @@ public class Cinema {
     }
 
     public void book(int row, int col) {
-        seats[row][col].bookSeat();
+
+        if(seats[row][col].getSeatt().ordinal() != Seattype.SEAT.ordinal()){
+            seats[row][col].bookSeat();
+            if(col %2 !=0){
+                seats[row][col-1].bookSeat();
+            }else{
+                seats[row][col+1].bookSeat();
+            }
+        }else {
+            seats[row][col].bookSeat();
+        }
+
     }
 
     public boolean checkseat(int row, int col){
+
         return  seats[row][col].isTaken();
+    }
+
+    public void setseattype(int row, int col,Seattype seattype){
+        seats[row][col].setSeatt(seattype);
+        if(col %2 !=0){
+            seats[row][col-1].setSeatt(seattype);
+        }else{
+            seats[row][col+1].setSeatt(seattype);
+        }
+    }
+
+    public Seattype getseattype(int row, int col){
+        return seats[row][col].getSeatt();
+    }
+
+    public String getseattypedesc(){
+        String COUPLE_SEAT="Couple seat:", ELITE_SEAT="Elite seat:", ULTIMA_SEAT="Ultimate seat:";
+        for (int i = 0; i < seats.length; i++) {
+            for (int j = 0; j < seats[0].length; j++) {
+                if (seats[i][j].getSeatt() == Seattype.COUPLE_SEAT) {
+                    char c = (char) (i+65);
+                    COUPLE_SEAT = COUPLE_SEAT +" "+ String.valueOf(c)+ String.valueOf(j+1);
+                }
+                if (seats[i][j].getSeatt() == Seattype.ELITE_SEAT) {
+                    char c = (char) (i+65);
+                    ELITE_SEAT = ELITE_SEAT +" "+ String.valueOf(c)+ String.valueOf(j+1);
+                }
+                if (seats[i][j].getSeatt() == Seattype.ULTIMA_SEAT) {
+                    char c = (char) (i+65);
+                    ULTIMA_SEAT = ULTIMA_SEAT +" "+ String.valueOf(c)+ String.valueOf(j+1);
+                }
+            }
+        }
+        return COUPLE_SEAT+ELITE_SEAT+ULTIMA_SEAT;
     }
 
 }

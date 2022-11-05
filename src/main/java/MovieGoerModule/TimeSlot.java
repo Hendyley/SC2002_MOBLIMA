@@ -19,6 +19,7 @@ public class TimeSlot {
 
     DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+
     public TimeSlot(String dateOfSlot, String startTime, String endTime, ClassOfCinama movieClass, Cinema RoomStyle) {
         room = new Cinema();
         stringDate = dateOfSlot;

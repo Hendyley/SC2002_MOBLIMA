@@ -1,10 +1,8 @@
 package MovieGoerModule;
 
-import java.util.ArrayList;
-
 public class Ticket {
     private int quantity;
-    private AgeOfMovieGoer age;
+    private AgeOfMovieGoer agetype;
     private TypeOfMovie movieType;
     private double price;
     private ClassOfCinama cinemaClass;
@@ -17,7 +15,7 @@ public class Ticket {
 
     public Ticket(int quantity, AgeOfMovieGoer age, TypeOfMovie movieType, ClassOfCinama cinemaClass, Day day) {
         this.quantity = quantity;
-        this.age = age;
+        this.agetype = age;
         this.movieType = movieType;
         this.cinemaClass = cinemaClass;
         this.day = day;
@@ -102,7 +100,7 @@ public class Ticket {
         }
 
         // student prices
-        if (age == AgeOfMovieGoer.STUDENT && day != Day.REMAINING_DAYS) {
+        if (agetype == AgeOfMovieGoer.STUDENT && day != Day.REMAINING_DAYS) {
             if (movieType == TypeOfMovie.REGULAR_2D) {
                 price = 7;
             }
@@ -121,14 +119,14 @@ public class Ticket {
         }
 
         // SENIOR prices
-        if (age == AgeOfMovieGoer.SENIOR && day != Day.REMAINING_DAYS) {
+        if (agetype == AgeOfMovieGoer.SENIOR && day != Day.REMAINING_DAYS) {
             if (movieType == TypeOfMovie.REGULAR_2D) {
                 price = 4;
             }
         }
 
         // CHILD prices
-        if (age == AgeOfMovieGoer.STUDENT && day != Day.REMAINING_DAYS) {
+        if (agetype == AgeOfMovieGoer.STUDENT && day != Day.REMAINING_DAYS) {
             if (movieType == TypeOfMovie.REGULAR_2D) {
                 price = 5;
             }
@@ -162,7 +160,7 @@ public class Ticket {
         return price;
     }
     public AgeOfMovieGoer get(){
-        return age;
+        return agetype;
     }
 
     public TypeOfMovie getMovieType(){
@@ -178,6 +176,10 @@ public class Ticket {
 
     public int getQuantity(){
         return quantity;
+    }
+
+    public AgeOfMovieGoer getAgetype(){
+        return agetype;
     }
 
 

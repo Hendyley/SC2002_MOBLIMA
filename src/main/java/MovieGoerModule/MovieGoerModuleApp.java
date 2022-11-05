@@ -1,20 +1,25 @@
 package MovieGoerModule;
 
+import AdminModule.Holiday;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
 public class MovieGoerModuleApp {
-    public String[] holidays = { "01/01/2022", "01/02/2022", "02/02/2022", "15/04/2022", "01/05/2022", "03/05/2022",
-            "15/05/2022", "10/07/2022", "09/08/2022", "24/10/2022", "25/12/2022" };
-
     public static void main(String[] args) throws Exception {
         // Initialisation
         Calendar today = Calendar.getInstance();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss");
+        //System.out.println(dtf.format(now));
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String[] holidays = { "01/01/2022", "01/02/2022", "02/02/2022", "15/04/2022", "01/05/2022", "03/05/2022",
+                "15/05/2022", "10/07/2022", "09/08/2022", "24/10/2022", "25/12/2022" };
+
 
         // Cineplex cathay = new Cineplex(3);
         // TimeSlot newSlot = new TimeSlot("02/11/2022", 1700);
@@ -36,6 +41,7 @@ public class MovieGoerModuleApp {
         movieArr[6] = new Movie("Thor");
 
         movieArr[2].setAgetype(AgeOfMovieGoer.STUDENT);
+        movieArr[4].setAgetype(AgeOfMovieGoer.CHILD);
 
         Cineplex[] cathay = new Cineplex[3];
         cathay[0] = new Cineplex(3, "cathay");
@@ -43,6 +49,16 @@ public class MovieGoerModuleApp {
         cathay[2] = new Cineplex(3, "cathay boon lay");
 
         Cinema roomstyle = new Cinema();
+        roomstyle.setseattype(9,0,Seattype.COUPLE_SEAT);
+        roomstyle.setseattype(9,2,Seattype.COUPLE_SEAT);
+        roomstyle.setseattype(9,4,Seattype.COUPLE_SEAT);
+        roomstyle.setseattype(9,6,Seattype.COUPLE_SEAT);
+
+        roomstyle.setseattype(8,0,Seattype.ELITE_SEAT);
+        roomstyle.setseattype(8,2,Seattype.ELITE_SEAT);
+
+        roomstyle.setseattype(8,4,Seattype.ULTIMA_SEAT);
+        roomstyle.setseattype(8,6,Seattype.ULTIMA_SEAT);
 
         // cathay[0].addSlot(new TimeSlot(Date1, "0", "2", ClassOfCinama.REGULAR,
         // movieArr[0], roomstyle));
@@ -80,7 +96,7 @@ public class MovieGoerModuleApp {
         cathay[2].getMovieList().add(movieArr[2]);
 
         MovieGoer man = new MovieGoer("Derrick", "p");
-        man.setAge(19);
+        man.setAge(21);
 
         // *************************
         Scanner sc = new Scanner(System.in);
@@ -176,7 +192,7 @@ public class MovieGoerModuleApp {
                         System.out.println("Select a date");
                         String firstDate = slotList.get(0).getStringDate();
                         System.out.println(0 + " " + slotList.get(0).getStringDate());
-
+                        dateList.add(firstDate);
                         for (int i = 1; i < slotList.size(); i++) {
                             if (slotList.get(i - 1).getStringDate() != slotList.get(i).getStringDate()) {
                                 dateList.add(slotList.get(i).getStringDate());
@@ -214,6 +230,7 @@ public class MovieGoerModuleApp {
 
                     break;
                 case 4:
+                    LocalDateTime now = LocalDateTime.now();
                     ArrayList<TimeSlot> ts1 = null;
                     ArrayList<String> datel = new ArrayList<String>();
                     String dateS = "";
@@ -240,7 +257,9 @@ public class MovieGoerModuleApp {
 
                     System.out.println("Which movie :");
                     for (int i = 0; i < cine.getMovieList().size(); i++) {
-                        System.out.println(i + " " + cine.getMovieList().get(i).getTitle());
+                        if( (cine.getMovieList().get(i).getStatus() == Status.NOW_SHOWING || cine.getMovieList().get(i).getStatus() == Status.PREVIEW) ){
+                            System.out.println(i + " " + cine.getMovieList().get(i).getTitle() + " " + cine.getMovieList().get(i).getStatus() );
+                        }
                     }
                     int moviechoice = sc.nextInt();
                     if(moviechoice >= cine.getMovieList().size()){
@@ -249,12 +268,14 @@ public class MovieGoerModuleApp {
                     }
                     ts1 = cine.getMovieList().get(moviechoice).getTimeSlots();
                     //Age requirement check
-                    if (man.getAgetype().ordinal() <= cine.getMovieList().get(moviechoice).getAge_restriction().ordinal()) {
-                        System.out.println("You don't meet the age requirement to watch " + cine.getMovieList().get(moviechoice).getAge_restriction() + " Movie");
+                    if (man.getAgetype().ordinal() < cine.getMovieList().get(moviechoice).getAge_restriction().ordinal() ) {
+                        System.out.println("Age requirement required to watch " + cine.getMovieList().get(moviechoice).getAge_restriction() + " Movie");
                         break;
                     }
+                    //Check booking type
+                    if(cine.getMovieList().get(moviechoice).getStatus() == Status.COMING_SOON || cine.getMovieList().get(moviechoice).getStatus() == Status.END_OF_SHOWING)
                     if (ts1.size() == 0) {
-                        System.out.println("No date Available");
+                        System.out.println("The movie is coming soon or not showing now");
                         break;
                     }
 
@@ -295,34 +316,85 @@ public class MovieGoerModuleApp {
 
                     System.out.println("Select Qty: ");
                     Qty = sc.nextInt();
+                    ArrayList<Integer> ticketagelist= new ArrayList<>();
+                    for(int i=0;i<Qty;i++){
+                        System.out.println("Selecting Age Catefory for Customer "+i);
+                        System.out.println("0 for CHILD");
+                        System.out.println("1 for STUDENT");
+                        System.out.println("2 for SENIOR");
+                        System.out.println("3 for ADULT");
+                        int age = sc.nextInt();
+                        if( (age>3) || (age<0) || age<cine.getMovieList().get(moviechoice).getAge_restriction().ordinal() ){
+                            Qty=-1;
+                            break;
+                        }
+                        ticketagelist.add(age);
+                    }
+                    if(Qty == -1){
+                        System.out.println("Age requirement required to watch " + cine.getMovieList().get(moviechoice).getAge_restriction() + " Movie");
+                        break;
+                    }
+
                     LocalDate dt = LocalDate.parse(dateS, df);
                     Day d;
-                    if (dt.getDayOfWeek() == DayOfWeek.MONDAY || dt.getDayOfWeek() == DayOfWeek.TUESDAY
-                            || dt.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
+                    Integer starttime = Integer.parseInt( tss.getStartTime().substring(0,2) );
+                    Integer endtime = Integer.parseInt( tss.getEndTime().substring(0,2) );
+                    if (dt.getDayOfWeek() == DayOfWeek.MONDAY || dt.getDayOfWeek() == DayOfWeek.TUESDAY || dt.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
                         d = Day.MON_TO_WED;
+                    } else if (dt.getDayOfWeek() == DayOfWeek.FRIDAY && ( !(starttime <= 6 && 6 <= endtime) || (starttime>6) || (endtime<6)  ) ) {
+                        d = Day.FRI_BEFORE_6;
                     } else if (dt.getDayOfWeek() == DayOfWeek.THURSDAY) {
                         d = Day.THURS;
-                    } else if (dt.getDayOfWeek() == DayOfWeek.FRIDAY || dt.getDayOfWeek() == DayOfWeek.SATURDAY || dt.getDayOfWeek() == DayOfWeek.SUNDAY) {
-                        d = Day.FRI_BEFORE_6;
-                    } else {
+                    }  else {
                         d = Day.REMAINING_DAYS;
                     }
 
-                    String transid = "Cinema :"+cine.getName()+" Movie title :"+cine.getMovieList().get(moviechoice).getTitle()+" "+tss.getairingtimeformat()+" "+tss.getMovieClass();
+                    for(int i=0; i<holidays.length;i++){
+                        if(holidays[i].indexOf(dateS) > -1){
+                            d = Day.REMAINING_DAYS;
+                        }
+                    }
+
+                    String transid = "Cinema :"+cine.getName()+" Movie title :"+cine.getMovieList().get(moviechoice).getTitle()+" "+tss.getairingtimeformat()+" "+tss.getMovieClass()+" "+cine.getMovieList().get(moviechoice).getType();
                     System.out.println(transid);
-                    System.out.println("Select Seats: (Example: A12, B9 )");
+                    String seatdesc = tss.getRoom().getseattypedesc();
+                    System.out.println("Seatdesc : "+seatdesc);
+                    String couples = seatdesc.substring(0,seatdesc.indexOf("Elite"));
+                    String elite = seatdesc.substring(seatdesc.indexOf("Elite"),seatdesc.indexOf("Ulti"));
+                    String ulti = seatdesc.substring(seatdesc.indexOf("Ulti"));
                     cine.getMovieList().get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom().printSeats();
                     //Cinema c = cine.getMovieList().get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom();
+                    System.out.println(couples);
+                    System.out.println(elite);
+                    System.out.println(ulti);
+                    System.out.println("Select Seats: (Example: A12, B9 )");
                     for (int q = 0; q < Qty; q++) {
                         String selectseat = s.nextLine();
-                        // System.out.println( Integer.valueOf(
-                        // selectseat.toLowerCase().substring(0,1).charAt(0)-96) +" "+
-                        // Integer.parseInt(selectseat.substring(1)));
+
                         int row = Integer.valueOf(selectseat.toLowerCase().substring(0, 1).charAt(0) - 96) - 1;
-                        int col = Integer.parseInt(selectseat.substring(1)) - 1;
-                        if ((row<=10) && (col<=12) ) {
+                        int col = Integer.parseInt(selectseat.substring(1)) - 1 ;
+                        //System.out.println("Gettype : "+tss.getRoom().getseattype(row,col)+" "+row+" "+col+tss.getRoom().checkseat(row, col));
+                        if ((row<10) && (col<12) ) {
                             if(!tss.getRoom().checkseat(row, col)){
-                                tss.getRoom().book(row, col);
+                                if(tss.getRoom().getseattype(row,col).ordinal() != Seattype.SEAT.ordinal()){
+                                    q = q + 1;
+                                    if((q) >= Qty){
+                                        System.out.println("Sorry the seat required 2 seaters. Choose again!");
+                                        q = q - 2;
+                                    } else{
+                                        tss.getRoom().book(row, col);
+                                        System.out.println("Double seats selected!");
+                                    }
+                                }
+
+                                if(tss.getRoom().getseattype(row,col).ordinal() == Seattype.SEAT.ordinal()){
+                                    tss.getRoom().book(row, col);
+                                    System.out.println("Seat selected!");
+                                }
+
+                            }else{
+                                System.out.println("Sorry the seat is taken. Choose again!");
+                                q = q - 1;
                             }
                         } else {
                             System.out.println("Sorry the seat is taken. Choose again!");
@@ -332,13 +404,12 @@ public class MovieGoerModuleApp {
 
                     Ticket[] t = new Ticket[Qty];
                     for(int i=0;i<Qty;i++){
-                        t[i] = new Ticket(1, man.getAgetype(), cine.getMovieList().get(moviechoice).getType(), tss.getMovieClass(), d);
+                        t[i] = new Ticket(1, AgeOfMovieGoer.values()[ticketagelist.get(i)] , cine.getMovieList().get(moviechoice).getType(), tss.getMovieClass(), d);
                     }
-
-                    Transaction trans = new Transaction(dateS +" "+ transid, t);
+                    Transaction trans = new Transaction(dtf.format(now).toString() +" "+ transid, t);
                     man.getTransactionHistory().add(trans);
 
-                    System.out.println(Qty + " Booking places");
+                    System.out.println(Qty + " Booking places!");
                     break;
                 case 5:
                     System.out.println("5. View Booking History");
