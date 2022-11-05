@@ -158,4 +158,27 @@ public class Ticket {
         return price * quantity;
     }
 
+    public double getPrice() {
+        return price;
+    }
+    public AgeOfMovieGoer get(){
+        return age;
+    }
+
+    public TypeOfMovie getMovieType(){
+        return movieType;
+    }
+
+    public Day getDay(){
+        return day;
+    }
+    public ClassOfCinama getCinemaClass(){
+        return cinemaClass;
+    }
+
+    public int getQuantity(){
+        return quantity;
+    }
+
+
 }

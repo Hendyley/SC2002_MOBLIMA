@@ -218,7 +218,6 @@ public class MovieGoerModuleApp {
                     ArrayList<String> datel = new ArrayList<String>();
                     String dateS = "";
                     TimeSlot tss = null;
-                    int cinemas;
                     Cineplex cine = null;
                     System.out.println("4. Book a ticket");
                     System.out.println("Select Cineplex");
@@ -226,8 +225,12 @@ public class MovieGoerModuleApp {
                     for (int i = 0; i < cathay.length; i++) {
                         System.out.println(i + " Cinema: " + cathay[i].getName());
                     }
-                    cinemas = sc.nextInt();
-                    cine = cathay[cinemas];
+                    cinema = sc.nextInt();
+                    if(cinema>= cathay.length){
+                        System.out.println("Cannot find the cineplex");
+                        break;
+                    }
+                    cine = cathay[cinema];
 
                     //cine.getMovieList();
                     if(cine.getMovieList().size()==0){
@@ -305,8 +308,9 @@ public class MovieGoerModuleApp {
                         d = Day.REMAINING_DAYS;
                     }
 
-                    System.out.println("Cinema :"+cine.getName()+" Movie title :"+cine.getMovieList().get(moviechoice).getTitle()+" "+tss.getairingtimeformat()+" "+tss.getMovieClass());
-                    System.out.println("Select Seats: (Example: A12, B9)");
+                    String transid = "Cinema :"+cine.getName()+" Movie title :"+cine.getMovieList().get(moviechoice).getTitle()+" "+tss.getairingtimeformat()+" "+tss.getMovieClass();
+                    System.out.println(transid);
+                    System.out.println("Select Seats: (Example: A12, B9 )");
                     cine.getMovieList().get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom().printSeats();
                     //Cinema c = cine.getMovieList().get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom();
                     for (int q = 0; q < Qty; q++) {
@@ -316,8 +320,10 @@ public class MovieGoerModuleApp {
                         // Integer.parseInt(selectseat.substring(1)));
                         int row = Integer.valueOf(selectseat.toLowerCase().substring(0, 1).charAt(0) - 96) - 1;
                         int col = Integer.parseInt(selectseat.substring(1)) - 1;
-                        if (!tss.getRoom().checkseat(row, col)) {
-                            tss.getRoom().book(row, col);
+                        if ((row<=10) && (col<=12) ) {
+                            if(!tss.getRoom().checkseat(row, col)){
+                                tss.getRoom().book(row, col);
+                            }
                         } else {
                             System.out.println("Sorry the seat is taken. Choose again!");
                             q = q - 1;
@@ -329,13 +335,19 @@ public class MovieGoerModuleApp {
                         t[i] = new Ticket(1, man.getAgetype(), cine.getMovieList().get(moviechoice).getType(), tss.getMovieClass(), d);
                     }
 
-                    Transaction trans = new Transaction(dateS+" "+ts1.get(tsnum.get(choice)).getStartTime() + "-" +ts1.get(tsnum.get(choice)).getEndTime(), t);
+                    Transaction trans = new Transaction(dateS +" "+ transid, t);
                     man.getTransactionHistory().add(trans);
 
                     System.out.println(Qty + " Booking places");
                     break;
                 case 5:
                     System.out.println("5. View Booking History");
+                    ArrayList<Transaction> temptrans = man.getTransactionHistory();
+                    System.out.println("Here is your Transaction :");
+                    for(int i=0;i<temptrans.size();i++){
+                        System.out.println("Transaction "+temptrans.get(i).getId());
+                        temptrans.get(i).printTickets();
+                    }
 
                     break;
 
@@ -347,6 +359,11 @@ public class MovieGoerModuleApp {
                     System.out.println("1. by sales");
                     System.out.println("2. by rating");
                     choice = sc.nextInt();
+
+                    if(choice>2){
+                        System.out.println("Sorry, please select input appropriate value");
+                        break;
+                    }
 
                     switch (choice) {
                         case 1:
@@ -377,6 +394,18 @@ public class MovieGoerModuleApp {
                                 + " Sales: " + top5m[i].getSales() + " Number of reviewer: "
                                 + top5m[i].getnumberofreviewer());
                     }
+                    System.out.println("Select movie to view review comment");
+                    choice=sc.nextInt();
+                    if(choice>=n || choice<0){
+                        //System.out.println("Sorry, please select input appropriate value");
+                        break;
+                    }
+                    ArrayList<Review> tempreview = top5m[choice].getreviewlist();
+                    for(int i=0;i<tempreview.size();i++){
+                        System.out.println("Comment "+i+": "+tempreview.get(i).getRemark());
+                    }
+
+
                     break;
                 case 7:
                     System.out.println("7. Give a movie review");
@@ -387,6 +416,9 @@ public class MovieGoerModuleApp {
                                         + " number of reviewer: " + movieArr[i].getnumberofreviewer());
                     }
                     int choose = sc.nextInt();
+                    if(choose>=movieArr.length){
+                        System.out.println("Sorry, Movie not found");
+                    }
 
                     System.out.println("Give a rating from 1-5");
                     int rating = sc.nextInt();

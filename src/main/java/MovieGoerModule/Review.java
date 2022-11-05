@@ -21,6 +21,10 @@ public class Review {
         this.remark = remark;
     }
 
+    public String getRemark(){
+        return remark;
+    }
+
 
 
 }

@@ -66,10 +66,6 @@ public class MovieGoer extends Account{
         return this.history;
     }
 
-    public void addbuy(Transaction transaction){
-        history.add(transaction);
-    }
-
     public void setName(String name) {
         this.name = name;
     }
