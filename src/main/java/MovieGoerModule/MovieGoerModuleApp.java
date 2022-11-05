@@ -44,12 +44,40 @@ public class MovieGoerModuleApp {
 
         Cinema roomstyle = new Cinema();
 
-        cathay[0].addSlot(new TimeSlot(Date1, "0", "2", ClassOfCinama.REGULAR, movieArr[0], roomstyle));
-        cathay[0].addSlot(new TimeSlot(Date1, "3", "5", ClassOfCinama.DOLBY, movieArr[1], roomstyle));
-        cathay[0].addSlot(new TimeSlot(Date1, "6", "8", ClassOfCinama.PLATINUM, movieArr[2], roomstyle));
-        cathay[0].addSlot(new TimeSlot(Date1, "8", "11", ClassOfCinama.PLATINUM, movieArr[0], roomstyle));
-        cathay[0].addSlot(new TimeSlot(Date1, "11", "13", ClassOfCinama.REGULAR, movieArr[3], roomstyle));
-        cathay[0].addSlot(new TimeSlot(Date1, "14", "16", ClassOfCinama.REGULAR, movieArr[4], roomstyle));
+        // cathay[0].addSlot(new TimeSlot(Date1, "0", "2", ClassOfCinama.REGULAR,
+        // movieArr[0], roomstyle));
+        // cathay[0].addSlot(new TimeSlot(Date1, "3", "5", ClassOfCinama.DOLBY,
+        // movieArr[1], roomstyle));
+        // cathay[0].addSlot(new TimeSlot(Date1, "6", "8", ClassOfCinama.PLATINUM,
+        // movieArr[2], roomstyle));
+        // cathay[0].addSlot(new TimeSlot(Date1, "8", "11", ClassOfCinama.PLATINUM,
+        // movieArr[0], roomstyle));
+        // cathay[0].addSlot(new TimeSlot(Date1, "11", "13", ClassOfCinama.REGULAR,
+        // movieArr[3], roomstyle));
+        // cathay[0].addSlot(new TimeSlot(Date1, "14", "16", ClassOfCinama.REGULAR,
+        // movieArr[4], roomstyle));
+
+        movieArr[0].addSlot(new TimeSlot("01/01/2022", "1500", "1700", ClassOfCinama.DOLBY, roomstyle));
+        movieArr[0].addSlot(new TimeSlot("01/02/2022", "1300", "1500", ClassOfCinama.DOLBY, roomstyle));
+        movieArr[0].addSlot(new TimeSlot("01/03/2022", "0900", "1100", ClassOfCinama.DOLBY, roomstyle));
+
+        movieArr[1].addSlot(new TimeSlot("01/05/2022", "1500", "1700", ClassOfCinama.DOLBY, roomstyle));
+        movieArr[1].addSlot(new TimeSlot("01/06/2022", "1300", "1500", ClassOfCinama.DOLBY, roomstyle));
+        movieArr[1].addSlot(new TimeSlot("01/07/2022", "0900", "1100", ClassOfCinama.DOLBY, roomstyle));
+
+        movieArr[2].addSlot(new TimeSlot("01/08/2022", "1500", "1700", ClassOfCinama.DOLBY, roomstyle));
+        movieArr[2].addSlot(new TimeSlot("01/09/2022", "1300", "1500", ClassOfCinama.DOLBY, roomstyle));
+        movieArr[2].addSlot(new TimeSlot("01/10/2022", "0900", "1100", ClassOfCinama.DOLBY, roomstyle));
+
+        cathay[0].getMovieList().add(movieArr[0]);
+        cathay[0].getMovieList().add(movieArr[1]);
+        cathay[0].getMovieList().add(movieArr[2]);
+
+        cathay[1].getMovieList().add(movieArr[0]);
+        cathay[1].getMovieList().add(movieArr[1]);
+
+        cathay[2].getMovieList().add(movieArr[1]);
+        cathay[2].getMovieList().add(movieArr[2]);
 
         MovieGoer man = new MovieGoer("Derrick", "p");
         man.setAge(19);
@@ -122,16 +150,15 @@ public class MovieGoerModuleApp {
                     }
                     cinema = sc.nextInt();
                     cinename = cathay[cinema];
-                    if (cinename.getTimeslots().size() == 0) {
-                        System.out.println("No Movie is airing in this cineplex");
-                        break;
-                    }
-
+                    // if (cinename.getTimeslots().size() == 0) {
+                    // System.out.println("No Movie is airing in this cineplex");
+                    // break;
+                    // }
                     cinename.getMovieList();
                     System.out.println("Which movie :");
 
                     for (int i = 0; i < cinename.getMovieList().size(); i++) {
-                        System.out.println(cinename.getMovieList().get(i).getTitle());
+                        System.out.println(i + " " + cinename.getMovieList().get(i).getTitle());
                     }
                     int movieSelection = sc.nextInt();
                     slotList = cinename.getMovieList().get(movieSelection).getTimeSlots();
@@ -139,20 +166,17 @@ public class MovieGoerModuleApp {
                     if (slotList.size() == 0) {
                         System.out.println("No date Available");
                     } else {
+                        System.out.println("Select a date");
                         String firstDate = slotList.get(0).getStringDate();
                         System.out.println(0 + " " + slotList.get(0).getStringDate());
 
                         for (int i = 1; i < slotList.size(); i++) {
                             if (slotList.get(i - 1).getStringDate() != slotList.get(i).getStringDate()) {
                                 dateList.add(slotList.get(i).getStringDate());
-                                System.out.println(slotList.get(i).getStringDate());
+                                System.out.println(i + " " + slotList.get(i).getStringDate());
                             }
                         }
 
-                        System.out.println("Select a date");
-                        for (int i = 0; i < dateList.size(); i++) {
-                            System.out.println(i + ". " + dateList.get(i));
-                        }
                         int input = sc.nextInt();
                         dateSelection = dateList.get(input);
                     }
@@ -161,10 +185,14 @@ public class MovieGoerModuleApp {
                     for (int i = 0; i < slotList.size(); i++) {
                         if (slotList.get(i).getStringDate() == dateSelection) {
                             slotList2.add(slotList.get(i));
-                            System.out.print(
-                                    i + " " + slotList.get(i).getStartTime() + "-" + slotList.get(i).getEndTime());
                         }
                     }
+                    for (int i = 0; i < slotList2.size(); i++) {
+                        System.out.println(
+                                i + " " + slotList2.get(i).getStartTime() + "-" +
+                                        slotList2.get(i).getEndTime());
+                    }
+
                     int inputSlot = sc.nextInt();
                     slotSelected = slotList2.get(inputSlot);
                     slotSelected.getRoom().printSeats();

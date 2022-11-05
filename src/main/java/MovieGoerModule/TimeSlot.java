@@ -15,17 +15,14 @@ public class TimeSlot {
     private String endTime;
     private ClassOfCinama movieClass;
     private Cinema room;
-
     private Movie airingmovie;
 
     DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public TimeSlot(String dateOfSlot, String startTime, String endTime, ClassOfCinama movieClass, Movie movie,
-            Cinema RoomStyle) {
+    public TimeSlot(String dateOfSlot, String startTime, String endTime, ClassOfCinama movieClass, Cinema RoomStyle) {
         room = new Cinema();
         stringDate = dateOfSlot;
 
-        this.airingmovie = movie; /// set to which movie in this time slot
         this.movieClass = movieClass;
         this.startTime = startTime;
         this.endTime = endTime;
