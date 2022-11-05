@@ -149,6 +149,10 @@ public class MovieGoerModuleApp {
                         System.out.println(i + " Cinema: " + cathay[i].getName());
                     }
                     cinema = sc.nextInt();
+                    if (cinema >= cathay.length) {
+                        System.out.println("Please Choose appropriate Cinema!");
+                        break;
+                    }
                     cinename = cathay[cinema];
                     // if (cinename.getTimeslots().size() == 0) {
                     // System.out.println("No Movie is airing in this cineplex");
