@@ -97,7 +97,7 @@ public class configureSettings {
         return priceList;
     }
 
-    public static void addPricelistFromFile(ArrayList<Object> priceList) throws IOException {
+    public static void addPricelistToFile(ArrayList<Object> priceList) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(PRICELIST_FILE_NAME);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         objectOutputStream.writeObject(priceList);
