@@ -11,7 +11,8 @@ public class configureSettings {
             System.out.println("Choose an option:");
             System.out.println("1: Change ticket price");
             System.out.println("2: Add/Remove holiday");
-            System.out.println("3: Back");
+            System.out.println("3: Add/Remove showtimes");
+            System.out.println("4: Back");
             choice = sc.nextInt();
             sc.nextLine();  //clear buffer
             switch(choice){
@@ -34,6 +35,10 @@ public class configureSettings {
                     break;
 
                 case 3:
+                    //showtime changes
+                    break;
+
+                case 4:
                 default:
                     System.out.println("Going back...");
                     break;
