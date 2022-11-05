@@ -106,6 +106,7 @@ public class Movie implements Serializable{
     }
 
 
+
     public String getDirector(){
         return director;
     }
