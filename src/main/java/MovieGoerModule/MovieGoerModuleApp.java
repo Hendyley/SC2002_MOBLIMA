@@ -307,7 +307,7 @@ public class MovieGoerModuleApp {
 
                     System.out.println("Cinema :"+cine.getName()+" Movie title :"+cine.getMovieList().get(moviechoice).getTitle()+" "+tss.getairingtimeformat()+" "+tss.getMovieClass());
                     System.out.println("Select Seats: (Example: A12, B9)");
-                    //cine.getMovieList().get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom().printSeats();
+                    cine.getMovieList().get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom().printSeats();
                     //Cinema c = cine.getMovieList().get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom();
                     for (int q = 0; q < Qty; q++) {
                         String selectseat = s.nextLine();
