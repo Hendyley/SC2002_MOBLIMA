@@ -42,12 +42,14 @@ public class MovieGoerModuleApp {
         cathay[1] = new Cineplex(3, "cathay woodland");
         cathay[2] = new Cineplex(3, "cathay boon lay");
 
-        cathay[0].addSlot(new TimeSlot(Date1, "0", "2", ClassOfCinama.REGULAR, movieArr[0]));
-        cathay[0].addSlot(new TimeSlot(Date1, "3", "5", ClassOfCinama.DOLBY, movieArr[1]));
-        cathay[0].addSlot(new TimeSlot(Date1, "6", "8", ClassOfCinama.PLATINUM, movieArr[2]));
-        cathay[0].addSlot(new TimeSlot(Date1, "8", "11", ClassOfCinama.PLATINUM, movieArr[0]));
-        cathay[0].addSlot(new TimeSlot(Date1, "11", "13", ClassOfCinama.REGULAR, movieArr[3]));
-        cathay[0].addSlot(new TimeSlot(Date1, "14", "16", ClassOfCinama.REGULAR, movieArr[4]));
+        Cinema roomstyle = new Cinema();
+
+        cathay[0].addSlot(new TimeSlot(Date1, "0", "2", ClassOfCinama.REGULAR, movieArr[0], roomstyle));
+        cathay[0].addSlot(new TimeSlot(Date1, "3", "5", ClassOfCinama.DOLBY, movieArr[1], roomstyle));
+        cathay[0].addSlot(new TimeSlot(Date1, "6", "8", ClassOfCinama.PLATINUM, movieArr[2], roomstyle));
+        cathay[0].addSlot(new TimeSlot(Date1, "8", "11", ClassOfCinama.PLATINUM, movieArr[0], roomstyle));
+        cathay[0].addSlot(new TimeSlot(Date1, "11", "13", ClassOfCinama.REGULAR, movieArr[3], roomstyle));
+        cathay[0].addSlot(new TimeSlot(Date1, "14", "16", ClassOfCinama.REGULAR, movieArr[4], roomstyle));
 
         MovieGoer man = new MovieGoer("Derrick", "p");
         man.setAge(19);
