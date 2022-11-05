@@ -24,7 +24,7 @@ public class configureSettings {
                     addHolidays ad = new addHolidays();
                     System.out.println("Enter a holiday date (DD/MM/YYYY):");
                     String date = sc.nextLine();
-                    if(date.matches("^(0[1-9]|[1-2][0-9]||3[0-1])/(0[1-9]||1[0-2])/([0-9][0-9])?[0-9][0-9]$")){ //check format
+                    if(dateChecker.check(date)){ //check format
                         ad.addDay(date);
                         System.out.println("Added successfully!");
                     }
@@ -43,7 +43,7 @@ public class configureSettings {
                     System.out.println("Going back...");
                     break;
             }
-        } while(choice != 3);
+        } while(choice != 4);
 
     }
 }
