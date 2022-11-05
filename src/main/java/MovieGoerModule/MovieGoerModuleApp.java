@@ -161,6 +161,10 @@ public class MovieGoerModuleApp {
                         System.out.println(i + " " + cinename.getMovieList().get(i).getTitle());
                     }
                     int movieSelection = sc.nextInt();
+                    if (movieSelection >= cinename.getMovieList().size()) {
+                        System.out.println("Please Choose appropriate Movie!");
+                        break;
+                    }
                     slotList = cinename.getMovieList().get(movieSelection).getTimeSlots();
 
                     if (slotList.size() == 0) {
@@ -178,6 +182,10 @@ public class MovieGoerModuleApp {
                         }
 
                         int input = sc.nextInt();
+                        if (input >= dateList.size()) {
+                            System.out.println("Please Choose appropriate Date!");
+                            break;
+                        }
                         dateSelection = dateList.get(input);
                     }
 
@@ -194,6 +202,10 @@ public class MovieGoerModuleApp {
                     }
 
                     int inputSlot = sc.nextInt();
+                    if (inputSlot >= slotList2.size()) {
+                        System.out.println("Please Choose appropriate TimeSlot!");
+                        break;
+                    }
                     slotSelected = slotList2.get(inputSlot);
                     slotSelected.getRoom().printSeats();
 
