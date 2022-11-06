@@ -215,10 +215,10 @@ public class configureSettings {
             System.out.println("What would like to change?");
             System.out.println("1: Age");
             System.out.println("2. Seat Type");
-            System.out.println("3: Movie Class");
-            System.out.println("4. Day");
-            System.out.println("5: Done");
-            System.out.println("6: Cancel");
+            System.out.println("3: Cinema Class");
+            System.out.println("4: Movie Type");
+            System.out.println("5. Day");
+            System.out.println("6: Done");
             choice = sc.nextInt();
 
             switch (choice) {
@@ -227,33 +227,35 @@ public class configureSettings {
                     break;
                 
                 case 2:
+                    seatTypeList = switch_case_seatType(seatTypeList);
                     break;
                 
                 case 3:
+                    cinemaClassList = switch_case_cinemaClass(cinemaClassList);
                     break;
 
                 case 4:
+                    movieTypeList = switch_case_movieType(movieTypeList);
                     break;
 
                 case 5:
+                    dayList = switch_case_day(dayList);
+                    break;
+
+                case 6:
                     pricelist.set(0,ageList);
                     pricelist.set(1,seatTypeList);
                     pricelist.set(2,cinemaClassList);
                     pricelist.set(3,movieTypeList);
                     pricelist.set(4,dayList);
                     addPricelistToFile(pricelist);
-
-                    System.out.println("Updated successfully");
-                    printPricelist();
-                    break;
-
-                case 6:
-                    System.out.println("Update has been cancelled");
-
+                    System.out.println("Updated successfully!");
+                    switch_case_printUpdated();
+                    
                 default:
                     break;
             }
-        }while(choice != 5 && choice != 6);
+        }while(choice != 6);
     }
 
     private static HashMap<String,Double> switch_case_age(HashMap<String,Double> ageList){
@@ -266,6 +268,7 @@ public class configureSettings {
             System.out.println("2: STUDENT");
             System.out.println("3: SENIOR");
             System.out.println("4: ADULT");
+            System.out.println("5: Back");
             choice = sc.nextInt();
 
             switch (choice) {
@@ -292,12 +295,16 @@ public class configureSettings {
                     newPrice = sc.nextDouble();
                     ageList.replace("ADULT", newPrice);
                     break;
+                
+                case 5:
+                    System.out.println("Going Back...\n");
+                    break;
 
                 default:
                     break;
             }
 
-        }while(choice < 1 || choice > 4);
+        }while(choice < 1 || choice > 5);
 
         return ageList;
     }
@@ -313,25 +320,143 @@ public class configureSettings {
             System.out.println("2: COUPLE_SEAT");
             System.out.println("3: ELITE_SEAT");
             System.out.println("4: ULTIMA_SEAT");
+            System.out.println("5: Back");
             choice = sc.nextInt();
 
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter new price for SEAT");
+                    newPrice = sc.nextDouble();
+                    seatTypeList.replace("SEAT", newPrice);
+                    break;
+            
+                case 2:
+                    System.out.println("Enter new price for COUPLE_SEAT");
+                    newPrice = sc.nextDouble();
+                    seatTypeList.replace("COUPLE_SEAT", newPrice);
+                    break;
 
-        } while (choice < 1 || choice > 4);
+                case 3:
+                    System.out.println("Enter new price for ELITE_SEAT");
+                    newPrice = sc.nextDouble();
+                    seatTypeList.replace("ELITE_SEAT", newPrice);
+                    break;
+
+                case 4:
+                    System.out.println("Enter new price for ULTIMA_SEAT");
+                    newPrice = sc.nextDouble();
+                    seatTypeList.replace("ULTIMA_SEAT", newPrice);
+                    break;
+
+                case 5:
+                    System.out.println("Going Back...\n");
+                    break;
+
+                default:
+                    break;
+            }
+
+        } while (choice < 1 || choice > 5);
 
         return seatTypeList;
     }
 
-    private static HashMap<String,Double> switch_case_movieClass(HashMap<String,Double> movieClassList){
+    private static HashMap<String,Double> switch_case_cinemaClass(HashMap<String,Double> cinemaClassList){
         int choice = 0;
         double newPrice = 0;
         Scanner sc = new Scanner(System.in);
         
         do {
+            System.out.println("Select cinema class to change");
+            System.out.println("1: REGULAR");
+            System.out.println("2: DOLBY");
+            System.out.println("3: PLATINUM");
+            System.out.println("4: Back");
             
-        } while (choice < 1 || choice > 3);
+            choice = sc.nextInt();
 
-        return movieClassList;
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter new price for REGULAR");
+                    newPrice = sc.nextDouble();
+                    cinemaClassList.replace("REGULAR", newPrice);
+                    break;
+            
+                case 2:
+                    System.out.println("Enter new price for DOLBY");
+                    newPrice = sc.nextDouble();
+                    cinemaClassList.replace("DOLBY", newPrice);                   
+                    break;
+                
+                case 3:
+                    System.out.println("Enter new price for PLATINUM");
+                    newPrice = sc.nextDouble();
+                    cinemaClassList.replace("PLATINUM", newPrice);
+                    break;
+                
+                case 4:
+                    System.out.println("Going Back...\n");
+                    break;
+            
+                default:
+                    break;
+            }
+        } while (choice < 1 || choice > 4);
+
+        return cinemaClassList;
     }   
+
+    private static HashMap<String,Double> switch_case_movieType(HashMap<String,Double> movieTypeList){
+        int choice = 0;
+        double newPrice = 0;
+        Scanner sc = new Scanner(System.in);
+        
+        do {
+            System.out.println("Select movie type to change");
+            System.out.println("1: REGULAR_2D");
+            System.out.println("2: REGULAR_3D");
+            System.out.println("3: BLOCKBUSTER_2D");
+            System.out.println("4: BLOCKBUSTER_3D");
+            System.out.println("5: Back");
+            choice = sc.nextInt();
+            
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter new price for REGULAR_2D");
+                    newPrice = sc.nextDouble();
+                    movieTypeList.replace("REGULAR_2D", newPrice);
+                    break;
+            
+                case 2:
+                    System.out.println("Enter new price for REGULAR_3D");
+                    newPrice = sc.nextDouble();
+                    movieTypeList.replace("REGULAR_3D", newPrice);                   
+                    break;
+                
+                case 3:
+                    System.out.println("Enter new price for BLOCKBUSTER_2D");
+                    newPrice = sc.nextDouble();
+                    movieTypeList.replace("BLOCKBUSTER_2D", newPrice);
+                    break;
+                
+                case 4:
+                    System.out.println("Enter new price for BLOCKBUSTER_3D");
+                    newPrice = sc.nextDouble();
+                    movieTypeList.replace("BLOCKBUSTER_3D", newPrice);
+                    break;
+
+                case 5:
+                    System.out.println("Going Back...\n");
+                    break;
+                
+                default:
+                    break;
+            }
+        } while (choice < 1 || choice > 5);
+
+        return movieTypeList;
+    }   
+
 
     private static HashMap<String,Double> switch_case_day(HashMap<String,Double> dayList){
         int choice = 0;
@@ -339,12 +464,87 @@ public class configureSettings {
         Scanner sc = new Scanner(System.in);
         
         do {
+            System.out.println("Select day to change");
+            System.out.println("1: MON_TO_WED");
+            System.out.println("2: THURS");
+            System.out.println("3: FRI_BEFORE_6");
+            System.out.println("4: HOLIDAY");
+            System.out.println("5: REMAINING_DAYS");
+            System.out.println("6: Back");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter new price for MON_TO_WED");
+                    newPrice = sc.nextDouble();
+                    dayList.replace("MON_TO_WED", newPrice);
+                    break;
             
-        } while (choice < 1 || choice > 5);
+                case 2:
+                    System.out.println("Enter new price for THURS");
+                    newPrice = sc.nextDouble();
+                    dayList.replace("THURS", newPrice);                   
+                    break;
+                
+                case 3:
+                    System.out.println("Enter new price for FRI_BEFORE_6");
+                    newPrice = sc.nextDouble();
+                    dayList.replace("FRI_BEFORE_6", newPrice);
+                    break;
+                
+                case 4:
+                    System.out.println("Enter new price for HOLIDAY");
+                    newPrice = sc.nextDouble();
+                    dayList.replace("HOLIDAY", newPrice);
+                    break;
+
+                case 5:
+                    System.out.println("Enter new price for REMAINING_DAYS");
+                    newPrice = sc.nextDouble();
+                    dayList.replace("REMAINING_DAYS", newPrice);
+                    break;
+
+                case 6:
+                    System.out.println("Going Back...\n");
+                    break;
+
+                default:
+                    break;
+            }
+            
+            
+        } while (choice < 1 || choice > 6);
 
 
         return dayList;
     }
+
+    private static void switch_case_printUpdated() throws ClassNotFoundException, IOException{
+        int choice = 0;
+        Scanner sc = new Scanner(System.in);
+
+        do {
+            System.out.println("Print out updated pricelist?");
+            System.out.println("1. Yes.");
+            System.out.println("2. No.");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    printPricelist();
+                    break;
+
+                case 2:
+                    break;
+
+                default:
+                    break;
+            }
+
+        } while (choice != 1 && choice != 2);
+
+    }
+
 
 
 }
