@@ -8,7 +8,7 @@ import MovieGoerModule.Role;
 import AdminModule.Staff;
 
 public class testLoginApp2 {
-    private final static String ACCOUNT_FILE_NAME = "AccountList2.txt";
+    private final static String ACCOUNT_FILE_NAME = "AccountList.txt";
     private static Scanner sc = new Scanner(System.in);
     private static Role currentRole;
     private static boolean isLogined = false;
@@ -121,13 +121,15 @@ public class testLoginApp2 {
             staffList.add(staff1);
         }
 
-        if(!isUsernameExist(accountLists, staff1.getUsername())){
-            mg1 = new MovieGoer("user1", "user123");
+        mg1 = new MovieGoer("user1", "user123", "Adams",95463461,"adamsOKorNot@gmail.com");
+        mg1.setAge(19);
+        if(!isUsernameExist(accountLists, mg1.getUsername())){            
             mgList.add(mg1);
         }
 
-        if(!isUsernameExist(accountLists, staff1.getUsername())){
-            mg1 = new MovieGoer("user2","user234");
+        mg1 = new MovieGoer("user2","user234","John",94352423,"johnIsOk@gmail.com");
+        mg1.setAge(31);
+        if(!isUsernameExist(accountLists, mg1.getUsername())){
             mgList.add(mg1);
         }
 
