@@ -366,7 +366,7 @@ public class MovieGoerModuleApp{
                         }
                     }
 
-                    String transid = "Cinema :"+cine.getName()+" Movie title :"+cine.getMovieList().get(moviechoice).getTitle()+" "+tss.getairingtimeformat()+" "+tss.getMovieClass()+" "+cine.getMovieList().get(moviechoice).getType();
+                    String transid = "Cinema :"+cine.getName()+" Movie title :"+cine.getMovieList().get(moviechoice).getTitle()+" "+tss.getairingtimeformat()+" "+d+" "+tss.getMovieClass()+" "+cine.getMovieList().get(moviechoice).getType();
                     System.out.println(transid);
                     seatdesc = tss.getRoom().getseattypedesc();
                     //System.out.println("Seatdesc : "+seatdesc);
@@ -424,8 +424,9 @@ public class MovieGoerModuleApp{
                     //String ageprice = priceLists.get(0).toString();
                     HashMap<String,Double> ageList = (HashMap<String,Double>)priceLists.get(0);
                     HashMap<String,Double> seatTypeList = (HashMap<String,Double>)priceLists.get(1);
-                    HashMap<String,Double> movieClassList = (HashMap<String,Double>)priceLists.get(2);
-                    HashMap<String,Double> dayList = (HashMap<String,Double>)priceLists.get(3);
+                    HashMap<String,Double> cinemaClassList = (HashMap<String,Double>)priceLists.get(2);
+                    HashMap<String,Double> movieClassList = (HashMap<String,Double>)priceLists.get(3);
+                    HashMap<String,Double> dayList = (HashMap<String,Double>)priceLists.get(4);
 
                     for(int i=0;i<Qty;i++){
                         double ticketprice = 0;
@@ -444,6 +445,14 @@ public class MovieGoerModuleApp{
                             Double value = seatType.getValue();
                             if(keys.equals( selectedseattype.get(i).toString() )){
                                 System.out.println("Calculating for "+selectedseattype.get(i).toString());
+                                ticketprice += value;
+                            }
+                        }
+                        for (Map.Entry<String, Double> cinemaClass : cinemaClassList.entrySet()) {
+                            String keys = cinemaClass.getKey();
+                            Double value = cinemaClass.getValue();
+                            if(keys.equals( tss.getMovieClass().toString() )){
+                                System.out.println("Calculating for "+tss.getMovieClass().toString());
                                 ticketprice += value;
                             }
                         }
