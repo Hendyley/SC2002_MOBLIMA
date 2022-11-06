@@ -30,19 +30,10 @@ public class configureSettings {
             switch(choice){
                 case 1:
                     //change ticket price
-                    //retrieve pricelist from pricelist.txt
+                    //print pricelist
                     printPricelist();
-                    ArrayList<Object> priceList = getPricelistFromFile();
-                    //select category to change
-
-                    //select the "age" to change
-
-                    //enter new value
-
-                    //set value into category arraylist
-                    //set category arraylist into pricelist arraylist
-                    //save updated pricelist arraylist into pricelist.txt 
-
+                    //update pricelist
+                    updatePricelist();
                     break;
 
                 case 2:
@@ -111,7 +102,8 @@ public class configureSettings {
         ArrayList<Object> priceList = new ArrayList<>();
         HashMap<String,Double> ageList = new HashMap<String,Double>();
         HashMap<String,Double> seatTypeList = new HashMap<String,Double>();
-        HashMap<String,Double> movieClassList = new HashMap<String,Double>();
+        HashMap<String,Double> cinemaClassList = new HashMap<String,Double>();
+        HashMap<String,Double> movieTypeList = new HashMap<String,Double>();
         HashMap<String,Double> dayList = new HashMap<String,Double>();
 
         ageList.put("CHILD", 2.0);
@@ -124,9 +116,15 @@ public class configureSettings {
         seatTypeList.put("ELITE_SEAT",5.0);
         seatTypeList.put("ULTIMA_SEAT",7.0);
 
-        movieClassList.put("REGULAR",3.0);
-        movieClassList.put("DOLBY",6.0);
-        movieClassList.put("PLATINUM",10.0);
+        cinemaClassList.put("REGULAR",3.0);
+        cinemaClassList.put("DOLBY",6.0);
+        cinemaClassList.put("PLATINUM",10.0);
+
+        movieTypeList.put("REGULAR_2D",3.0);
+        movieTypeList.put("REGULAR_3D",4.5);
+        movieTypeList.put("BLOCKBUSTER_2D",5.0);
+        movieTypeList.put("BLOCKBUSTER_3D",6.0);
+
 
         dayList.put("MON_TO_WED",2.0);
         dayList.put("THURS",1.5);
@@ -137,7 +135,8 @@ public class configureSettings {
         
         priceList.add(ageList);
         priceList.add(seatTypeList);
-        priceList.add(movieClassList);
+        priceList.add(cinemaClassList);
+        priceList.add(movieTypeList);
         priceList.add(dayList);
         
         return priceList;
@@ -147,8 +146,9 @@ public class configureSettings {
         ArrayList<Object> pricelist = getPricelistFromFile();
         HashMap<String,Double> ageList = (HashMap<String,Double>)pricelist.get(0);
         HashMap<String,Double> seatTypeList = (HashMap<String,Double>)pricelist.get(1);
-        HashMap<String,Double> movieClassList = (HashMap<String,Double>)pricelist.get(2);
-        HashMap<String,Double> dayList = (HashMap<String,Double>)pricelist.get(3);
+        HashMap<String,Double> cinemaClassList = (HashMap<String,Double>)pricelist.get(2);
+        HashMap<String,Double> movieTypeList = (HashMap<String,Double>)pricelist.get(3);
+        HashMap<String,Double> dayList = (HashMap<String,Double>)pricelist.get(4);
 
         System.out.println("Printing out Pricelist\n");
         System.out.println("Age");
@@ -170,15 +170,23 @@ public class configureSettings {
         System.out.println("");
 
 
-        System.out.println("Movie Class");
+        System.out.println("Cinema Class");
         System.out.println("------------------");
-        for (Map.Entry<String, Double> movieClass : movieClassList.entrySet()) {
-            String key = movieClass.getKey();
-            Double value = movieClass.getValue();
+        for (Map.Entry<String, Double> cinemaClass : cinemaClassList.entrySet()) {
+            String key = cinemaClass.getKey();
+            Double value = cinemaClass.getValue();
             System.out.printf("%s: %.2f\n",key,value);
         }
         System.out.println("");
 
+        System.out.println("Movie Type");
+        System.out.println("------------------");
+        for (Map.Entry<String, Double> movieType : movieTypeList.entrySet()) {
+            String key = movieType.getKey();
+            Double value = movieType.getValue();
+            System.out.printf("%s: %.2f\n",key,value);
+        }
+        System.out.println("");
 
         System.out.println("Day");
         System.out.println("------------------");
@@ -190,5 +198,153 @@ public class configureSettings {
         System.out.println("");
 
     }
+
+    public static void updatePricelist() throws ClassNotFoundException, IOException{
+        int choice = 0;
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Object> pricelist = getPricelistFromFile();
+        HashMap<String,Double> ageList = (HashMap<String,Double>)pricelist.get(0);
+        HashMap<String,Double> seatTypeList = (HashMap<String,Double>)pricelist.get(1);
+        HashMap<String,Double> cinemaClassList = (HashMap<String,Double>)pricelist.get(2);
+        HashMap<String,Double> movieTypeList = (HashMap<String,Double>)pricelist.get(3);
+        HashMap<String,Double> dayList = (HashMap<String,Double>)pricelist.get(4);
+
+        
+        //select category to change
+        do{
+            System.out.println("What would like to change?");
+            System.out.println("1: Age");
+            System.out.println("2. Seat Type");
+            System.out.println("3: Movie Class");
+            System.out.println("4. Day");
+            System.out.println("5: Done");
+            System.out.println("6: Cancel");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    ageList = switch_case_age(ageList);
+                    break;
+                
+                case 2:
+                    break;
+                
+                case 3:
+                    break;
+
+                case 4:
+                    break;
+
+                case 5:
+                    pricelist.set(0,ageList);
+                    pricelist.set(1,seatTypeList);
+                    pricelist.set(2,cinemaClassList);
+                    pricelist.set(3,movieTypeList);
+                    pricelist.set(4,dayList);
+                    addPricelistToFile(pricelist);
+
+                    System.out.println("Updated successfully");
+                    printPricelist();
+                    break;
+
+                case 6:
+                    System.out.println("Update has been cancelled");
+
+                default:
+                    break;
+            }
+        }while(choice != 5 && choice != 6);
+    }
+
+    private static HashMap<String,Double> switch_case_age(HashMap<String,Double> ageList){
+        int choice = 0;
+        double newPrice = 0;
+        Scanner sc = new Scanner(System.in);
+        do{
+            System.out.println("Select age to change");
+            System.out.println("1: CHILD");
+            System.out.println("2: STUDENT");
+            System.out.println("3: SENIOR");
+            System.out.println("4: ADULT");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter new price for CHILD:");
+                    newPrice = sc.nextDouble();
+                    ageList.replace("CHILD", newPrice);
+                    break;
+                
+                case 2:
+                    System.out.println("Enter new price for STUDENT:");
+                    newPrice = sc.nextDouble();
+                    ageList.replace("STUDENT", newPrice);
+                    break;
+
+                case 3:
+                    System.out.println("Enter new price for SENIOR:");
+                    newPrice = sc.nextDouble();
+                    ageList.replace("SENIOR", newPrice);
+                    break;
+
+                case 4:
+                    System.out.println("Enter new price for ADULT:");
+                    newPrice = sc.nextDouble();
+                    ageList.replace("ADULT", newPrice);
+                    break;
+
+                default:
+                    break;
+            }
+
+        }while(choice < 1 || choice > 4);
+
+        return ageList;
+    }
+
+    private static HashMap<String,Double> switch_case_seatType(HashMap<String,Double> seatTypeList){
+        int choice = 0;
+        double newPrice = 0;
+        Scanner sc = new Scanner(System.in);
+        
+        do {
+            System.out.println("Select seat type to change");
+            System.out.println("1: SEAT");
+            System.out.println("2: COUPLE_SEAT");
+            System.out.println("3: ELITE_SEAT");
+            System.out.println("4: ULTIMA_SEAT");
+            choice = sc.nextInt();
+
+
+        } while (choice < 1 || choice > 4);
+
+        return seatTypeList;
+    }
+
+    private static HashMap<String,Double> switch_case_movieClass(HashMap<String,Double> movieClassList){
+        int choice = 0;
+        double newPrice = 0;
+        Scanner sc = new Scanner(System.in);
+        
+        do {
+            
+        } while (choice < 1 || choice > 3);
+
+        return movieClassList;
+    }   
+
+    private static HashMap<String,Double> switch_case_day(HashMap<String,Double> dayList){
+        int choice = 0;
+        double newPrice = 0;
+        Scanner sc = new Scanner(System.in);
+        
+        do {
+            
+        } while (choice < 1 || choice > 5);
+
+
+        return dayList;
+    }
+
 
 }
