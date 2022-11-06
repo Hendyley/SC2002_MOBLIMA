@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import MovieGoerModule.Movie;
 
 public class deleteMovie {
-    public static void main(String[] args) throws ClassNotFoundException, IOException{
+    public static void delete() throws ClassNotFoundException, IOException{
         //delete movie from database?
         Scanner sc = new Scanner(System.in);
         int choice = 0;
