@@ -7,7 +7,7 @@ import MovieGoerModule.Movie;
 import MovieGoerModule.Status;
 
 public class updateMovie {
-    public static void main(String[] args) throws ClassNotFoundException, IOException{
+    public static void update() throws ClassNotFoundException, IOException{
         int choice = 0;
         Scanner sc = new Scanner(System.in);
         ArrayList<Movie> movieList;
