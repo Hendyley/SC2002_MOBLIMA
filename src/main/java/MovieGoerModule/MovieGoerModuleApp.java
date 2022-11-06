@@ -464,7 +464,6 @@ public class MovieGoerModuleApp{
                                 ticketprice += value;
                             }
                         }
-
                         t[i] = new Ticket(1, AgeOfMovieGoer.values()[ticketagelist.get(i)] , cine.getMovieList().get(moviechoice).getType(), tss.getMovieClass(), d, selectedseattype.get(i), ticketprice);
                         cine.getMovieList().get(moviechoice).addsales(ticketprice); //add to movie
                     }
