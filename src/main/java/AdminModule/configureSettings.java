@@ -52,6 +52,8 @@ public class configureSettings {
 
                 case 3:
                     //showtime changes
+                    Cineplex cine = selectCineplex.select();
+                    timeslotChange.change(cine);
                     break;
 
                 case 4:
