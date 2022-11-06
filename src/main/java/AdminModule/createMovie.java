@@ -8,7 +8,7 @@ import MovieGoerModule.TypeOfMovie;
 import MovieGoerModule.Status;
 
 public class createMovie{
-    public static void main(String[] args) throws ClassNotFoundException, IOException{
+    public static void create() throws ClassNotFoundException, IOException{
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the title of the movie:");
         String title = sc.nextLine();
