@@ -6,6 +6,8 @@ public class Ticket {
     private TypeOfMovie movieType;
     private double price;
     private ClassOfCinama cinemaClass;
+
+    private Seattype seattype;
     private Day day;
 
 
@@ -13,12 +15,14 @@ public class Ticket {
 
     }
 
-    public Ticket(int quantity, AgeOfMovieGoer age, TypeOfMovie movieType, ClassOfCinama cinemaClass, Day day) {
+    public Ticket(int quantity, AgeOfMovieGoer age, TypeOfMovie movieType, ClassOfCinama cinemaClass, Day day,Seattype seattype,double price) {
         this.quantity = quantity;
         this.agetype = age;
         this.movieType = movieType;
         this.cinemaClass = cinemaClass;
         this.day = day;
+        this.seattype = seattype;
+        this.price = price;
     }
 
     public double calcPrice() {
@@ -182,5 +186,8 @@ public class Ticket {
         return agetype;
     }
 
+    public  Seattype getSeattype(){
+        return seattype;
+    }
 
 }

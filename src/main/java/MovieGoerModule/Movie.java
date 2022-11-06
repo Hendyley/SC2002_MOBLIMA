@@ -61,6 +61,10 @@ public class Movie implements Serializable{
         return type;
     }
 
+    public void addsales(double ticketsales){
+         sales = sales + ticketsales;
+    }
+
     public AgeOfMovieGoer getAge_restriction(){
         return age_restriction;
     }
@@ -95,7 +99,9 @@ public class Movie implements Serializable{
     }
 
 
-    public double getSales(){ return sales;}
+    public double getSales(){
+        return sales;
+    }
 
     public ArrayList<Review> getreviewlist(){
         return allreviews;

@@ -6,11 +6,14 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Scanner;
+import java.util.*;
 
-public class MovieGoerModuleApp {
+import static AdminModule.configureSettings.getPricelistFromFile;
+
+
+public class MovieGoerModuleApp{
+
+    private final static String PRICELIST_FILE_NAME = "Pricelist.txt";
     public static void main(String[] args) throws Exception {
         // Initialisation
         Calendar today = Calendar.getInstance();
@@ -116,7 +119,7 @@ public class MovieGoerModuleApp {
 
         int option = 0, cinema = 0, choice = 0, Qty = 0;
         float time;
-        String key, datetime, movie;
+        String key, datetime, movie, seatdesc;
         Cineplex cinename;
         Scanner s = new Scanner(System.in);
         do {
@@ -227,6 +230,14 @@ public class MovieGoerModuleApp {
                     }
                     slotSelected = slotList2.get(inputSlot);
                     slotSelected.getRoom().printSeats();
+
+                    seatdesc = slotSelected.getRoom().getseattypedesc();
+                    String couples = seatdesc.substring(0,seatdesc.indexOf("Elite"));
+                    String elite = seatdesc.substring(seatdesc.indexOf("Elite"),seatdesc.indexOf("Ulti"));
+                    String ulti = seatdesc.substring(seatdesc.indexOf("Ulti"));
+                    System.out.println(couples);
+                    System.out.println(elite);
+                    System.out.println(ulti);
 
                     break;
                 case 4:
@@ -357,16 +368,17 @@ public class MovieGoerModuleApp {
 
                     String transid = "Cinema :"+cine.getName()+" Movie title :"+cine.getMovieList().get(moviechoice).getTitle()+" "+tss.getairingtimeformat()+" "+tss.getMovieClass()+" "+cine.getMovieList().get(moviechoice).getType();
                     System.out.println(transid);
-                    String seatdesc = tss.getRoom().getseattypedesc();
-                    System.out.println("Seatdesc : "+seatdesc);
-                    String couples = seatdesc.substring(0,seatdesc.indexOf("Elite"));
-                    String elite = seatdesc.substring(seatdesc.indexOf("Elite"),seatdesc.indexOf("Ulti"));
-                    String ulti = seatdesc.substring(seatdesc.indexOf("Ulti"));
+                    seatdesc = tss.getRoom().getseattypedesc();
+                    //System.out.println("Seatdesc : "+seatdesc);
+                    String couples1 = seatdesc.substring(0,seatdesc.indexOf("Elite"));
+                    String elite1 = seatdesc.substring(seatdesc.indexOf("Elite"),seatdesc.indexOf("Ulti"));
+                    String ulti1 = seatdesc.substring(seatdesc.indexOf("Ulti"));
                     cine.getMovieList().get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom().printSeats();
                     //Cinema c = cine.getMovieList().get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom();
-                    System.out.println(couples);
-                    System.out.println(elite);
-                    System.out.println(ulti);
+                    System.out.println(couples1);
+                    System.out.println(elite1);
+                    System.out.println(ulti1);
+                    ArrayList<Seattype> selectedseattype = new ArrayList<>();
                     System.out.println("Select Seats: (Example: A12, B9 )");
                     for (int q = 0; q < Qty; q++) {
                         String selectseat = s.nextLine();
@@ -383,12 +395,15 @@ public class MovieGoerModuleApp {
                                         q = q - 2;
                                     } else{
                                         tss.getRoom().book(row, col);
+                                        selectedseattype.add(tss.getRoom().getseattype(row,col));
+                                        selectedseattype.add(tss.getRoom().getseattype(row,col));
                                         System.out.println("Double seats selected!");
                                     }
                                 }
 
                                 if(tss.getRoom().getseattype(row,col).ordinal() == Seattype.SEAT.ordinal()){
                                     tss.getRoom().book(row, col);
+                                    selectedseattype.add(tss.getRoom().getseattype(row,col));
                                     System.out.println("Seat selected!");
                                 }
 
@@ -402,9 +417,56 @@ public class MovieGoerModuleApp {
                         }
                     }
 
+
+                    //Ticket create part
                     Ticket[] t = new Ticket[Qty];
+                    ArrayList<Object> priceLists = getPricelistFromFile();
+                    //String ageprice = priceLists.get(0).toString();
+                    HashMap<String,Double> ageList = (HashMap<String,Double>)priceLists.get(0);
+                    HashMap<String,Double> seatTypeList = (HashMap<String,Double>)priceLists.get(1);
+                    HashMap<String,Double> movieClassList = (HashMap<String,Double>)priceLists.get(2);
+                    HashMap<String,Double> dayList = (HashMap<String,Double>)priceLists.get(3);
+
                     for(int i=0;i<Qty;i++){
-                        t[i] = new Ticket(1, AgeOfMovieGoer.values()[ticketagelist.get(i)] , cine.getMovieList().get(moviechoice).getType(), tss.getMovieClass(), d);
+                        double ticketprice = 0;
+                        //Calculating price
+                        for (Map.Entry<String, Double> age : ageList.entrySet()) {
+                            String keys = age.getKey();
+                            Double value = age.getValue();
+                            //System.out.println(keys+" "+value+" "+ AgeOfMovieGoer.values()[ticketagelist.get(i)].toString());
+                            if(keys.equals( AgeOfMovieGoer.values()[ticketagelist.get(i)].toString()) ){
+                                System.out.println("Calculating for "+AgeOfMovieGoer.values()[ticketagelist.get(i)].toString());
+                                ticketprice += value;
+                            }
+                        }
+                        for (Map.Entry<String, Double> seatType : seatTypeList.entrySet()) {
+                            String keys = seatType.getKey();
+                            Double value = seatType.getValue();
+                            if(keys.equals( selectedseattype.get(i).toString() )){
+                                System.out.println("Calculating for "+selectedseattype.get(i).toString());
+                                ticketprice += value;
+                            }
+                        }
+                        for (Map.Entry<String, Double> movieClass : movieClassList.entrySet()) {
+                            String keys = movieClass.getKey();
+                            Double value = movieClass.getValue();
+                            if(keys.equals( cine.getMovieList().get(moviechoice).getType().toString() )){
+                                System.out.println("Calculating for "+cine.getMovieList().get(moviechoice).getType().toString());
+                                ticketprice += value;
+                            }
+                        }
+                        for (Map.Entry<String, Double> day : dayList.entrySet()) {
+                            String keys = day.getKey();
+                            Double value = day.getValue();
+                            //System.out.println(keys+" "+value+" "+ d.toString());
+                            if(keys.equals( d.toString()) ){
+                                System.out.println("Calculating for "+d.toString());
+                                ticketprice += value;
+                            }
+                        }
+
+                        t[i] = new Ticket(1, AgeOfMovieGoer.values()[ticketagelist.get(i)] , cine.getMovieList().get(moviechoice).getType(), tss.getMovieClass(), d, selectedseattype.get(i), ticketprice);
+                        cine.getMovieList().get(moviechoice).addsales(ticketprice); //add to movie
                     }
                     Transaction trans = new Transaction(dtf.format(now).toString() +" "+ transid, t);
                     man.getTransactionHistory().add(trans);
@@ -439,6 +501,17 @@ public class MovieGoerModuleApp {
                     switch (choice) {
                         case 1:
                             // Sort by sales only
+                            Movie keyss;
+                            int js;
+                            for (int i = 1; i < top5m.length; i++) {
+                                keyss = top5m[i];
+                                js = i - 1;
+                                while (js >= 0 && top5m[js].getSales() < keyss.getSales()) {
+                                    top5m[js + 1] = top5m[js];
+                                    js = js - 1;
+                                }
+                                top5m[js + 1] = keyss;
+                            }
                             break;
                         case 2:
                             // Sort by Rating only
@@ -504,6 +577,8 @@ public class MovieGoerModuleApp {
 
                     System.out.println("Thank you for the review.");
 
+                    break;
+                case 8:
                     break;
                 default:
                     break;

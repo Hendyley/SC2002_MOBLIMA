@@ -20,7 +20,7 @@ public class Transaction {
 
     public void printTickets() {
         for (int i = 0; i < tickets.length; i++) {
-            System.out.println(" Ticket "+id+" age category: "+tickets[i].getAgetype()+" price:"+tickets[i].getPrice()+" purchased:"+tickets[i].getDay()+" qty:"+tickets[i].getQuantity());
+            System.out.println(" Ticket "+id.substring(0,id.indexOf("Cinema"))+" age category: "+tickets[i].getAgetype()+" seat:"+tickets[i].getSeattype()+" price:"+tickets[i].getPrice()+" purchased:"+tickets[i].getDay()+" qty:"+tickets[i].getQuantity());
         }
     }
 
