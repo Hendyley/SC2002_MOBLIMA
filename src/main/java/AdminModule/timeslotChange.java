@@ -43,7 +43,7 @@ public class timeslotChange {
                 break;
         }
         
-        for(int i = 0; i < cine.getNumRooms(); i++){
+        for(int i = 0; i < cine.getRoomList().size(); i++){
             //print id of rooms
         }
         System.out.println("Select a room:");
@@ -51,6 +51,6 @@ public class timeslotChange {
         Cinema c = cine.getRoom(room);
         
         TimeSlot ts = new TimeSlot(date, startTime, endTime, movieClass, c);
-        m.addSlot(ts);
+        // m.addSlot(ts);
     }
 }

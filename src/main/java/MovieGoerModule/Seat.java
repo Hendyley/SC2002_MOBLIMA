@@ -1,12 +1,15 @@
 package MovieGoerModule;
 
-public class Seat {
+import java.io.Serializable;
+
+public class Seat implements Serializable{
     private boolean seat;
 
     private Seattype seattype;
 
     public Seat() {
         this.seat = false;
+        this.seattype = Seattype.SEAT;
     }
 
     public boolean isTaken() {

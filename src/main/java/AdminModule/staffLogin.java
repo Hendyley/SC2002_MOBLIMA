@@ -20,17 +20,17 @@ public class staffLogin {
             switch(choice){
                 case 1:
                     //add movie
-                    createMovie.main(args);
+                    createMovie.create();
                     break;
 
                 case 2:
                     //update movie
-                    updateMovie.main(args);
+                    updateMovie.update();
                     break;
 
                 case 3:
                     //delete movie
-                    deleteMovie.main(args);
+                    deleteMovie.delete();
                     break;
 
                 case 4:

@@ -25,6 +25,7 @@ public class Movie implements Serializable{
         this.title = title;
     }
 
+
     public void setTitle(String title) {
         this.title = title;
     }

@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import MovieGoerModule.AgeOfMovieGoer;
+import MovieGoerModule.Cineplex;
 
 public class configureSettings {
     private final static String PRICELIST_FILE_NAME = "Pricelist.txt";
@@ -52,8 +53,8 @@ public class configureSettings {
 
                 case 3:
                     //showtime changes
-                    Cineplex cine = selectCineplex.select();
-                    timeslotChange.change(cine);
+                    // Cineplex cine = selectCineplex.select();
+                    // timeslotChange.change(cine);
                     break;
 
                 case 4:

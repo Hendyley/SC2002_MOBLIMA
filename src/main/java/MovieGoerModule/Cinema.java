@@ -1,12 +1,13 @@
 package MovieGoerModule;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cinema {
+public class Cinema implements Serializable{
     final int ROW = 10;
     final int COL = 12;
     private Seat[][] seats;
-    private int id;
+    private String id;
     private ClassOfCinama cinemaClass;
 
 
@@ -27,6 +28,17 @@ public class Cinema {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 seats[i][j] = new Seat();
+            }
+        }
+    }
+    public Cinema(String id, ClassOfCinama cinemaClass) {
+        this.id = id;
+        this.cinemaClass = cinemaClass;
+        seats = new Seat[ROW][COL];
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
+                seats[i][j] = new Seat();
+                seats[i][j].setSeatt(Seattype.SEAT);
             }
         }
     }
@@ -110,11 +122,11 @@ public class Cinema {
         return cinemaClass;
     }
 
-    public void setID(int id){
+    public void setID(String id){
         this.id = id;
     }
 
-    public int getID(){
+    public String getID(){
         return id;
     }
 

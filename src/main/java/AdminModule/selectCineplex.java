@@ -15,7 +15,7 @@ public class selectCineplex{
     public static Cineplex select() throws ClassNotFoundException, IOException{
         Scanner sc = new Scanner(System.in);
         int index;
-        ArrayList <Cineplex> cineList = testDB.getCineplexListFromFile();
+        ArrayList <Cineplex> cineList = cinexplexDB.getCineplexListFromFile();
 
         do{
             System.out.println("Displaying cineplexes:");
@@ -24,7 +24,7 @@ public class selectCineplex{
             }
             System.out.println("Enter name of cineplex:");
             String cineplexName = sc.nextLine();
-            index = testDB.getCineplexIndex(cineList, cineplexName);
+            index = cinexplexDB.getCineplexIndex(cineList, cineplexName);
         } while(index != -1);
         //end of selecting cineplex
 
@@ -90,7 +90,7 @@ public class selectCineplex{
 
         //print and select room
         System.out.println("Rooms:");
-        for(int i = 0; i < c.getNumRooms(); i++){
+        for(int i = 0; i < c.getRoomList().size(); i++){
             System.out.print(i + " ");
         }
 
@@ -98,7 +98,7 @@ public class selectCineplex{
         int room;
         do{
             room = sc.nextInt();
-        }while(room >= 0 && room <= c.getNumRooms() - 1);
+        }while(room >= 0 && room <= c.getRoomList().size() - 1);
 
         Cinema selectedRoom = c.getRoom(index);
         ArrayList<TimeSlot> same_movie = new ArrayList<TimeSlot>();
@@ -122,11 +122,11 @@ public class selectCineplex{
         }
         boolean clash = false;
         for(int i = 0; i < same_room.size(); i++){
-            if(start < same_room.get(i).getStartTime() || end > same_room.get(i).getEndTime()){
-                clash = true;
-                System.out.println("clashing timeslot");
-                //return sth
-            }
+            // if(start < same_room.get(i).getStartTime() || end > same_room.get(i).getEndTime()){
+            //     clash = true;
+            //     System.out.println("clashing timeslot");
+            //     //return sth
+            // }
         }
         //timeslot constructor
         //TimeSlot(String dateOfSlot, String startTime, String endTime, ClassOfCinama movieClass, Cinema RoomStyle)
