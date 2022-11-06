@@ -6,6 +6,8 @@ public class Cinema {
     final int ROW = 10;
     final int COL = 12;
     private Seat[][] seats;
+    private int id;
+    private ClassOfCinama cinemaClass;
 
 
     // set a default layout
@@ -99,5 +101,22 @@ public class Cinema {
         }
         return COUPLE_SEAT+ELITE_SEAT+ULTIMA_SEAT;
     }
+    
+    public void setClass(ClassOfCinama c){
+        this.cinemaClass = c;
+    }
+
+    public ClassOfCinama getCinemaClass(){
+        return cinemaClass;
+    }
+
+    public void setID(int id){
+        this.id = id;
+    }
+
+    public int getID(){
+        return id;
+    }
+
 
 }
