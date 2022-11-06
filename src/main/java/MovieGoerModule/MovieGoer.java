@@ -22,8 +22,9 @@ public class MovieGoer extends Account{
         this.history = new ArrayList<>();
     }
 
-    public MovieGoer(String username, String password, Role role, String name, int mobile, String email) {
+    public MovieGoer(String username, String password,String name, int mobile, String email) {
         super(username,password);
+        super.setRole(Role.MOVIEGOER);
         this.name = name;
         this.mobile = mobile;
         this.email = email;
