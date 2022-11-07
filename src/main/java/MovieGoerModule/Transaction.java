@@ -1,7 +1,12 @@
 package MovieGoerModule;
 
-public class Transaction {
+import java.io.Serializable;
+
+public class Transaction implements Serializable{
     private String id;
+    private String mgName;
+    private String mgMobile;
+    private String mgEmail;
 
     private Ticket[] tickets;
 
@@ -10,8 +15,28 @@ public class Transaction {
         this.tickets = tickets;
     }
 
+    public Transaction(String id, String mgName, String mgMobile, String mgEmail, Ticket[] tickets) {
+        this.id = id;
+        this.mgName = mgName;
+        this.mgMobile = mgMobile;
+        this.mgEmail = mgEmail;
+        this.tickets = tickets;
+    }
+
     public String getId() {
         return this.id;
+    }
+
+    public String getMgName(){
+        return this.mgName;
+    }
+
+    public String getMgMobile(){
+        return this.mgMobile;
+    }
+
+    public String getMgEmail(){
+        return this.mgEmail;
     }
 
     public Ticket[] getTickets() {
