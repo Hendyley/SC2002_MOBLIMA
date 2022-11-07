@@ -15,7 +15,10 @@ public class TimeSlot {
     private String endTime;
     private ClassOfCinama movieClass;
     private Cinema room;
-    private Movie airingmovie;
+    // private Movie airingmovie;
+    private String movieName;
+    private int movieDuration;
+    private TypeOfMovie movieType;
 
     DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -34,6 +37,20 @@ public class TimeSlot {
         this.room = RoomStyle;
 
     }
+
+    public TimeSlot(String dateOfSlot,String startTime,Cinema roomStyle, String movieName, 
+        int movieDuration, TypeOfMovie movieType){
+            this.stringDate = dateOfSlot;
+            this.date = LocalDate.parse(dateOfSlot, df);
+            this.startTime = startTime;
+            calculateEndTime(startTime,movieDuration);
+
+            this.room = roomStyle;
+            this.movieName = movieName;
+            this.movieDuration = movieDuration;
+            this.movieType = movieType;
+        }
+
 
     public String getStringDate() {
         return stringDate;
@@ -55,11 +72,48 @@ public class TimeSlot {
         return movieClass;
     }
 
-    public Movie getAiringmovie() {
-        return airingmovie;
+    public String getMovieName(){
+        return movieName;
     }
+
+    public int getMovieDuration(){
+        return movieDuration;
+    }
+
+    public TypeOfMovie getMovieType(){
+        return movieType;
+    }
+
+    // public Movie getAiringmovie() {
+    //     return airingmovie;
+    // }
 
     public Cinema getRoom() {
         return room;
+    }
+
+
+    public void calculateEndTime(String startTime, int movieDuration){
+        String startHourStr = startTime.substring(0,2);
+        String startMinStr = startTime.substring(2, 4);
+        int endHour = Integer.parseInt(startHourStr);
+        int endMin = Integer.parseInt(startMinStr);
+
+        int movieHour = movieDuration/60;
+        int movieMin = movieDuration - (movieHour * 60);
+        int bufferMin = 20;
+
+        endMin  = ((endMin + movieMin + bufferMin)/10) *10;
+        if(endMin >= 60){
+            endMin = endMin - 60;
+            endHour += 1;
+        }
+        endHour = endHour + movieHour;
+
+        if(endMin < 10){
+            this.endTime = Integer.toString(endHour) + "0" +Integer.toString(endMin);
+        }else{
+            this.endTime = Integer.toString(endHour) + Integer.toString(endMin);
+        }
     }
 }
