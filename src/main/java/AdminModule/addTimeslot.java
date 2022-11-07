@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import MovieGoerModule.Cinema;
 import MovieGoerModule.Cineplex;
-import MovieGoerModule.ClassOfCinama;
+import MovieGoerModule.ClassOfCinema;
 import MovieGoerModule.Movie;
 import MovieGoerModule.Status;
 import MovieGoerModule.TimeSlot;
@@ -28,22 +28,22 @@ public class addTimeslot {
         System.out.println("2: PLATINUM");
         System.out.println("3: DOLBY");
         int choice = sc.nextInt();
-        ClassOfCinama movieClass;
+        ClassOfCinema movieClass;
         switch(choice){
             case 1:
-                movieClass = ClassOfCinama.REGULAR;
+                movieClass = ClassOfCinema.REGULAR;
                 break;
 
             case 2:
-                movieClass = ClassOfCinama.PLATINUM;
+                movieClass = ClassOfCinema.PLATINUM;
                 break;
 
             case 3:
-                movieClass = ClassOfCinama.DOLBY;
+                movieClass = ClassOfCinema.DOLBY;
                 break;
 
             default:
-                movieClass = ClassOfCinama.REGULAR;
+                movieClass = ClassOfCinema.REGULAR;
                 break;
         }
         

@@ -76,17 +76,17 @@ public class MovieGoerModuleApp{
         // cathay[0].addSlot(new TimeSlot(Date1, "14", "16", ClassOfCinama.REGULAR,
         // movieArr[4], roomstyle));
 
-        movieArr[0].addSlot(new TimeSlot("01/01/2022", "1500", "1700", ClassOfCinama.DOLBY, roomstyle));
-        movieArr[0].addSlot(new TimeSlot("01/02/2022", "1300", "1500", ClassOfCinama.DOLBY, roomstyle));
-        movieArr[0].addSlot(new TimeSlot("01/03/2022", "0900", "1100", ClassOfCinama.DOLBY, roomstyle));
+        movieArr[0].addSlot(new TimeSlot("01/01/2022", "1500", "1700", ClassOfCinema.DOLBY, roomstyle));
+        movieArr[0].addSlot(new TimeSlot("01/02/2022", "1300", "1500", ClassOfCinema.DOLBY, roomstyle));
+        movieArr[0].addSlot(new TimeSlot("01/03/2022", "0900", "1100", ClassOfCinema.DOLBY, roomstyle));
 
-        movieArr[1].addSlot(new TimeSlot("01/05/2022", "1500", "1700", ClassOfCinama.DOLBY, roomstyle));
-        movieArr[1].addSlot(new TimeSlot("01/06/2022", "1300", "1500", ClassOfCinama.DOLBY, roomstyle));
-        movieArr[1].addSlot(new TimeSlot("01/07/2022", "0900", "1100", ClassOfCinama.DOLBY, roomstyle));
+        movieArr[1].addSlot(new TimeSlot("01/05/2022", "1500", "1700", ClassOfCinema.DOLBY, roomstyle));
+        movieArr[1].addSlot(new TimeSlot("01/06/2022", "1300", "1500", ClassOfCinema.DOLBY, roomstyle));
+        movieArr[1].addSlot(new TimeSlot("01/07/2022", "0900", "1100", ClassOfCinema.DOLBY, roomstyle));
 
-        movieArr[2].addSlot(new TimeSlot("01/08/2022", "1500", "1700", ClassOfCinama.DOLBY, roomstyle));
-        movieArr[2].addSlot(new TimeSlot("01/09/2022", "1300", "1500", ClassOfCinama.DOLBY, roomstyle));
-        movieArr[2].addSlot(new TimeSlot("01/10/2022", "0900", "1100", ClassOfCinama.DOLBY, roomstyle));
+        movieArr[2].addSlot(new TimeSlot("01/08/2022", "1500", "1700", ClassOfCinema.DOLBY, roomstyle));
+        movieArr[2].addSlot(new TimeSlot("01/09/2022", "1300", "1500", ClassOfCinema.DOLBY, roomstyle));
+        movieArr[2].addSlot(new TimeSlot("01/10/2022", "0900", "1100", ClassOfCinema.DOLBY, roomstyle));
 
         cathay[0].getMovieList().add(movieArr[0]);
         cathay[0].getMovieList().add(movieArr[1]);

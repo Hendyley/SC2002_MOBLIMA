@@ -14,7 +14,7 @@ public class TimeSlot implements Serializable{
     private LocalDate date;
     private String startTime;
     private String endTime;
-    private ClassOfCinama movieClass;
+    private ClassOfCinema movieClass;
     private Cinema room;
     // private Movie airingmovie;
     private String movieName;
@@ -24,7 +24,7 @@ public class TimeSlot implements Serializable{
     private transient DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 
-    public TimeSlot(String dateOfSlot, String startTime, String endTime, ClassOfCinama movieClass, Cinema RoomStyle) {
+    public TimeSlot(String dateOfSlot, String startTime, String endTime, ClassOfCinema movieClass, Cinema RoomStyle) {
         room = new Cinema();
         stringDate = dateOfSlot;
 
@@ -69,7 +69,7 @@ public class TimeSlot implements Serializable{
         return stringDate + " at " + startTime + "-" + endTime;
     }
 
-    public ClassOfCinama getMovieClass() {
+    public ClassOfCinema getMovieClass() {
         return movieClass;
     }
 

@@ -12,7 +12,7 @@ import java.util.Arrays;
 import MovieGoerModule.AgeOfMovieGoer;
 import MovieGoerModule.Cinema;
 import MovieGoerModule.Cineplex;
-import MovieGoerModule.ClassOfCinama;
+import MovieGoerModule.ClassOfCinema;
 import MovieGoerModule.Movie;
 import MovieGoerModule.Status;
 import MovieGoerModule.TimeSlot;
@@ -103,9 +103,9 @@ public class cineplexDB {
         
 
         Cineplex cineplex1 = new Cineplex("Cathay AMK Hub");
-        cinema1 = new Cinema("AMK_001",ClassOfCinama.REGULAR);
-        cinema2 = new Cinema("AMK_002",ClassOfCinama.DOLBY);
-        cinema3 = new Cinema("AMK_003",ClassOfCinama.PLATINUM);
+        cinema1 = new Cinema("AMK_001",ClassOfCinema.REGULAR);
+        cinema2 = new Cinema("AMK_002",ClassOfCinema.DOLBY);
+        cinema3 = new Cinema("AMK_003",ClassOfCinema.PLATINUM);
         cineplex1.setRoom(cinema1);
         cineplex1.setRoom(cinema2);
         cineplex1.setRoom(cinema3);
@@ -140,17 +140,17 @@ public class cineplexDB {
         cineplex1.setMovie(movie2);
         
         Cineplex cineplex2 = new Cineplex("Cathay Parkway Parade");
-        cinema1 = new Cinema("PP_001",ClassOfCinama.REGULAR);
-        cinema2 = new Cinema("PP_002",ClassOfCinama.DOLBY);
-        cinema3 = new Cinema("PP_003",ClassOfCinama.PLATINUM);
+        cinema1 = new Cinema("PP_001",ClassOfCinema.REGULAR);
+        cinema2 = new Cinema("PP_002",ClassOfCinema.DOLBY);
+        cinema3 = new Cinema("PP_003",ClassOfCinema.PLATINUM);
         cineplex2.setRoom(cinema1);
         cineplex2.setRoom(cinema2);
         cineplex2.setRoom(cinema3);
 
         Cineplex cineplex3 = new Cineplex("Cathay West Mall");
-        cinema1 = new Cinema("WM_001",ClassOfCinama.REGULAR);
-        cinema2 = new Cinema("WM_002",ClassOfCinama.DOLBY);
-        cinema3 = new Cinema("WM_003",ClassOfCinama.PLATINUM);
+        cinema1 = new Cinema("WM_001",ClassOfCinema.REGULAR);
+        cinema2 = new Cinema("WM_002",ClassOfCinema.DOLBY);
+        cinema3 = new Cinema("WM_003",ClassOfCinema.PLATINUM);
         cineplex3.setRoom(cinema1);
         cineplex3.setRoom(cinema2);
         cineplex3.setRoom(cinema3);

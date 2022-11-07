@@ -1,5 +1,5 @@
 package MovieGoerModule;
 
-public enum ClassOfCinama {
+public enum ClassOfCinema {
     PLATINUM, REGULAR, DOLBY
 }

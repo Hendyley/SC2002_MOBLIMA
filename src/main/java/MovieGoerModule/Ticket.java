@@ -5,7 +5,7 @@ public class Ticket {
     private AgeOfMovieGoer agetype;
     private TypeOfMovie movieType;
     private double price;
-    private ClassOfCinama cinemaClass;
+    private ClassOfCinema cinemaClass;
 
     private Seattype seattype;
     private Day day;
@@ -15,7 +15,7 @@ public class Ticket {
 
     }
 
-    public Ticket(int quantity, AgeOfMovieGoer age, TypeOfMovie movieType, ClassOfCinama cinemaClass, Day day,Seattype seattype,double price) {
+    public Ticket(int quantity, AgeOfMovieGoer age, TypeOfMovie movieType, ClassOfCinema cinemaClass, Day day,Seattype seattype,double price) {
         this.quantity = quantity;
         this.agetype = age;
         this.movieType = movieType;
@@ -149,11 +149,11 @@ public class Ticket {
         }
 
         // just add final constant price value of cinema class
-        if (cinemaClass == ClassOfCinama.PLATINUM) {
+        if (cinemaClass == ClassOfCinema.PLATINUM) {
             price += 10;
         }
 
-        if (cinemaClass == ClassOfCinama.DOLBY) {
+        if (cinemaClass == ClassOfCinema.DOLBY) {
             price += 5;
         }
 
@@ -174,7 +174,7 @@ public class Ticket {
     public Day getDay(){
         return day;
     }
-    public ClassOfCinama getCinemaClass(){
+    public ClassOfCinema getCinemaClass(){
         return cinemaClass;
     }
 

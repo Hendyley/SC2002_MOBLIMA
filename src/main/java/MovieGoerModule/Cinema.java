@@ -8,7 +8,7 @@ public class Cinema implements Serializable{
     final int COL = 12;
     private Seat[][] seats;
     private String id;
-    private ClassOfCinama cinemaClass;
+    private ClassOfCinema cinemaClass;
 
 
     // set a default layout
@@ -31,7 +31,7 @@ public class Cinema implements Serializable{
             }
         }
     }
-    public Cinema(String id, ClassOfCinama cinemaClass) {
+    public Cinema(String id, ClassOfCinema cinemaClass) {
         this.id = id;
         this.cinemaClass = cinemaClass;
         seats = new Seat[ROW][COL];
@@ -114,11 +114,11 @@ public class Cinema implements Serializable{
         return COUPLE_SEAT+ELITE_SEAT+ULTIMA_SEAT;
     }
     
-    public void setClass(ClassOfCinama c){
+    public void setClass(ClassOfCinema c){
         this.cinemaClass = c;
     }
 
-    public ClassOfCinama getCinemaClass(){
+    public ClassOfCinema getCinemaClass(){
         return cinemaClass;
     }
 
