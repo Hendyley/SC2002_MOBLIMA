@@ -7,7 +7,7 @@ public class Transaction implements Serializable{
     private String mgName;
     private String mgMobile;
     private String mgEmail;
-
+    private double totalPrice;
     private Ticket[] tickets;
 
     public Transaction(String id, Ticket[] tickets) {
@@ -21,6 +21,7 @@ public class Transaction implements Serializable{
         this.mgMobile = mgMobile;
         this.mgEmail = mgEmail;
         this.tickets = tickets;
+        this.totalPrice = calcTotalPrice(tickets);
     }
 
     public String getId() {
@@ -43,11 +44,18 @@ public class Transaction implements Serializable{
         return tickets;
     }
 
+
     public void printTickets() {
         for (int i = 0; i < tickets.length; i++) {
             System.out.println(" Ticket "+id.substring(0,id.indexOf("Cinema"))+"age category: "+tickets[i].getAgetype()+" seat:"+tickets[i].getSeattype()+" price:"+tickets[i].getPrice()+" purchased:"+tickets[i].getDay()+" qty:"+tickets[i].getQuantity());
         }
     }
 
-
+    public double calcTotalPrice(Ticket[] ticketList){
+        double totalPrice = 0;
+        for(Ticket t : ticketList){
+            totalPrice += t.getPrice();
+        }
+        return totalPrice;
+    }
 }
