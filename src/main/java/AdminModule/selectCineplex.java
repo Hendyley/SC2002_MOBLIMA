@@ -15,7 +15,7 @@ public class selectCineplex{
     public static Cineplex select() throws ClassNotFoundException, IOException{
         Scanner sc = new Scanner(System.in);
         int index;
-        ArrayList <Cineplex> cineList = cinexplexDB.getCineplexListFromFile();
+        ArrayList <Cineplex> cineList = cineplexDB.getCineplexListFromFile();
 
         do{
             System.out.println("Displaying cineplexes:");
@@ -24,7 +24,7 @@ public class selectCineplex{
             }
             System.out.println("Enter name of cineplex:");
             String cineplexName = sc.nextLine();
-            index = cinexplexDB.getCineplexIndex(cineList, cineplexName);
+            index = cineplexDB.getCineplexIndex(cineList, cineplexName);
         } while(index != -1);
         //end of selecting cineplex
 
@@ -105,7 +105,7 @@ public class selectCineplex{
         ArrayList<TimeSlot> other_movie = new ArrayList<TimeSlot>();
         //for loop timeslot_day, split same movie other movie
         for(int i = 0; i < tsList.size(); i++){
-            if(tsList.get(i).getAiringmovie().getTitle().compareTo(title) == 0){
+            if(tsList.get(i).getMovieName().compareTo(title) == 0){
                 same_movie.add(tsList.get(i));
             }
             else{
