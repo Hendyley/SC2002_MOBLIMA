@@ -87,10 +87,12 @@ public class MovieGoerModuleApp{
         movieArr[2].addSlot(new TimeSlot("01/08/2022", "1500", "1700", ClassOfCinema.DOLBY, roomstyle));
         movieArr[2].addSlot(new TimeSlot("01/09/2022", "1300", "1500", ClassOfCinema.DOLBY, roomstyle));
         movieArr[2].addSlot(new TimeSlot("01/10/2022", "0900", "1100", ClassOfCinema.DOLBY, roomstyle));
+        movieArr[4].addSlot(new TimeSlot("09/08/2022", "0900", "1100", ClassOfCinema.PLATINUM, roomstyle));
 
         cathay[0].getMovieList().add(movieArr[0]);
         cathay[0].getMovieList().add(movieArr[1]);
         cathay[0].getMovieList().add(movieArr[2]);
+        cathay[0].getMovieList().add(movieArr[4]);
 
         cathay[1].getMovieList().add(movieArr[0]);
         cathay[1].getMovieList().add(movieArr[1]);
@@ -145,7 +147,7 @@ public class MovieGoerModuleApp{
                     }
                     System.out.println("Select movie to view details");
                     choice = sc.nextInt();
-                    if(choice<movieArr.length){
+                    if(choice>=movieArr.length){
                         System.out.println("Please Choose appropriate Movie!");
                         break;
                     }
@@ -379,7 +381,7 @@ public class MovieGoerModuleApp{
 
                     for(int i=0; i<holidays.length;i++){
                         if(holidays[i].indexOf(dateS) > -1){
-                            d = Day.REMAINING_DAYS;
+                            d = Day.HOLIDAY;
                         }
                     }
 
