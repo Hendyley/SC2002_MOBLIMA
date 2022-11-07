@@ -1,5 +1,6 @@
 package MovieGoerModule;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -8,7 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class TimeSlot {
+public class TimeSlot implements Serializable{
     private String stringDate;
     private LocalDate date;
     private String startTime;
@@ -20,7 +21,7 @@ public class TimeSlot {
     private int movieDuration;
     private TypeOfMovie movieType;
 
-    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private transient DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 
     public TimeSlot(String dateOfSlot, String startTime, String endTime, ClassOfCinama movieClass, Cinema RoomStyle) {

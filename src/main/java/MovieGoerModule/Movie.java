@@ -26,6 +26,17 @@ public class Movie implements Serializable{
         this.title = title;
     }
 
+    public Movie(String title,String director, ArrayList<String> cast,String synopsis
+        ,Status status, TypeOfMovie type, int movieDurationMin, AgeOfMovieGoer age_restriction){
+        this.title = title;
+        this.director = director;
+        this.cast = cast;
+        this.synopsis = synopsis;
+        this.status = status;
+        this.type = type;
+        this.movieDurationMin = movieDurationMin;
+        this.age_restriction = age_restriction;
+    }
 
     public void setTitle(String title) {
         this.title = title;
@@ -113,7 +124,7 @@ public class Movie implements Serializable{
         return timeslots;
     }
 
-    public int movieDurationMin(){
+    public int getMovieDurationMin(){
         return movieDurationMin;
     }
 

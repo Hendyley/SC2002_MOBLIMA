@@ -7,11 +7,16 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import MovieGoerModule.AgeOfMovieGoer;
 import MovieGoerModule.Cinema;
 import MovieGoerModule.Cineplex;
 import MovieGoerModule.ClassOfCinama;
 import MovieGoerModule.Movie;
+import MovieGoerModule.Status;
+import MovieGoerModule.TimeSlot;
+import MovieGoerModule.TypeOfMovie;
 
 public class cinexplexDB {
     private final static String Cineplex_FILE_NAME = "Cineplex.txt";
@@ -88,23 +93,56 @@ public class cinexplexDB {
         ArrayList<Cineplex> cineplexList = new ArrayList<>();
         Cinema cinema1,cinema2,cinema3;
         Movie movie1,movie2;
+        String movieTitle;
+        String director;
+        ArrayList<String> cast;
+        String synopsis;
+        int movieDurationMin;
+        TimeSlot timeslot1;
+        TimeSlot timeslot2;
+        
 
         Cineplex cineplex1 = new Cineplex("Cathay AMK Hub");
         cinema1 = new Cinema("AMK_001",ClassOfCinama.REGULAR);
         cinema2 = new Cinema("AMK_002",ClassOfCinama.DOLBY);
-        cinema3 = new Cinema("AMK_003",ClassOfCinama.DOLBY);
+        cinema3 = new Cinema("AMK_003",ClassOfCinama.PLATINUM);
         cineplex1.setRoom(cinema1);
         cineplex1.setRoom(cinema2);
         cineplex1.setRoom(cinema3);
-        movie1 = new Movie("ONE PIECE FILM RED");
-        movie2 = new Movie("Kong Fu Hustle");
+        //movie1
+        movieTitle = "ONE PIECE FILM RED";
+        director ="Goro Taniguchi";
+        cast = new ArrayList<String>(Arrays.asList("Ikue Otani","Kaori Nazuka","Mayumi Tanaka"));
+        synopsis = "Uta - the most beloved singer in the world.\n"
+        +"Her voice, which she sings with while concealing her true identity\n";
+        movieDurationMin = 115;
+        movie1 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
+            ,TypeOfMovie.BLOCKBUSTER_2D,movieDurationMin,AgeOfMovieGoer.STUDENT);
+        //movie2
+        movieTitle = "Kong Fu Hustle";
+        director ="Stephen Chow";
+        cast = new ArrayList<String>(Arrays.asList("Stephen Chow","Danny Chan","Yuen Wah"));
+        synopsis = "When the hapless Sing (Stephen Chow) and his dim-witted pal,\n"
+         +"Bone (Feng Xiaogang), try to scam the residents of Pig Sty Alley\n";
+        movieDurationMin = 98;
+        movie2 = new Movie(movieTitle,director,cast,synopsis,Status.COMING_SOON
+            ,TypeOfMovie.BLOCKBUSTER_2D, movieDurationMin,AgeOfMovieGoer.STUDENT);
+        //timeslot1
+        timeslot1 = new TimeSlot("11/12/2022","1600",cinema1,movie1.getTitle()
+            ,movie1.getMovieDurationMin(),movie1.getType());
+        //timeslot2
+        timeslot2 = new TimeSlot("11/12/2022","1300",cinema3,movie2.getTitle()
+            ,movie1.getMovieDurationMin(),movie1.getType());
+        //settings
+        movie1.addSlot(timeslot1);
+        movie2.addSlot(timeslot2);
         cineplex1.setMovie(movie1);
         cineplex1.setMovie(movie2);
         
         Cineplex cineplex2 = new Cineplex("Cathay Parkway Parade");
         cinema1 = new Cinema("PP_001",ClassOfCinama.REGULAR);
         cinema2 = new Cinema("PP_002",ClassOfCinama.DOLBY);
-        cinema3 = new Cinema("PP_003",ClassOfCinama.DOLBY);
+        cinema3 = new Cinema("PP_003",ClassOfCinama.PLATINUM);
         cineplex2.setRoom(cinema1);
         cineplex2.setRoom(cinema2);
         cineplex2.setRoom(cinema3);
@@ -112,7 +150,7 @@ public class cinexplexDB {
         Cineplex cineplex3 = new Cineplex("Cathay West Mall");
         cinema1 = new Cinema("WM_001",ClassOfCinama.REGULAR);
         cinema2 = new Cinema("WM_002",ClassOfCinama.DOLBY);
-        cinema3 = new Cinema("WM_003",ClassOfCinama.DOLBY);
+        cinema3 = new Cinema("WM_003",ClassOfCinama.PLATINUM);
         cineplex3.setRoom(cinema1);
         cineplex3.setRoom(cinema2);
         cineplex3.setRoom(cinema3);
