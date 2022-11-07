@@ -13,6 +13,7 @@ public class Movie implements Serializable{
     private String synopsis = "NA";
     private String director = "NA";
     private ArrayList<String> cast = new ArrayList<>();
+    private int movieDurationMin = 30;
     private double sales = 0;
     private float rating = -1;
     private TypeOfMovie type = TypeOfMovie.BLOCKBUSTER_3D;
@@ -81,7 +82,7 @@ public class Movie implements Serializable{
         rating = (float) rate / allreviews.size();
         //return rating;
     }
-
+    
     public String getRating(){
 
         if(allreviews.size()>1){
@@ -112,6 +113,9 @@ public class Movie implements Serializable{
         return timeslots;
     }
 
+    public int movieDurationMin(){
+        return movieDurationMin;
+    }
 
 
     public String getDirector(){
