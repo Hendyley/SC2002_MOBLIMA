@@ -55,8 +55,13 @@ public class Cineplex implements Serializable{
         this.rooms.add(room);
     }
 
-    public void setMovie(Movie movie) {
-        this.listOfMovies.add(movie);
+
+    public void addMovie(Movie m){
+        this.listOfMovies.add(m);
+    }
+
+    public void setMovie(int index, Movie movie) {
+        this.listOfMovies.set(0, movie);
     }
 
 

@@ -38,6 +38,10 @@ public class Movie implements Serializable{
         this.age_restriction = age_restriction;
     }
 
+    public void addTimeSlot(TimeSlot ts) {
+        this.timeslots.add(ts);
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }

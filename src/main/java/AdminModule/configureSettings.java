@@ -66,7 +66,6 @@ public class configureSettings {
 
     }
 
-
     public static ArrayList<Object> getPricelistFromFile() throws IOException, ClassNotFoundException{
         ArrayList<Object> priceList;
 

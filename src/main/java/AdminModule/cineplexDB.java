@@ -88,6 +88,26 @@ public class cineplexDB {
         System.out.printf("\n\n");
 
     }
+
+    public static boolean isExistingMovie(ArrayList<Movie> movieList, String newMovieTitle){
+        for(Movie m: movieList){
+            if(m.getTitle().equals(newMovieTitle)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int getMovieIndex(ArrayList<Movie> movieList, String title){
+        String currentTitle = "";
+        for(int i = 0; i < movieList.size(); i++){
+           currentTitle = movieList.get(i).getTitle();
+           if(currentTitle.equals(title)){
+                return i;
+           };
+        }
+        return -1;
+    }
     
     public static ArrayList<Cineplex> generateDummyData(){
         ArrayList<Cineplex> cineplexList = new ArrayList<>();
@@ -136,8 +156,8 @@ public class cineplexDB {
         //settings
         movie1.addSlot(timeslot1);
         movie2.addSlot(timeslot2);
-        cineplex1.setMovie(movie1);
-        cineplex1.setMovie(movie2);
+        cineplex1.addMovie(movie1);
+        cineplex1.addMovie(movie2);
         
         Cineplex cineplex2 = new Cineplex("Cathay Parkway Parade");
         cinema1 = new Cinema("PP_001",ClassOfCinema.REGULAR);

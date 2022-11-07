@@ -44,7 +44,7 @@ public class TimeSlot implements Serializable{
             this.stringDate = dateOfSlot;
             this.date = LocalDate.parse(dateOfSlot, df);
             this.startTime = startTime;
-            calculateEndTime(startTime,movieDuration);
+            this.endTime = calculateEndTime(startTime,movieDuration);
 
             this.room = roomStyle;
             this.movieName = movieName;
@@ -94,7 +94,7 @@ public class TimeSlot implements Serializable{
     }
 
 
-    public void calculateEndTime(String startTime, int movieDuration){
+    public static String calculateEndTime(String startTime, int movieDuration){
         String startHourStr = startTime.substring(0,2);
         String startMinStr = startTime.substring(2, 4);
         int endHour = Integer.parseInt(startHourStr);
@@ -103,6 +103,7 @@ public class TimeSlot implements Serializable{
         int movieHour = movieDuration/60;
         int movieMin = movieDuration - (movieHour * 60);
         int bufferMin = 20;
+        String endTime = "";
 
         endMin  = ((endMin + movieMin + bufferMin)/10) *10;
         if(endMin >= 60){
@@ -112,9 +113,11 @@ public class TimeSlot implements Serializable{
         endHour = endHour + movieHour;
 
         if(endMin < 10){
-            this.endTime = Integer.toString(endHour) + "0" +Integer.toString(endMin);
+            endTime = Integer.toString(endHour) + "0" +Integer.toString(endMin);
         }else{
-            this.endTime = Integer.toString(endHour) + Integer.toString(endMin);
+            endTime = Integer.toString(endHour) + Integer.toString(endMin);
         }
+
+        return endTime;
     }
 }
