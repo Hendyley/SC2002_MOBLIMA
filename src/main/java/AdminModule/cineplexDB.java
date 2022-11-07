@@ -14,6 +14,7 @@ import MovieGoerModule.Cinema;
 import MovieGoerModule.Cineplex;
 import MovieGoerModule.ClassOfCinema;
 import MovieGoerModule.Movie;
+import MovieGoerModule.Seattype;
 import MovieGoerModule.Status;
 import MovieGoerModule.TimeSlot;
 import MovieGoerModule.TypeOfMovie;
@@ -126,6 +127,10 @@ public class cineplexDB {
         cinema1 = new Cinema("AMK_001",ClassOfCinema.REGULAR);
         cinema2 = new Cinema("AMK_002",ClassOfCinema.DOLBY);
         cinema3 = new Cinema("AMK_003",ClassOfCinema.PLATINUM);
+        //generate special seat
+        cinema1 = getGenerateSpecialSeats(cinema1);
+        cinema2 = getGenerateSpecialSeats(cinema2);
+        cinema3 = getGenerateSpecialSeats(cinema3);
         cineplex1.setRoom(cinema1);
         cineplex1.setRoom(cinema2);
         cineplex1.setRoom(cinema3);
@@ -163,6 +168,10 @@ public class cineplexDB {
         cinema1 = new Cinema("PP_001",ClassOfCinema.REGULAR);
         cinema2 = new Cinema("PP_002",ClassOfCinema.DOLBY);
         cinema3 = new Cinema("PP_003",ClassOfCinema.PLATINUM);
+        //generate special seat
+        cinema1 = getGenerateSpecialSeats(cinema1);
+        cinema2 = getGenerateSpecialSeats(cinema2);
+        cinema3 = getGenerateSpecialSeats(cinema3);
         cineplex2.setRoom(cinema1);
         cineplex2.setRoom(cinema2);
         cineplex2.setRoom(cinema3);
@@ -171,6 +180,10 @@ public class cineplexDB {
         cinema1 = new Cinema("WM_001",ClassOfCinema.REGULAR);
         cinema2 = new Cinema("WM_002",ClassOfCinema.DOLBY);
         cinema3 = new Cinema("WM_003",ClassOfCinema.PLATINUM);
+        //generate special seat
+        cinema1 = getGenerateSpecialSeats(cinema1);
+        cinema2 = getGenerateSpecialSeats(cinema2);
+        cinema3 = getGenerateSpecialSeats(cinema3);
         cineplex3.setRoom(cinema1);
         cineplex3.setRoom(cinema2);
         cineplex3.setRoom(cinema3);
@@ -180,6 +193,21 @@ public class cineplexDB {
         cineplexList.add(cineplex3);
         
         return cineplexList;
+    }
+
+    private static Cinema getGenerateSpecialSeats(Cinema roomstyle){
+        roomstyle.setseattype(9,0,Seattype.COUPLE_SEAT);
+        roomstyle.setseattype(9,2,Seattype.COUPLE_SEAT);
+        roomstyle.setseattype(9,4,Seattype.COUPLE_SEAT);
+        roomstyle.setseattype(9,6,Seattype.COUPLE_SEAT);
+
+        roomstyle.setseattype(8,0,Seattype.ELITE_SEAT);
+        roomstyle.setseattype(8,2,Seattype.ELITE_SEAT);
+
+        roomstyle.setseattype(8,4,Seattype.ULTIMA_SEAT);
+        roomstyle.setseattype(8,6,Seattype.ULTIMA_SEAT);
+        
+        return roomstyle;
     }
 
 }
