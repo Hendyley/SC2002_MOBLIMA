@@ -132,7 +132,7 @@ public class MovieGoerModuleApp{
                     System.out.println("Search by keyword: ");
                     key = s.nextLine();
                     for (int i = 0; i < movieArr.length; i++) {
-                        if (movieArr[i].getTitle().toLowerCase().indexOf(key.toLowerCase()) > -1) {
+                        if (movieArr[i].getTitle().toLowerCase().indexOf(key.toLowerCase()) != -1) {
                             System.out.println(i + " Movie " + movieArr[i].getTitle());
                         }
                     }
@@ -141,16 +141,33 @@ public class MovieGoerModuleApp{
                 case 2:
                     System.out.println("2. View Movie details");
                     for (int i = 0; i < movieArr.length; i++) {
-                        System.out.println(i + " Movie " + movieArr[i].getTitle());
+                        System.out.println(i + " Movie " + movieArr[i].getTitle()+" "+movieArr[choice].getStatus()+" "+movieArr[choice].getType()+" "+movieArr[choice].getAge_restriction());
                     }
                     System.out.println("Select movie to view details");
                     choice = sc.nextInt();
-                    System.out.println("Movie details : ");
-                    System.out.println("Movie title: " + movieArr[choice].getTitle());
-                    System.out.println("Movie status: " + movieArr[choice].getStatus());
-                    System.out.println("Movie rating: " + movieArr[choice].getRating());
+                    if(choice<movieArr.length){
+                        System.out.println("Please Choose appropriate Movie!");
+                        break;
+                    }
+                    System.out.println("Movie Details : ");
+                    System.out.println("Movie Title: " + movieArr[choice].getTitle());
+                    System.out.println("Movie Status: " + movieArr[choice].getStatus());
+                    System.out.println("Movie Duration: "+ movieArr[choice].getMovieDurationMin()+ " minutes");
+                    System.out.println("Movie Age Requirement: "+ movieArr[choice].getAge_restriction());
+                    System.out.println("Movie Type: "+ movieArr[choice].getType());
+                    System.out.println("Movie Rating: " + movieArr[choice].getRating());
                     System.out.println("Movie Director: " + movieArr[choice].getDirector());
-                    System.out.println("Movie synopsis: " + movieArr[choice].getSynopsis());
+                    System.out.println("Movie Synopsis: " + movieArr[choice].getSynopsis());
+                    System.out.println("Movie Airing time: ");
+                    ArrayList<TimeSlot> showair = movieArr[choice].getTimeSlots();
+                    for(int i=0; i<showair.size(); i++){
+                        System.out.println(showair.get(i).getairingtimeformat()+" "+showair.get(i).getMovieClass());
+                    }
+                    System.out.println("Movie Review: ");
+                    ArrayList<Review> showreview = movieArr[choice].getreviewlist();
+                    for(int i=0; i<showreview.size(); i++){
+                        System.out.println("Comment: "+i+" "+showreview.get(i).getRemark());
+                    }
 
                     break;
 
@@ -586,13 +603,11 @@ public class MovieGoerModuleApp{
                     System.out.println("Thank you for the review.");
 
                     break;
-                case 8:
-                    break;
                 default:
                     break;
             }
 
-        } while (option != 8);
+        } while (option < 8 && option > 0);
 
     }
 }
