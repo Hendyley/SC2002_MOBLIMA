@@ -9,12 +9,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import MovieGoerModule.Cineplex;
 
-import AdminModule.cinexplexDB;
-
 
 public class testCineplexApp {
     public static void main(String[] args) throws ClassNotFoundException, IOException {
         // ArrayList<Cineplex> CineplexList = cinexplexDB.getCineplexListFromFile();
-        cinexplexDB.printCineplexList();
+        cineplexDB.printCineplexList();
     }
 }
