@@ -7,7 +7,7 @@ import MovieGoerModule.MovieGoer;
 import MovieGoerModule.Role;
 import AdminModule.Staff;
 
-public class testLoginApp2 {
+public class MoblimaApp {
     private final static String ACCOUNT_FILE_NAME = "AccountList.txt";
     private static Scanner sc = new Scanner(System.in);
     private static Role currentRole;
