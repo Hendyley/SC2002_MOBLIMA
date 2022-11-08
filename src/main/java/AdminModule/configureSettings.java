@@ -11,9 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-import MovieGoerModule.AgeOfMovieGoer;
-import MovieGoerModule.Cineplex;
-
 public class configureSettings {
     private final static String PRICELIST_FILE_NAME = "Pricelist.txt";
     public static void main(String[] args) throws ClassNotFoundException, IOException {
@@ -45,16 +42,39 @@ public class configureSettings {
                         ad.addDay(date);
                         System.out.println("Added successfully!");
                     }
+                    else if(date.compareTo("0") == 0) break;
                     else{
                         System.out.println("Invalid date!");
+                        System.out.println("Try again, else input 0 to exit");
                     }
                     
                     break;
 
                 case 3:
-                    //showtime changes
-                    // Cineplex cine = selectCineplex.select();
-                    // timeslotChange.change(cine);
+                    int select = 0;
+                    System.out.println("Select:");
+                    System.out.println("1: Add Time Slot");
+                    System.out.println("2: Remove Time Slot");
+                    System.out.println("3: Back");
+                    switch(select){
+                        case 1:
+                            addTimeslot.test();
+                            break;
+
+                        case 2:
+                            deleteTimeSlot.delete();
+                            break;
+
+                        case 3:
+                            System.out.println("Going back...");
+                            break;
+
+                        default:
+                            System.out.println("Invalid number! Try again!");
+                            break;
+
+                    }
+
                     break;
 
                 case 4:
