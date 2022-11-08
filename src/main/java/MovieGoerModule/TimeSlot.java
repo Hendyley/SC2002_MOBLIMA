@@ -14,30 +14,12 @@ public class TimeSlot implements Serializable{
     private LocalDate date;
     private String startTime;
     private String endTime;
-    private ClassOfCinema movieClass;
     private Cinema room;
-    // private Movie airingmovie;
     private String movieName;
     private int movieDuration;
     private TypeOfMovie movieType;
 
     private transient DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-
-    public TimeSlot(String dateOfSlot, String startTime, String endTime, ClassOfCinema movieClass, Cinema RoomStyle) {
-        room = new Cinema();
-        stringDate = dateOfSlot;
-
-        this.movieClass = movieClass;
-        this.startTime = startTime;
-        this.endTime = endTime;
-
-        this.date = LocalDate.parse(dateOfSlot, df);
-        // System.out.println(date);
-        // System.out.println(date.getDayOfWeek());
-        this.room = RoomStyle;
-
-    }
 
     public TimeSlot(String dateOfSlot,String startTime,Cinema roomStyle, String movieName, 
         int movieDuration, TypeOfMovie movieType){
@@ -69,10 +51,6 @@ public class TimeSlot implements Serializable{
         return stringDate + " at " + startTime + "-" + endTime;
     }
 
-    public ClassOfCinema getMovieClass() {
-        return movieClass;
-    }
-
     public String getMovieName(){
         return movieName;
     }
@@ -84,10 +62,6 @@ public class TimeSlot implements Serializable{
     public TypeOfMovie getMovieType(){
         return movieType;
     }
-
-    // public Movie getAiringmovie() {
-    //     return airingmovie;
-    // }
 
     public Cinema getRoom() {
         return room;

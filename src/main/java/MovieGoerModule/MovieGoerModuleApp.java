@@ -315,247 +315,249 @@ public class MovieGoerModuleApp{
                     System.out.println(ulti);
 
                     break;
-                // case 4:
-                //     LocalDateTime now = LocalDateTime.now();
-                //     ArrayList<TimeSlot> ts1 = null;
-                //     ArrayList<String> datel = new ArrayList<String>();
-                //     String dateS = "";
-                //     TimeSlot tss = null;
-                //     Cineplex cine = null;
-                //     System.out.println("4. Book a ticket");
-                //     System.out.println("Select Cineplex");
-                //     System.out.println("Enter which cineplex: ");
-                //     for (int i = 0; i < cathay.length; i++) {
-                //         System.out.println(i + " Cinema: " + cathay[i].getName());
-                //     }
-                //     cinema = sc.nextInt();
-                //     if(cinema>= cathay.length){
-                //         System.out.println("Cannot find the cineplex");
-                //         break;
-                //     }
-                //     cine = cathay[cinema];
+                case 4:
+                    LocalDateTime now = LocalDateTime.now();
+                    ArrayList<TimeSlot> ts1 = null;
+                    ArrayList<String> datel = new ArrayList<String>();
+                    String dateS = "";
+                    TimeSlot tss = null;
+                    Cineplex cine = null;
+                    System.out.println("4. Book a ticket");
+                    int j = 0;
+                    int index = -1;
+                    System.out.println("Cineplex List:");
+                    for(Cineplex cineplex :cathay){
+                        System.out.printf("%s. %s\n",j,cineplex.getName());
+                        j++;
+                    }
+                    do {
+                        System.out.println("Select one of the cineplex index");
+                        index = sc.nextInt();
+                    } while (index < 0 || index > cathay.size()-1);
+                    cine = cathay.get(index);
+                    movieList = cine.getMovieList();
 
-                //     //cine.getMovieList();
-                //     if(cine.getMovieList().size()==0){
-                //         System.out.println("No Movie is airing in this cineplex");
-                //         break;
-                //     }
+                    //movieList;
+                    if(movieList.size()==0){
+                        System.out.println("No Movie is airing in this cineplex");
+                        break;
+                    }
 
-                //     System.out.println("Which movie :");
-                //     for (int i = 0; i < cine.getMovieList().size(); i++) {
-                //         if( (cine.getMovieList().get(i).getStatus() == Status.NOW_SHOWING || cine.getMovieList().get(i).getStatus() == Status.PREVIEW) ){
-                //             System.out.println(i + " " + cine.getMovieList().get(i).getTitle() + " " + cine.getMovieList().get(i).getStatus() );
-                //         }
-                //     }
-                //     int moviechoice = sc.nextInt();
-                //     if(moviechoice >= cine.getMovieList().size()){
-                //         System.out.println("Please Choose appropriate Movie!");
-                //         break;
-                //     }
-                //     ts1 = cine.getMovieList().get(moviechoice).getTimeSlots();
-                //     //Age requirement check
-                //     if (man.getAgetype().ordinal() < cine.getMovieList().get(moviechoice).getAge_restriction().ordinal() ) {
-                //         System.out.println("Age requirement required to watch " + cine.getMovieList().get(moviechoice).getAge_restriction() + " Movie");
-                //         break;
-                //     }
-                //     //Check booking type
-                //     if(cine.getMovieList().get(moviechoice).getStatus() == Status.COMING_SOON || cine.getMovieList().get(moviechoice).getStatus() == Status.END_OF_SHOWING)
-                //     if (ts1.size() == 0) {
-                //         System.out.println("The movie is coming soon or not showing now");
-                //         break;
-                //     }
+                    System.out.println("Which movie :");
+                    for (int i = 0; i < movieList.size(); i++) {
+                        if( (movieList.get(i).getStatus() == Status.NOW_SHOWING || movieList.get(i).getStatus() == Status.PREVIEW) ){
+                            System.out.println(i + " " + movieList.get(i).getTitle() + " " + movieList.get(i).getStatus() );
+                        }
+                    }
+                    int moviechoice = sc.nextInt();
+                    if(moviechoice >= movieList.size()){
+                        System.out.println("Please Choose appropriate Movie!");
+                        break;
+                    }
+                    ts1 = movieList.get(moviechoice).getTimeSlots();
+                    //Age requirement check
+                    if (man.getAgetype().ordinal() < movieList.get(moviechoice).getAge_restriction().ordinal() ) {
+                        System.out.println("Age requirement required to watch " + movieList.get(moviechoice).getAge_restriction() + " Movie");
+                        break;
+                    }
+                    //Check booking type
+                    if(movieList.get(moviechoice).getStatus() == Status.COMING_SOON || movieList.get(moviechoice).getStatus() == Status.END_OF_SHOWING)
+                    if (ts1.size() == 0) {
+                        System.out.println("The movie is coming soon or not showing now");
+                        break;
+                    }
 
-                //     System.out.println("Select a date");
-                //     String firstDate = ts1.get(0).getStringDate();
-                //     System.out.println(0 + " " + ts1.get(0).getStringDate());
-                //     datel.add(firstDate);
-                //     for (int i = 1; i < ts1.size(); i++) {
-                //         if (ts1.get(i - 1).getStringDate() != ts1.get(i).getStringDate()) {
-                //             datel.add(ts1.get(i).getStringDate());
-                //             System.out.println(i + " " + ts1.get(i).getStringDate());
-                //         }
-                //     }
+                    System.out.println("Select a date");
+                    String firstDate = ts1.get(0).getStringDate();
+                    System.out.println(0 + " " + ts1.get(0).getStringDate());
+                    datel.add(firstDate);
+                    for (int i = 1; i < ts1.size(); i++) {
+                        if (ts1.get(i - 1).getStringDate() != ts1.get(i).getStringDate()) {
+                            datel.add(ts1.get(i).getStringDate());
+                            System.out.println(i + " " + ts1.get(i).getStringDate());
+                        }
+                    }
 
-                //     int input = sc.nextInt();
-                //     dateS = datel.get(input);
-
-
-                //     System.out.println("Select Timeslot");
-                //     ArrayList<Integer> tsnum = new ArrayList<>();
-                //     int slot = 0;
-                //     for (int i = 0; i < ts1.size(); i++) {
-                //         if (ts1.get(i).getStringDate() == dateS) {
-                //             System.out.println(slot + " " + ts1.get(i).getStartTime() + "-" +ts1.get(i).getEndTime());
-                //             tsnum.add(i); slot++;
-                //         }
-                //     }
-                //     choice = sc.nextInt();
-
-                //     if (choice >= tsnum.size()) {
-                //         System.out.println("Please Choose appropriate timeslot!");
-                //         break;
-                //     }
-                //     tss = ts1.get(tsnum.get(choice));
-                //     //System.out.println("selected "+tsnum.get(choice));
-                //     //tss.getRoom().printSeats();
+                    int input = sc.nextInt();
+                    dateS = datel.get(input);
 
 
-                //     System.out.println("Select Qty: ");
-                //     Qty = sc.nextInt();
-                //     ArrayList<Integer> ticketagelist= new ArrayList<>();
-                //     for(int i=0;i<Qty;i++){
-                //         System.out.println("Selecting Age Catefory for Customer "+i);
-                //         System.out.println("0 for CHILD");
-                //         System.out.println("1 for STUDENT");
-                //         System.out.println("2 for SENIOR");
-                //         System.out.println("3 for ADULT");
-                //         int age = sc.nextInt();
-                //         if( (age>3) || (age<0) || age<cine.getMovieList().get(moviechoice).getAge_restriction().ordinal() ){
-                //             Qty=-1;
-                //             break;
-                //         }
-                //         ticketagelist.add(age);
-                //     }
-                //     if(Qty == -1){
-                //         System.out.println("Age requirement required to watch " + cine.getMovieList().get(moviechoice).getAge_restriction() + " Movie");
-                //         break;
-                //     }
+                    System.out.println("Select Timeslot");
+                    ArrayList<Integer> tsnum = new ArrayList<>();
+                    int slot = 0;
+                    for (int i = 0; i < ts1.size(); i++) {
+                        if (ts1.get(i).getStringDate() == dateS) {
+                            System.out.println(slot + " " + ts1.get(i).getStartTime() + "-" +ts1.get(i).getEndTime());
+                            tsnum.add(i); slot++;
+                        }
+                    }
+                    choice = sc.nextInt();
 
-                //     LocalDate dt = LocalDate.parse(dateS, df);
-                //     Day d;
-                //     Integer starttime = Integer.parseInt( tss.getStartTime().substring(0,2) );
-                //     Integer endtime = Integer.parseInt( tss.getEndTime().substring(0,2) );
-                //     if (dt.getDayOfWeek() == DayOfWeek.MONDAY || dt.getDayOfWeek() == DayOfWeek.TUESDAY || dt.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
-                //         d = Day.MON_TO_WED;
-                //     } else if (dt.getDayOfWeek() == DayOfWeek.FRIDAY && ( !(starttime <= 6 && 6 <= endtime) || (starttime>6) || (endtime<6)  ) ) {
-                //         d = Day.FRI_BEFORE_6;
-                //     } else if (dt.getDayOfWeek() == DayOfWeek.THURSDAY) {
-                //         d = Day.THURS;
-                //     }  else {
-                //         d = Day.REMAINING_DAYS;
-                //     }
-
-                //     for(int i=0; i<holidays.length;i++){
-                //         if(holidays[i].indexOf(dateS) > -1){
-                //             d = Day.HOLIDAY;
-                //         }
-                //     }
-
-                //     String transid = "Cinema :"+cine.getName()+" Movie title :"+cine.getMovieList().get(moviechoice).getTitle()+" "+tss.getairingtimeformat()+" "+d+" "+tss.getMovieClass()+" "+cine.getMovieList().get(moviechoice).getType();
-                //     System.out.println(transid);
-                //     seatdesc = tss.getRoom().getseattypedesc();
-                //     //System.out.println("Seatdesc : "+seatdesc);
-                //     String couples1 = seatdesc.substring(0,seatdesc.indexOf("Elite"));
-                //     String elite1 = seatdesc.substring(seatdesc.indexOf("Elite"),seatdesc.indexOf("Ulti"));
-                //     String ulti1 = seatdesc.substring(seatdesc.indexOf("Ulti"));
-                //     cine.getMovieList().get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom().printSeats();
-                //     //Cinema c = cine.getMovieList().get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom();
-                //     System.out.println(couples1);
-                //     System.out.println(elite1);
-                //     System.out.println(ulti1);
-                //     ArrayList<Seattype> selectedseattype = new ArrayList<>();
-                //     System.out.println("Select Seats: (Example: A12, B9 )");
-                //     for (int q = 0; q < Qty; q++) {
-                //         String selectseat = s.nextLine();
-
-                //         int row = Integer.valueOf(selectseat.toLowerCase().substring(0, 1).charAt(0) - 96) - 1;
-                //         int col = Integer.parseInt(selectseat.substring(1)) - 1 ;
-                //         //System.out.println("Gettype : "+tss.getRoom().getseattype(row,col)+" "+row+" "+col+tss.getRoom().checkseat(row, col));
-                //         if ((row<10) && (col<12) ) {
-                //             if(!tss.getRoom().checkseat(row, col)){
-                //                 if(tss.getRoom().getseattype(row,col).ordinal() != Seattype.SEAT.ordinal()){
-                //                     q = q + 1;
-                //                     if((q) >= Qty){
-                //                         System.out.println("Sorry the seat required 2 seaters. Choose again!");
-                //                         q = q - 2;
-                //                     } else{
-                //                         tss.getRoom().book(row, col);
-                //                         selectedseattype.add(tss.getRoom().getseattype(row,col));
-                //                         selectedseattype.add(tss.getRoom().getseattype(row,col));
-                //                         System.out.println("Double seats selected!");
-                //                     }
-                //                 }
-
-                //                 if(tss.getRoom().getseattype(row,col).ordinal() == Seattype.SEAT.ordinal()){
-                //                     tss.getRoom().book(row, col);
-                //                     selectedseattype.add(tss.getRoom().getseattype(row,col));
-                //                     System.out.println("Seat selected!");
-                //                 }
-
-                //             }else{
-                //                 System.out.println("Sorry the seat is taken. Choose again!");
-                //                 q = q - 1;
-                //             }
-                //         } else {
-                //             System.out.println("Sorry the seat is taken. Choose again!");
-                //             q = q - 1;
-                //         }
-                //     }
+                    if (choice >= tsnum.size()) {
+                        System.out.println("Please Choose appropriate timeslot!");
+                        break;
+                    }
+                    tss = ts1.get(tsnum.get(choice));
+                    //System.out.println("selected "+tsnum.get(choice));
+                    //tss.getRoom().printSeats();
 
 
-                //     //Ticket create part
-                //     Ticket[] t = new Ticket[Qty];
-                //     ArrayList<Object> priceLists = getPricelistFromFile();
-                //     //String ageprice = priceLists.get(0).toString();
-                //     HashMap<String,Double> ageList = (HashMap<String,Double>)priceLists.get(0);
-                //     HashMap<String,Double> seatTypeList = (HashMap<String,Double>)priceLists.get(1);
-                //     HashMap<String,Double> cinemaClassList = (HashMap<String,Double>)priceLists.get(2);
-                //     HashMap<String,Double> movieClassList = (HashMap<String,Double>)priceLists.get(3);
-                //     HashMap<String,Double> dayList = (HashMap<String,Double>)priceLists.get(4);
+                    System.out.println("Select Qty: ");
+                    Qty = sc.nextInt();
+                    ArrayList<Integer> ticketagelist= new ArrayList<>();
+                    for(int i=0;i<Qty;i++){
+                        System.out.println("Selecting Age Catefory for Customer "+i);
+                        System.out.println("0 for CHILD");
+                        System.out.println("1 for STUDENT");
+                        System.out.println("2 for SENIOR");
+                        System.out.println("3 for ADULT");
+                        int age = sc.nextInt();
+                        if( (age>3) || (age<0) || age<movieList.get(moviechoice).getAge_restriction().ordinal() ){
+                            Qty=-1;
+                            break;
+                        }
+                        ticketagelist.add(age);
+                    }
+                    if(Qty == -1){
+                        System.out.println("Age requirement required to watch " + movieList.get(moviechoice).getAge_restriction() + " Movie");
+                        break;
+                    }
 
-                //     for(int i=0;i<Qty;i++){
-                //         double ticketprice = 0;
-                //         //Calculating price
-                //         for (Map.Entry<String, Double> age : ageList.entrySet()) {
-                //             String keys = age.getKey();
-                //             Double value = age.getValue();
-                //             //System.out.println(keys+" "+value+" "+ AgeOfMovieGoer.values()[ticketagelist.get(i)].toString());
-                //             if(keys.equals( AgeOfMovieGoer.values()[ticketagelist.get(i)].toString()) ){
-                //                 System.out.println("Calculating for "+AgeOfMovieGoer.values()[ticketagelist.get(i)].toString());
-                //                 ticketprice += value;
-                //             }
-                //         }
-                //         for (Map.Entry<String, Double> seatType : seatTypeList.entrySet()) {
-                //             String keys = seatType.getKey();
-                //             Double value = seatType.getValue();
-                //             if(keys.equals( selectedseattype.get(i).toString() )){
-                //                 System.out.println("Calculating for "+selectedseattype.get(i).toString());
-                //                 ticketprice += value;
-                //             }
-                //         }
-                //         for (Map.Entry<String, Double> cinemaClass : cinemaClassList.entrySet()) {
-                //             String keys = cinemaClass.getKey();
-                //             Double value = cinemaClass.getValue();
-                //             if(keys.equals( tss.getMovieClass().toString() )){
-                //                 System.out.println("Calculating for "+tss.getMovieClass().toString());
-                //                 ticketprice += value;
-                //             }
-                //         }
-                //         for (Map.Entry<String, Double> movieClass : movieClassList.entrySet()) {
-                //             String keys = movieClass.getKey();
-                //             Double value = movieClass.getValue();
-                //             if(keys.equals( cine.getMovieList().get(moviechoice).getType().toString() )){
-                //                 System.out.println("Calculating for "+cine.getMovieList().get(moviechoice).getType().toString());
-                //                 ticketprice += value;
-                //             }
-                //         }
-                //         for (Map.Entry<String, Double> day : dayList.entrySet()) {
-                //             String keys = day.getKey();
-                //             Double value = day.getValue();
-                //             //System.out.println(keys+" "+value+" "+ d.toString());
-                //             if(keys.equals( d.toString()) ){
-                //                 System.out.println("Calculating for "+d.toString());
-                //                 ticketprice += value;
-                //             }
-                //         }
-                //         t[i] = new Ticket(1, AgeOfMovieGoer.values()[ticketagelist.get(i)] , cine.getMovieList().get(moviechoice).getType(), tss.getMovieClass(), d, selectedseattype.get(i), ticketprice);
-                //         cine.getMovieList().get(moviechoice).addsales(ticketprice); //add to movie
-                //     }
-                //     Transaction trans = new Transaction(dtf.format(now).toString() +" "+ transid, t);
-                //     man.getTransactionHistory().add(trans);
+                    LocalDate dt = LocalDate.parse(dateS, df);
+                    Day d;
+                    Integer starttime = Integer.parseInt( tss.getStartTime().substring(0,2) );
+                    Integer endtime = Integer.parseInt( tss.getEndTime().substring(0,2) );
+                    if (dt.getDayOfWeek() == DayOfWeek.MONDAY || dt.getDayOfWeek() == DayOfWeek.TUESDAY || dt.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
+                        d = Day.MON_TO_WED;
+                    } else if (dt.getDayOfWeek() == DayOfWeek.FRIDAY && ( !(starttime <= 6 && 6 <= endtime) || (starttime>6) || (endtime<6)  ) ) {
+                        d = Day.FRI_BEFORE_6;
+                    } else if (dt.getDayOfWeek() == DayOfWeek.THURSDAY) {
+                        d = Day.THURS;
+                    }  else {
+                        d = Day.REMAINING_DAYS;
+                    }
 
-                //     System.out.println(Qty + " Booking places!");
-                //     break;
+                    for(int i=0; i<holidays.length;i++){
+                        if(holidays[i].indexOf(dateS) > -1){
+                            d = Day.HOLIDAY;
+                        }
+                    }
+
+                    String transid = "Cinema :"+cine.getName()+" Movie title :"+movieList.get(moviechoice).getTitle()+" "+tss.getairingtimeformat()+" "+d+" "+tss.getRoom().getCinemaClass()+" "+movieList.get(moviechoice).getType();
+                    System.out.println(transid);
+                    seatdesc = tss.getRoom().getseattypedesc();
+                    //System.out.println("Seatdesc : "+seatdesc);
+                    String couples1 = seatdesc.substring(0,seatdesc.indexOf("Elite"));
+                    String elite1 = seatdesc.substring(seatdesc.indexOf("Elite"),seatdesc.indexOf("Ulti"));
+                    String ulti1 = seatdesc.substring(seatdesc.indexOf("Ulti"));
+                    movieList.get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom().printSeats();
+                    //Cinema c = movieList.get(moviechoice).getTimeSlots().get(tsnum.get(choice)).getRoom();
+                    System.out.println(couples1);
+                    System.out.println(elite1);
+                    System.out.println(ulti1);
+                    ArrayList<Seattype> selectedseattype = new ArrayList<>();
+                    System.out.println("Select Seats: (Example: A12, B9 )");
+                    for (int q = 0; q < Qty; q++) {
+                        String selectseat = s.nextLine();
+
+                        int row = Integer.valueOf(selectseat.toLowerCase().substring(0, 1).charAt(0) - 96) - 1;
+                        int col = Integer.parseInt(selectseat.substring(1)) - 1 ;
+                        //System.out.println("Gettype : "+tss.getRoom().getseattype(row,col)+" "+row+" "+col+tss.getRoom().checkseat(row, col));
+                        if ((row<10) && (col<12) ) {
+                            if(!tss.getRoom().checkseat(row, col)){
+                                if(tss.getRoom().getseattype(row,col).ordinal() != Seattype.SEAT.ordinal()){
+                                    q = q + 1;
+                                    if((q) >= Qty){
+                                        System.out.println("Sorry the seat required 2 seaters. Choose again!");
+                                        q = q - 2;
+                                    } else{
+                                        tss.getRoom().book(row, col);
+                                        selectedseattype.add(tss.getRoom().getseattype(row,col));
+                                        selectedseattype.add(tss.getRoom().getseattype(row,col));
+                                        System.out.println("Double seats selected!");
+                                    }
+                                }
+
+                                if(tss.getRoom().getseattype(row,col).ordinal() == Seattype.SEAT.ordinal()){
+                                    tss.getRoom().book(row, col);
+                                    selectedseattype.add(tss.getRoom().getseattype(row,col));
+                                    System.out.println("Seat selected!");
+                                }
+
+                            }else{
+                                System.out.println("Sorry the seat is taken. Choose again!");
+                                q = q - 1;
+                            }
+                        } else {
+                            System.out.println("Sorry the seat is taken. Choose again!");
+                            q = q - 1;
+                        }
+                    }
+
+
+                    //Ticket create part
+                    Ticket[] t = new Ticket[Qty];
+                    ArrayList<Object> priceLists = getPricelistFromFile();
+                    //String ageprice = priceLists.get(0).toString();
+                    HashMap<String,Double> ageList = (HashMap<String,Double>)priceLists.get(0);
+                    HashMap<String,Double> seatTypeList = (HashMap<String,Double>)priceLists.get(1);
+                    HashMap<String,Double> cinemaClassList = (HashMap<String,Double>)priceLists.get(2);
+                    HashMap<String,Double> movieClassList = (HashMap<String,Double>)priceLists.get(3);
+                    HashMap<String,Double> dayList = (HashMap<String,Double>)priceLists.get(4);
+
+                    for(int i=0;i<Qty;i++){
+                        double ticketprice = 0;
+                        //Calculating price
+                        for (Map.Entry<String, Double> age : ageList.entrySet()) {
+                            String keys = age.getKey();
+                            Double value = age.getValue();
+                            //System.out.println(keys+" "+value+" "+ AgeOfMovieGoer.values()[ticketagelist.get(i)].toString());
+                            if(keys.equals( AgeOfMovieGoer.values()[ticketagelist.get(i)].toString()) ){
+                                System.out.println("Calculating for "+AgeOfMovieGoer.values()[ticketagelist.get(i)].toString());
+                                ticketprice += value;
+                            }
+                        }
+                        for (Map.Entry<String, Double> seatType : seatTypeList.entrySet()) {
+                            String keys = seatType.getKey();
+                            Double value = seatType.getValue();
+                            if(keys.equals( selectedseattype.get(i).toString() )){
+                                System.out.println("Calculating for "+selectedseattype.get(i).toString());
+                                ticketprice += value;
+                            }
+                        }
+                        for (Map.Entry<String, Double> cinemaClass : cinemaClassList.entrySet()) {
+                            String keys = cinemaClass.getKey();
+                            Double value = cinemaClass.getValue();
+                            if(keys.equals( tss.getRoom().getCinemaClass().toString() )){
+                                System.out.println("Calculating for "+tss.getRoom().getCinemaClass().toString());
+                                ticketprice += value;
+                            }
+                        }
+                        for (Map.Entry<String, Double> movieClass : movieClassList.entrySet()) {
+                            String keys = movieClass.getKey();
+                            Double value = movieClass.getValue();
+                            if(keys.equals( movieList.get(moviechoice).getType().toString() )){
+                                System.out.println("Calculating for "+movieList.get(moviechoice).getType().toString());
+                                ticketprice += value;
+                            }
+                        }
+                        for (Map.Entry<String, Double> day : dayList.entrySet()) {
+                            String keys = day.getKey();
+                            Double value = day.getValue();
+                            //System.out.println(keys+" "+value+" "+ d.toString());
+                            if(keys.equals( d.toString()) ){
+                                System.out.println("Calculating for "+d.toString());
+                                ticketprice += value;
+                            }
+                        }
+                        t[i] = new Ticket(1, AgeOfMovieGoer.values()[ticketagelist.get(i)] , movieList.get(moviechoice).getType(), tss.getRoom().getCinemaClass(), d, selectedseattype.get(i), ticketprice);
+                        movieList.get(moviechoice).addsales(ticketprice); //add to movie
+                    }
+                    Transaction trans = new Transaction(dtf.format(now).toString() +" "+ transid, t);
+                    man.getTransactionHistory().add(trans);
+
+                    System.out.println(Qty + " Booking places!");
+                    break;
                 // case 5:
                 //     System.out.println("5. View Booking History");
                 //     ArrayList<Transaction> temptrans = man.getTransactionHistory();
