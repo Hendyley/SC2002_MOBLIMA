@@ -115,6 +115,7 @@ public class MovieGoerModuleApp{
         float time;
         String key, datetime, movie, seatdesc;
         Cineplex cinename;
+        ArrayList<Movie> movieList;
         Scanner s = new Scanner(System.in);
         do {
             System.out.println("********************");
@@ -136,21 +137,8 @@ public class MovieGoerModuleApp{
             switch (option) {
                 case 1:
                     System.out.println("1. Search/List movie");
-                    System.out.println("Cineplex List:");
-                    int i = 0;
-                    int index = -1;
-                    for(Cineplex cineplex :cathay){
-                        System.out.printf("%s. %s\n",i,cineplex.getName());
-                        i++;
-                    }
-                    
-                    do {
-                        System.out.println("Select one of the cineplex index");
-                        index = sc.nextInt();
-                    } while (index < 0 || index > cathay.size()-1);
                    
-
-                    ArrayList<Movie> movieList = cathay.get(index).getMovieList();
+                    movieList = getMovieList(cathay,sc);
                     do {
                         boolean isNotFound = true;
                         System.out.println("1. Search movie");
@@ -196,38 +184,46 @@ public class MovieGoerModuleApp{
                     } while (choice != 3);
 
                     break;
-                // case 2:
-                //     System.out.println("2. View Movie details");
-                //     for (int i = 0; i < movieArr.length; i++) {
-                //         System.out.println(i + " Movie " + movieArr[i].getTitle()+" "+movieArr[choice].getStatus()+" "+movieArr[choice].getType()+" "+movieArr[choice].getAge_restriction());
-                //     }
-                //     System.out.println("Select movie to view details");
-                //     choice = sc.nextInt();
-                //     if(choice>=movieArr.length){
-                //         System.out.println("Please Choose appropriate Movie!");
-                //         break;
-                //     }
-                //     System.out.println("Movie Details : ");
-                //     System.out.println("Movie Title: " + movieArr[choice].getTitle());
-                //     System.out.println("Movie Status: " + movieArr[choice].getStatus());
-                //     System.out.println("Movie Duration: "+ movieArr[choice].getMovieDurationMin()+ " minutes");
-                //     System.out.println("Movie Age Requirement: "+ movieArr[choice].getAge_restriction());
-                //     System.out.println("Movie Type: "+ movieArr[choice].getType());
-                //     System.out.println("Movie Rating: " + movieArr[choice].getRating());
-                //     System.out.println("Movie Director: " + movieArr[choice].getDirector());
-                //     System.out.println("Movie Synopsis: " + movieArr[choice].getSynopsis());
-                //     System.out.println("Movie Airing time: ");
-                //     ArrayList<TimeSlot> showair = movieArr[choice].getTimeSlots();
-                //     for(int i=0; i<showair.size(); i++){
-                //         System.out.println(showair.get(i).getairingtimeformat()+" "+showair.get(i).getMovieClass());
-                //     }
-                //     System.out.println("Movie Review: ");
-                //     ArrayList<Review> showreview = movieArr[choice].getreviewlist();
-                //     for(int i=0; i<showreview.size(); i++){
-                //         System.out.println("Comment: "+i+" "+showreview.get(i).getRemark());
-                //     }
+                case 2:
+                    System.out.println("2. View Movie details");
+                    
+                    movieList = getMovieList(cathay,sc);
+                    if(movieList.size() < 1){
+                        System.out.println("No movie available.");
+                        break;
+                    }
 
-                //     break;
+                    for (int i = 0; i < movieList.size(); i++) {
+                        System.out.println(i + " Movie " + movieList.get(i).getTitle()+" "+ movieList.get(i).getStatus()+" "
+                            +movieList.get(i).getType()+" "+movieList.get(i).getAge_restriction());
+                    }
+                    System.out.println("Select movie to view details");
+                    choice = sc.nextInt();
+                    if(choice>=movieList.size()){
+                        System.out.println("Please Choose appropriate Movie!");
+                        break;
+                    }
+                    System.out.println("Movie Details : ");
+                    System.out.println("Movie Title: " + movieList.get(choice).getTitle());
+                    System.out.println("Movie Status: " + movieList.get(choice).getStatus());
+                    System.out.println("Movie Duration: "+ movieList.get(choice).getMovieDurationMin()+ " minutes");
+                    System.out.println("Movie Age Requirement: "+ movieList.get(choice).getAge_restriction());
+                    System.out.println("Movie Type: "+ movieList.get(choice).getType());
+                    System.out.println("Movie Rating: " + movieList.get(choice).getRating());
+                    System.out.println("Movie Director: " + movieList.get(choice).getDirector());
+                    System.out.println("Movie Synopsis: " + movieList.get(choice).getSynopsis());
+                    System.out.println("Movie Airing time: ");
+                    ArrayList<TimeSlot> showair = movieList.get(choice).getTimeSlots();
+                    for(int i=0; i<showair.size(); i++){
+                        System.out.println(showair.get(i).getairingtimeformat()+" "+showair.get(i).getRoom().getCinemaClass());
+                    }
+                    System.out.println("Movie Review: ");
+                    ArrayList<Review> showreview = movieList.get(choice).getreviewlist();
+                    for(int i=0; i<showreview.size(); i++){
+                        System.out.println("Comment: "+i+" "+showreview.get(i).getRemark());
+                    }
+                    System.out.println("");
+                    break;
 
                 // case 3:
                 //     ArrayList<String> dateList = new ArrayList<String>();
@@ -661,12 +657,33 @@ public class MovieGoerModuleApp{
                 //     System.out.println("Thank you for the review.");
 
                 //     break;
-                // 
+                
                 default:
                     break;
             }
 
         } while (option < 8 && option > 0);
 
+    }
+
+
+    private static ArrayList<Movie> getMovieList(ArrayList<Cineplex> cathay, Scanner sc){
+        int i = 0;
+        int index = -1;
+        ArrayList<Movie> movieList;
+
+        System.out.println("Cineplex List:");
+        for(Cineplex cineplex :cathay){
+            System.out.printf("%s. %s\n",i,cineplex.getName());
+            i++;
+        }
+        
+        do {
+            System.out.println("Select one of the cineplex index");
+            index = sc.nextInt();
+        } while (index < 0 || index > cathay.size()-1);
+       
+
+       return movieList = cathay.get(index).getMovieList();
     }
 }
