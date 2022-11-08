@@ -225,92 +225,96 @@ public class MovieGoerModuleApp{
                     System.out.println("");
                     break;
 
-                // case 3:
-                //     ArrayList<String> dateList = new ArrayList<String>();
-                //     ArrayList<TimeSlot> slotList = new ArrayList<TimeSlot>();
-                //     ArrayList<TimeSlot> slotList2 = new ArrayList<TimeSlot>();
-                //     String dateSelection = "";
-                //     TimeSlot slotSelected;
+                case 3:
+                    ArrayList<String> dateList = new ArrayList<String>();
+                    ArrayList<TimeSlot> slotList = new ArrayList<TimeSlot>();
+                    ArrayList<TimeSlot> slotList2 = new ArrayList<TimeSlot>();
+                    String dateSelection = "";
+                    TimeSlot slotSelected;
 
-                //     System.out.println("3. Seat Availability and Booking");
-                //     System.out.println("Enter which cineplex: ");
-                //     for (int i = 0; i < cathay.length; i++) {
-                //         System.out.println(i + " Cinema: " + cathay[i].getName());
-                //     }
-                //     cinema = sc.nextInt();
-                //     if (cinema >= cathay.length) {
-                //         System.out.println("Please Choose appropriate Cinema!");
-                //         break;
-                //     }
-                //     cinename = cathay[cinema];
-                //     // if (cinename.getTimeslots().size() == 0) {
-                //     // System.out.println("No Movie is airing in this cineplex");
-                //     // break;
-                //     // }
-                //     cinename.getMovieList();
-                //     System.out.println("Which movie :");
+                    System.out.println("3. Seat Availability and Booking");
+                    System.out.println("Cineplex List:");
+                    for (int i = 0; i < cathay.size(); i++) {
+                        System.out.println(i + ". " + cathay.get(i).getName());
+                    }
+                    System.out.println("Select one of the cineplex index");
+                    cinema = sc.nextInt();
+                    if (cinema >= cathay.size()) {
+                        System.out.println("Please Choose appropriate Cinema!");
+                        break;
+                    }
+                    cinename = cathay.get(cinema);
+                    // if (cinename.getTimeslots().size() == 0) {
+                    // System.out.println("No Movie is airing in this cineplex");
+                    // break;
+                    // }
+                    if(cinename.getMovieList().size() < 1){
+                        System.out.println("No movie available");
+                        break;
+                    }
+                    System.out.println("Which movie :");
 
-                //     for (int i = 0; i < cinename.getMovieList().size(); i++) {
-                //         System.out.println(i + " " + cinename.getMovieList().get(i).getTitle());
-                //     }
-                //     int movieSelection = sc.nextInt();
-                //     if (movieSelection >= cinename.getMovieList().size()) {
-                //         System.out.println("Please Choose appropriate Movie!");
-                //         break;
-                //     }
-                //     slotList = cinename.getMovieList().get(movieSelection).getTimeSlots();
+                    for (int i = 0; i < cinename.getMovieList().size(); i++) {
+                        System.out.println(i + " " + cinename.getMovieList().get(i).getTitle());
+                    }
+                    int movieSelection = sc.nextInt();
+                    if (movieSelection >= cinename.getMovieList().size()) {
+                        System.out.println("Please Choose appropriate Movie!");
+                        break;
+                    }
+                    slotList = cinename.getMovieList().get(movieSelection).getTimeSlots();
 
-                //     if (slotList.size() == 0) {
-                //         System.out.println("No date Available");
-                //     } else {
-                //         System.out.println("Select a date");
-                //         String firstDate = slotList.get(0).getStringDate();
-                //         System.out.println(0 + " " + slotList.get(0).getStringDate());
-                //         dateList.add(firstDate);
-                //         for (int i = 1; i < slotList.size(); i++) {
-                //             if (slotList.get(i - 1).getStringDate() != slotList.get(i).getStringDate()) {
-                //                 dateList.add(slotList.get(i).getStringDate());
-                //                 System.out.println(i + " " + slotList.get(i).getStringDate());
-                //             }
-                //         }
+                    if (slotList.size() == 0) {
+                        System.out.println("No date Available");
+                    } else {
+                        System.out.println("Select a date");
+                        String firstDate = slotList.get(0).getStringDate();
+                        System.out.println(0 + " " + slotList.get(0).getStringDate());
+                        dateList.add(firstDate);
+                        for (int i = 1; i < slotList.size(); i++) {
+                            if (slotList.get(i - 1).getStringDate() != slotList.get(i).getStringDate()) {
+                                dateList.add(slotList.get(i).getStringDate());
+                                System.out.println(i + " " + slotList.get(i).getStringDate());
+                            }
+                        }
 
-                //         int input = sc.nextInt();
-                //         if (input >= dateList.size()) {
-                //             System.out.println("Please Choose appropriate Date!");
-                //             break;
-                //         }
-                //         dateSelection = dateList.get(input);
-                //     }
+                        int input = sc.nextInt();
+                        if (input >= dateList.size()) {
+                            System.out.println("Please Choose appropriate Date!");
+                            break;
+                        }
+                        dateSelection = dateList.get(input);
+                    }
 
-                //     System.out.println("Select Timeslot");
-                //     for (int i = 0; i < slotList.size(); i++) {
-                //         if (slotList.get(i).getStringDate() == dateSelection) {
-                //             slotList2.add(slotList.get(i));
-                //         }
-                //     }
-                //     for (int i = 0; i < slotList2.size(); i++) {
-                //         System.out.println(
-                //                 i + " " + slotList2.get(i).getStartTime() + "-" +
-                //                         slotList2.get(i).getEndTime());
-                //     }
+                    System.out.println("Select Timeslot");
+                    for (int i = 0; i < slotList.size(); i++) {
+                        if (slotList.get(i).getStringDate() == dateSelection) {
+                            slotList2.add(slotList.get(i));
+                        }
+                    }
+                    for (int i = 0; i < slotList2.size(); i++) {
+                        System.out.println(
+                                i + " " + slotList2.get(i).getStartTime() + "-" +
+                                        slotList2.get(i).getEndTime());
+                    }
 
-                //     int inputSlot = sc.nextInt();
-                //     if (inputSlot >= slotList2.size()) {
-                //         System.out.println("Please Choose appropriate TimeSlot!");
-                //         break;
-                //     }
-                //     slotSelected = slotList2.get(inputSlot);
-                //     slotSelected.getRoom().printSeats();
+                    int inputSlot = sc.nextInt();
+                    if (inputSlot >= slotList2.size()) {
+                        System.out.println("Please Choose appropriate TimeSlot!");
+                        break;
+                    }
+                    slotSelected = slotList2.get(inputSlot);
+                    slotSelected.getRoom().printSeats();
 
-                //     seatdesc = slotSelected.getRoom().getseattypedesc();
-                //     String couples = seatdesc.substring(0,seatdesc.indexOf("Elite"));
-                //     String elite = seatdesc.substring(seatdesc.indexOf("Elite"),seatdesc.indexOf("Ulti"));
-                //     String ulti = seatdesc.substring(seatdesc.indexOf("Ulti"));
-                //     System.out.println(couples);
-                //     System.out.println(elite);
-                //     System.out.println(ulti);
+                    seatdesc = slotSelected.getRoom().getseattypedesc();
+                    String couples = seatdesc.substring(0,seatdesc.indexOf("Elite"));
+                    String elite = seatdesc.substring(seatdesc.indexOf("Elite"),seatdesc.indexOf("Ulti"));
+                    String ulti = seatdesc.substring(seatdesc.indexOf("Ulti"));
+                    System.out.println(couples);
+                    System.out.println(elite);
+                    System.out.println(ulti);
 
-                //     break;
+                    break;
                 // case 4:
                 //     LocalDateTime now = LocalDateTime.now();
                 //     ArrayList<TimeSlot> ts1 = null;
