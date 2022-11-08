@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Transaction implements Serializable{
     private String id;
     private String mgName;
-    private String mgMobile;
+    private int mgMobile;
     private String mgEmail;
     private double totalPrice;
     private Ticket[] tickets;
@@ -15,7 +15,7 @@ public class Transaction implements Serializable{
         this.tickets = tickets;
     }
 
-    public Transaction(String id, String mgName, String mgMobile, String mgEmail, Ticket[] tickets) {
+    public Transaction(String id, String mgName, int mgMobile, String mgEmail, Ticket[] tickets) {
         this.id = id;
         this.mgName = mgName;
         this.mgMobile = mgMobile;
@@ -32,7 +32,7 @@ public class Transaction implements Serializable{
         return this.mgName;
     }
 
-    public String getMgMobile(){
+    public int getMgMobile(){
         return this.mgMobile;
     }
 

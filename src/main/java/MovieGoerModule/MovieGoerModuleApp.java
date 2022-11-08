@@ -552,7 +552,8 @@ public class MovieGoerModuleApp{
                         t[i] = new Ticket(1, AgeOfMovieGoer.values()[ticketagelist.get(i)] , movieList.get(moviechoice).getType(), tss.getRoom().getCinemaClass(), d, selectedseattype.get(i), ticketprice);
                         movieList.get(moviechoice).addsales(ticketprice); //add to movie
                     }
-                    Transaction trans = new Transaction(dtf.format(now).toString() +" "+ transid, t);
+                    //Transaction trans = new Transaction(dtf.format(now).toString() +" "+ transid, t);
+                    Transaction trans = new Transaction(dtf.format(now).toString() +" "+ transid,man.getName(),man.getMobile(),man.getEmail(),t);
                     man.getTransactionHistory().add(trans);
 
                     System.out.println(Qty + " Booking places!");
