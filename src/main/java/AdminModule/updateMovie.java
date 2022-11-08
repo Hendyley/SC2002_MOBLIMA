@@ -3,34 +3,72 @@ package AdminModule;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
+
+import MovieGoerModule.Cineplex;
 import MovieGoerModule.Movie;
 import MovieGoerModule.Status;
 
 public class updateMovie {
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+        update();
+    }
+
     public static void update() throws ClassNotFoundException, IOException{
         int choice = 0;
         Scanner sc = new Scanner(System.in);
-        ArrayList<Movie> movieList;
-        int index = -1;
 
-        String title = sc.nextLine();
-        movieList = MovieDB.getMovieListFromFile();
-        index = MovieDB.getMovieIndex(movieList, title);
-        if(index < 0){
-            System.out.println("Movie does not exist");
+        //print out list of cineplex
+        ArrayList<Cineplex> cList = cineplexDB.getCineplexListFromFile();
+        cineplexDB.printCineplexList();
+
+        //select cineplex (enter name and get index)
+        int cineplexindex;
+        while(true){
+            System.out.println("Enter the name of cineplex:");
+            String nameCineplex = sc.nextLine();
+            if(cineplexDB.isExistingCineplex(cList, nameCineplex)){
+                cineplexindex = cineplexDB.getCineplexIndex(cList, nameCineplex);
+                break;
+            }
+            else{
+                System.out.println("Cineplex does not exist! Try again!");
+            }
+        }
+
+        Cineplex chosenCineplex = cList.get(cineplexindex);
+        ArrayList<Movie> movieList = chosenCineplex.getMovieList();
+        if(movieList.size() < 1){
+            System.out.println("No movies in this cineplex");
             return;
         }
 
-        Movie m = movieList.get(index);
-        System.out.println("original details:");
-        m.printDetails();
+        System.out.println("Movies in cineplex");
+        for(int i = 0; i < movieList.size(); i++){
+            System.out.println(i+1 + ": " + movieList.get(i).getTitle());
+        }
 
+        Movie chosenMovie;
+        int movieIndex;
+        while(true){
+            System.out.println("Enter title of movie to update");
+            String title = sc.nextLine();
+            if(cineplexDB.isExistingMovie(movieList, title)){
+                movieIndex = cineplexDB.getMovieIndex(movieList, title);
+                chosenMovie = movieList.get(movieIndex);
+                break;
+            }
+            else{
+                System.out.println("Movie does not exist! Try again");
+            }
+        }
+
+        System.out.println("original details:");
+        chosenMovie.printDetails();
 
         do{
             System.out.println("What would you like to change?");
             System.out.println("1: Status");
-            System.out.println("2. Time slots");
-            System.out.println("3: Done");
+            System.out.println("2: Done");
             choice = sc.nextInt();
                 
             switch(choice){
@@ -43,38 +81,41 @@ public class updateMovie {
                     int set = sc.nextInt();
                     switch(set){
                         case 1:
-                            m.setStatus(Status.COMING_SOON);
+                            chosenMovie.setStatus(Status.COMING_SOON);
                             break;
             
                         case 2:
-                            m.setStatus(Status.PREVIEW);
+                            chosenMovie.setStatus(Status.PREVIEW);
                             break;
             
                         case 3:
-                            m.setStatus(Status.NOW_SHOWING);
+                            chosenMovie.setStatus(Status.NOW_SHOWING);
                             break;
             
                         case 4:
-                            m.setStatus(Status.END_OF_SHOWING);
+                            chosenMovie.setStatus(Status.END_OF_SHOWING);
+                            break;
+
+                        default:
+                            System.out.println("Invalid input! Try again!");
                             break;
                     }
                     break;
 
                 case 2:
-                    //TIMESLOTS
-                    break;
-
-                case 3:
-                    movieList.set(index,m);    
-                    MovieDB.addMovieListToFile(movieList);
-                    MovieDB.printMovieList();
-
+                    chosenCineplex.setMovie(movieIndex, chosenMovie);
+                    cList.set(cineplexindex, chosenCineplex);
+                    cineplexDB.addCineplexListToFile(cList);
                     System.out.println("Done!");
                     System.out.println("Updated details:");
-                    m.printDetails();
+                    chosenMovie.printDetails();
+                    break;
+
+                default:
+                    System.out.println("Invalid input! Try again!");
                     break;
             }
 
-        } while(choice != 3);
+        } while(choice != 2);
     }
 }

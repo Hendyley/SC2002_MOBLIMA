@@ -22,7 +22,8 @@ public class configureSettings {
             System.out.println("1: Change ticket price");
             System.out.println("2: Add/Remove holiday");
             System.out.println("3: Add/Remove showtimes");
-            System.out.println("4: Back");
+            System.out.println("4: Change view listings");
+            System.out.println("5: Back");
             choice = sc.nextInt();
             sc.nextLine();  //clear buffer
             switch(choice){
@@ -78,11 +79,18 @@ public class configureSettings {
                     break;
 
                 case 4:
-                default:
+                    //change permissions to view
+                    //admin can view both by sales and by ratings
+                    break;
+
+                case 5:
                     System.out.println("Going back...");
                     break;
+
+                default:
+                    System.out.println("Invalid choice! Try again!");
             }
-        } while(choice != 4);
+        } while(choice != 5);
 
     }
 

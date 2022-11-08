@@ -42,6 +42,11 @@ public class staffLogin {
                     //sign out
                     System.out.println("Signing out...");
                     break;
+
+                default:
+                    //invalid input
+                    System.out.println("Invalid input! Try again!");
+                    break;
             }
             
         } while(choice != 5);

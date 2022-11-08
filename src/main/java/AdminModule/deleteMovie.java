@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import MovieGoerModule.Movie;
 
 public class deleteMovie {
+    //remove movie by changing status to end of showing 
     public static void delete() throws ClassNotFoundException, IOException{
         //delete movie from database?
         Scanner sc = new Scanner(System.in);
@@ -16,8 +17,8 @@ public class deleteMovie {
         System.out.println("Enter the title to delete:");
         String title = sc.nextLine();
         movieList = MovieDB.getMovieListFromFile();
-        index = MovieDB.getMovieIndex(movieList, title);
-        if(index < 0){
+        index = MovieDB.getMovieIndex(movieList, title);        //return -1 if does not exist
+        if(index < 0){ 
             System.out.println("Movie does not exist");
             return;
         }
