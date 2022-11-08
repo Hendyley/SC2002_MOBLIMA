@@ -1,6 +1,8 @@
 package MovieGoerModule;
 
-public class Ticket {
+import java.io.Serializable;
+
+public class Ticket implements Serializable{
     private int quantity;
     private AgeOfMovieGoer agetype;
     private TypeOfMovie movieType;

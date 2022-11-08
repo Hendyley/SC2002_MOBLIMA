@@ -50,7 +50,7 @@ public class timeslotChange {
         int room = sc.nextInt();
         Cinema c = cine.getRoom(room);
         
-        TimeSlot ts = new TimeSlot(date, startTime, endTime, movieClass, c);
+        //TimeSlot ts = new TimeSlot(date, startTime, endTime, movieClass, c);
         // m.addSlot(ts);
     }
 }

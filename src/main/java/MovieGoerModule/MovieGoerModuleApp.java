@@ -337,7 +337,6 @@ public class MovieGoerModuleApp{
                     cine = cathay.get(index);
                     movieList = cine.getMovieList();
 
-                    //movieList;
                     if(movieList.size()==0){
                         System.out.println("No Movie is airing in this cineplex");
                         break;
@@ -406,7 +405,7 @@ public class MovieGoerModuleApp{
                     Qty = sc.nextInt();
                     ArrayList<Integer> ticketagelist= new ArrayList<>();
                     for(int i=0;i<Qty;i++){
-                        System.out.println("Selecting Age Catefory for Customer "+i);
+                        System.out.println("Selecting Age Category for Customer "+i);
                         System.out.println("0 for CHILD");
                         System.out.println("1 for STUDENT");
                         System.out.println("2 for SENIOR");
