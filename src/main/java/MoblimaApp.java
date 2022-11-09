@@ -1088,6 +1088,10 @@ public class MoblimaApp {
             MovieDB.addMovieListToFile(globalMovieList);
 
         System.out.println(Qty + " Booking places!");
+        System.out.println("Printing out your transaction\n");
+        System.out.println("Transaction "+trans.getId());
+        trans.printTickets();
+        System.out.printf("Total Price SGD %.2f inclusive of GST\n\n",trans.getTotalPrice());
     }
 
 
