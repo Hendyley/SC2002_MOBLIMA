@@ -37,7 +37,7 @@ public class staffLogin {
 
                 case 4:
                     //configure settings (change ticket prices, holidays, movie type)
-                    configureSettings.main(args);
+                    configureSettings.configure();
                     break;
 
                 case 5:
@@ -63,6 +63,5 @@ public class staffLogin {
             
         } while(choice != 7);
         
-        sc.close();
     }
 }

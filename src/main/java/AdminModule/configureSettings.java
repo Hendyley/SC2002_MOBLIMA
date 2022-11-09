@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class configureSettings {
     private final static String PRICELIST_FILE_NAME = "Pricelist.txt";
     private final static String VIEW_TOP5_SETTINGS_FILE_NAME = "ViewTop5Settings.txt";
-    public static void main(String[] args) throws ClassNotFoundException, IOException {
+    public static void configure() throws ClassNotFoundException, IOException {
         Scanner sc = new Scanner(System.in);
         int choice;
 
