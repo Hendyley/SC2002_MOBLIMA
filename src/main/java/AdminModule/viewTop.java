@@ -37,9 +37,11 @@ public class viewTop {
                         }
                     }
                     //print
+                    System.out.println("Listing top 5 movies by ratings:");
                     for(int i = 0; i < movieList.size(); i++){
                         System.out.println(i+1 + ": " + movieList.get(i).getTitle());
                     }
+                    System.out.println();
 
                     break;  //break case
 
@@ -54,14 +56,16 @@ public class viewTop {
                         }
                     }
                     //print
+                    System.out.println("Listing top 5 movies by sales:");
                     for(int i = 0; i < movieList.size(); i++){
                         System.out.println(i+1 + ": " + movieList.get(i).getTitle());
                     }
-
+                    System.out.println();
                     break; //break case
 
                 case 3:
                     System.out.println("Going back...");
+                    System.out.println();
                     break;
 
                 default:

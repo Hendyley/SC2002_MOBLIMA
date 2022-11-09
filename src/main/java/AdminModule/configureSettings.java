@@ -38,27 +38,31 @@ public class configureSettings {
                 case 2:
                     //add holidays
                     addHolidays ad = new addHolidays();
-                    System.out.println("Enter a holiday date (DD/MM/YYYY):");
-                    String date = sc.nextLine();
-                    if(dateChecker.check(date)){ //check format
-                        ad.addDay(date);
-                        System.out.println("Holiday added successfully!");
+                    String date;
+                    while(true){
+                        System.out.println("Enter a holiday date (DD/MM/YYYY) or 0 to exit:");
+                        date = sc.nextLine();
+                        if(dateChecker.check(date)){ //check format
+                            ad.addDay(date);
+                            System.out.println("Holiday added successfully!");
+                        }
+                        else if(date.compareTo("0") == 0) break;
+                        else{
+                            System.out.println("Invalid date! Try again!");
+                        }
                     }
-                    else if(date.compareTo("0") == 0) break;
-                    else{
-                        System.out.println("Invalid date!");
-                        System.out.println("Try again, else input 0 to exit");
-                    }
+
+                    break;  //break case
                     
-                    break;
 
                 case 3:
                     // add/delete timeslots
-                    int select = 0;
                     System.out.println("Select:");
                     System.out.println("1: Add Time Slot");
                     System.out.println("2: Remove Time Slot");
                     System.out.println("3: Back");
+                    int select = sc.nextInt();
+                    sc.nextLine(); //clear buffer
                     switch(select){
                         case 1:
                             addTimeslot.addTS();
