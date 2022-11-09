@@ -10,10 +10,12 @@ import java.util.ArrayList;
 
 public class holidayTextDB {
 
+	private final static String filename = "holidays.txt";
+
     // reading
-	public static ArrayList readHolidays(String filename) throws IOException {
+	public static ArrayList readHolidays() throws IOException {
 		// read String from text file
-		ArrayList stringArray = (ArrayList)read(filename);
+		ArrayList stringArray = (ArrayList)read();
 		ArrayList alr = new ArrayList() ;// to store Holiday data
 
         for (int i = 0 ; i < stringArray.size() ; i++) {
@@ -27,7 +29,7 @@ public class holidayTextDB {
 	}
 
   // saving
-	public static void saveHoliday(String filename, List al) throws IOException {
+	public static void saveHoliday(List al) throws IOException {
 		List alw = new ArrayList() ;// to store Holiday data
 
         for (int i = 0 ; i < al.size() ; i++) {
@@ -36,12 +38,12 @@ public class holidayTextDB {
 				st.append(date.getDate().trim());
 				alw.add(st.toString()) ;
 			}
-			write(filename,alw);
+			write(alw);
 	}
 
   /** Write fixed content to the given file. */
-	public static void write(String fileName, List data) throws IOException  {
-		PrintWriter out = new PrintWriter(new FileWriter(fileName));
+	public static void write(List data) throws IOException  {
+		PrintWriter out = new PrintWriter(new FileWriter(filename));
 
 		try {
 			for (int i =0; i < data.size() ; i++) {
@@ -54,9 +56,9 @@ public class holidayTextDB {
 	}
 
   /** Read the contents of the given file. */
-	public static List read(String fileName) throws IOException {
+	public static List read() throws IOException {
 		List data = new ArrayList() ;
-		Scanner scanner = new Scanner(new FileInputStream(fileName));
+		Scanner scanner = new Scanner(new FileInputStream(filename));
 		try {
 		while (scanner.hasNextLine()){
 			data.add(scanner.nextLine());
@@ -66,5 +68,15 @@ public class holidayTextDB {
 		scanner.close();
 		}
 		return data;
+	}
+
+	public static boolean isExistingHoliday(String date) throws IOException{
+		ArrayList<Holiday> list = readHolidays();
+		for(Holiday h : list){
+			if(h.getDate().compareTo(date) == 0){
+				return true;
+			}
+		}
+		return false; //holiday does not exist
 	}
 }

@@ -43,6 +43,7 @@ public class configureSettings {
                         System.out.println("Enter a holiday date (DD/MM/YYYY) or 0 to exit:");
                         date = sc.nextLine();
                         if(dateChecker.check(date)){ //check format
+                            if(holidayTextDB.isExistingHoliday(date))
                             ad.addDay(date);
                             System.out.println("Holiday added successfully!");
                         }
