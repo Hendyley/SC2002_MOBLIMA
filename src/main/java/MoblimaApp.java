@@ -552,6 +552,7 @@ public class MoblimaApp {
                 case 6:
                     System.out.println("6. List Top 5 Movies by sales OR by overall ratings");
                     viewTop.top5();
+                    
                     break;
 
                 case 7:
@@ -1022,8 +1023,6 @@ public class MoblimaApp {
 
         System.out.println(Qty + " Booking places!");
     }
-
-
 
 
     
