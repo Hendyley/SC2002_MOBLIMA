@@ -569,70 +569,70 @@ public class MovieGoerModuleApp{
 
                     break;
 
-                // case 6:
-                //     System.out.println("6. List Top 5 Movies by sales OR by overall ratings");
+                case 6:
+                    // System.out.println("6. List Top 5 Movies by sales OR by overall ratings");
 
-                //     // array for sorting
-                //     Movie[] top5m = movieArr;
-                //     System.out.println("1. by sales");
-                //     System.out.println("2. by rating");
-                //     choice = sc.nextInt();
+                    // // array for sorting
+                    // Movie[] top5m = movieArr;
+                    // System.out.println("1. by sales");
+                    // System.out.println("2. by rating");
+                    // choice = sc.nextInt();
 
-                //     if(choice>2){
-                //         System.out.println("Sorry, please select input appropriate value");
-                //         break;
-                //     }
+                    // if(choice>2){
+                    //     System.out.println("Sorry, please select input appropriate value");
+                    //     break;
+                    // }
 
-                //     switch (choice) {
-                //         case 1:
-                //             // Sort by sales only
-                //             Movie keyss;
-                //             int js;
-                //             for (int i = 1; i < top5m.length; i++) {
-                //                 keyss = top5m[i];
-                //                 js = i - 1;
-                //                 while (js >= 0 && top5m[js].getSales() < keyss.getSales()) {
-                //                     top5m[js + 1] = top5m[js];
-                //                     js = js - 1;
-                //                 }
-                //                 top5m[js + 1] = keyss;
-                //             }
-                //             break;
-                //         case 2:
-                //             // Sort by Rating only
-                //             Movie keys;
-                //             int j;
-                //             for (int i = 1; i < top5m.length; i++) {
-                //                 keys = top5m[i];
-                //                 j = i - 1;
-                //                 while (j >= 0 && top5m[j].getrealrating() < keys.getrealrating()) {
-                //                     top5m[j + 1] = top5m[j];
-                //                     j = j - 1;
-                //                 }
-                //                 top5m[j + 1] = keys;
-                //             }
-                //             break;
-                //     }
-                //     System.out.println("Here are the top 5 list: ");
-                //     int n = 5;
-                //     if (top5m.length < 5) {
-                //         n = top5m.length;
-                //     }
-                //     for (int i = 0; i < n; i++) {
-                //         System.out.println(i + " Movie: " + top5m[i].getTitle() + " Rating: " + top5m[i].getRating()
-                //                 + " Sales: " + top5m[i].getSales() + " Number of reviewer: "
-                //                 + top5m[i].getnumberofreviewer());
-                //     }
-                //     System.out.println("Select movie to view review comment");
-                //     choice=sc.nextInt();
-                //     if(choice>=n || choice<0){
-                //         //System.out.println("Sorry, please select input appropriate value");
-                //         break;
-                //     }
-                //     ArrayList<Review> tempreview = top5m[choice].getreviewlist();
-                //     for(int i=0;i<tempreview.size();i++){
-                //         System.out.println("Comment "+i+": "+tempreview.get(i).getRemark());
-                //     }
+                    // switch (choice) {
+                    //     case 1:
+                    //         // Sort by sales only
+                    //         Movie keyss;
+                    //         int js;
+                    //         for (int i = 1; i < top5m.length; i++) {
+                    //             keyss = top5m[i];
+                    //             js = i - 1;
+                    //             while (js >= 0 && top5m[js].getSales() < keyss.getSales()) {
+                    //                 top5m[js + 1] = top5m[js];
+                    //                 js = js - 1;
+                    //             }
+                    //             top5m[js + 1] = keyss;
+                    //         }
+                    //         break;
+                    //     case 2:
+                    //         // Sort by Rating only
+                    //         Movie keys;
+                    //         int j;
+                    //         for (int i = 1; i < top5m.length; i++) {
+                    //             keys = top5m[i];
+                    //             j = i - 1;
+                    //             while (j >= 0 && top5m[j].getrealrating() < keys.getrealrating()) {
+                    //                 top5m[j + 1] = top5m[j];
+                    //                 j = j - 1;
+                    //             }
+                    //             top5m[j + 1] = keys;
+                    //         }
+                    //         break;
+                    // }
+                    // System.out.println("Here are the top 5 list: ");
+                    // int n = 5;
+                    // if (top5m.length < 5) {
+                    //     n = top5m.length;
+                    // }
+                    // for (int i = 0; i < n; i++) {
+                    //     System.out.println(i + " Movie: " + top5m[i].getTitle() + " Rating: " + top5m[i].getRating()
+                    //             + " Sales: " + top5m[i].getSales() + " Number of reviewer: "
+                    //             + top5m[i].getnumberofreviewer());
+                    // }
+                    // System.out.println("Select movie to view review comment");
+                    // choice=sc.nextInt();
+                    // if(choice>=n || choice<0){
+                    //     //System.out.println("Sorry, please select input appropriate value");
+                    //     break;
+                    // }
+                    // ArrayList<Review> tempreview = top5m[choice].getreviewlist();
+                    // for(int i=0;i<tempreview.size();i++){
+                    //     System.out.println("Comment "+i+": "+tempreview.get(i).getRemark());
+                    // }
 
 
                 //     break;

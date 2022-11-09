@@ -547,8 +547,13 @@ public class MoblimaApp {
                          
                     }
 
-
                     break;
+
+                case 6:
+                    System.out.println("6. List Top 5 Movies by sales OR by overall ratings");
+                    viewTop.top5();
+                    break;
+
                 case 7:
                     System.out.println("testing case for now...");
                     printTransList();
