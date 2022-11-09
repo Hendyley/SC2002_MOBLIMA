@@ -107,7 +107,7 @@ public class Movie implements Serializable{
         if(allreviews.size()>=1){
             return df.format(rating);
         }else {
-            return "Nan";
+            return "NA";
         }
     }
 
