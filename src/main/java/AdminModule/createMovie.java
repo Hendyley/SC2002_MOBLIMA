@@ -67,8 +67,8 @@ public class createMovie{
         ArrayList<Movie> movieDBList = MovieDB.getMovieListFromFile();
         if(MovieDB.isExistingMovie(movieDBList,title)){
             System.out.println("Movie in database");
-            int index = MovieDB.getMovieIndex(movieList, title);
-            Movie toAdd = movieList.get(index);
+            int index = MovieDB.getMovieIndex(movieDBList, title);
+            Movie toAdd = movieDBList.get(index);
             chosenCineplex.addMovie(toAdd);
             cList.set(cineplexindex, chosenCineplex);
             System.out.println("Adding movie from database into cineplex...");
