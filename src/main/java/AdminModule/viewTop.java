@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
 
-import MovieGoerModule.Cineplex;
 import MovieGoerModule.Movie;
 
 public class viewTop {
@@ -28,6 +27,7 @@ public class viewTop {
             sc.nextLine();  //clear buffer
             switch(choice){
                 case 1: //view by rating
+                //sorting
                     for(int i = 1; i < movieList.size(); i++){
                         for(int j = i; j > 0; j--){
                             if(movieList.get(j).getrealrating() < movieList.get(j-1).getrealrating()){
@@ -36,12 +36,15 @@ public class viewTop {
                             else break;
                         }
                     }
+                    //print
                     for(int i = 0; i < movieList.size(); i++){
                         System.out.println(i+1 + ": " + movieList.get(i).getTitle());
                     }
-                    break;
+
+                    break;  //break case
 
                 case 2: //view by sales
+                    //sorting
                     for(int i = 1; i < movieList.size(); i++){
                         for(int j = i; j > 0; j--){
                             if(movieList.get(j).getSales() < movieList.get(j-1).getSales()){
@@ -50,10 +53,12 @@ public class viewTop {
                             else break;
                         }
                     }
+                    //print
                     for(int i = 0; i < movieList.size(); i++){
                         System.out.println(i+1 + ": " + movieList.get(i).getTitle());
                     }
-                    break;
+
+                    break; //break case
 
                 case 3:
                     System.out.println("Going back...");

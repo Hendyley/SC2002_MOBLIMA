@@ -11,7 +11,6 @@ public class addHolidays {
             Holiday d = new Holiday(date);
             al.add(d);
             holidayTextDB.saveHoliday(filename, al);
-            
         } catch(Exception e){ 
             System.out.println("IOException > " + e.getMessage());
         }

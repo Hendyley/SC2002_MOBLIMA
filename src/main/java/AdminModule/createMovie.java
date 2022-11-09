@@ -1,8 +1,6 @@
 package AdminModule;
 
 import java.io.IOException;
-import java.lang.ProcessBuilder.Redirect.Type;
-import java.time.Duration;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -18,6 +16,9 @@ public class createMovie{
     }
 
     public static void create() throws ClassNotFoundException, IOException{
+        //this function is to create a movie if it does not already exist
+        //addTimeSlot is used to add timeslot for exisiting movies
+        
         //search cineplex for movie
         //check if inside cineplex then return
         //else check in global
@@ -64,7 +65,7 @@ public class createMovie{
 
         //check in global DB, if inside then add to cineplex
         ArrayList<Movie> movieDBList = MovieDB.getMovieListFromFile();
-        if(MovieDB.isExistingMovie(movieList,title)){
+        if(MovieDB.isExistingMovie(movieDBList,title)){
             System.out.println("Movie in database");
             int index = MovieDB.getMovieIndex(movieList, title);
             Movie toAdd = movieList.get(index);
@@ -118,11 +119,13 @@ public class createMovie{
         //cast
         //do while loop for entering multiple cast
         //check for minimum 2 casts
+        int min = 2;
         System.out.println("Enter the cast: (0 to exit)");
-        while(true){
+        while(min > 0){
             String cast = sc.nextLine();
             if(cast.equals("0")) break;
             castList.add(cast);
+            min--;
         }
 
         //status

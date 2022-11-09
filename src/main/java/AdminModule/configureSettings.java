@@ -22,7 +22,7 @@ public class configureSettings {
             System.out.println("1: Change ticket price");
             System.out.println("2: Add/Remove holiday");
             System.out.println("3: Add/Remove showtimes");
-            System.out.println("4: Change view listings");
+            System.out.println("4: Change view listing permissions");
             System.out.println("5: Back");
             choice = sc.nextInt();
             sc.nextLine();  //clear buffer
@@ -36,12 +36,13 @@ public class configureSettings {
                     break;
 
                 case 2:
+                    //add holidays
                     addHolidays ad = new addHolidays();
                     System.out.println("Enter a holiday date (DD/MM/YYYY):");
                     String date = sc.nextLine();
                     if(dateChecker.check(date)){ //check format
                         ad.addDay(date);
-                        System.out.println("Added successfully!");
+                        System.out.println("Holiday added successfully!");
                     }
                     else if(date.compareTo("0") == 0) break;
                     else{
@@ -52,6 +53,7 @@ public class configureSettings {
                     break;
 
                 case 3:
+                    // add/delete timeslots
                     int select = 0;
                     System.out.println("Select:");
                     System.out.println("1: Add Time Slot");
@@ -59,7 +61,7 @@ public class configureSettings {
                     System.out.println("3: Back");
                     switch(select){
                         case 1:
-                            addTimeslot.test();
+                            addTimeslot.addTS();
                             break;
 
                         case 2:

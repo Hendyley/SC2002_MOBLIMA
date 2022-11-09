@@ -13,7 +13,9 @@ public class staffLogin {
             System.out.println("2: Update an existing movie");
             System.out.println("3: Delete a movie");
             System.out.println("4: Configure system settings");
-            System.out.println("5: Sign Out");
+            System.out.println("5: View movies");
+            System.out.println("6: View Top 5 Movies");
+            System.out.println("7: Sign Out");
             choice = sc.nextInt();
             sc.nextLine(); //clear buffer
 
@@ -39,6 +41,16 @@ public class staffLogin {
                     break;
 
                 case 5:
+                    //view all movies
+                    MovieDB.printMovieList();
+                    break;
+
+                case 6:
+                    //view top
+                    viewTop.top5();
+                    break;
+
+                case 7:
                     //sign out
                     System.out.println("Signing out...");
                     break;
@@ -49,7 +61,7 @@ public class staffLogin {
                     break;
             }
             
-        } while(choice != 5);
+        } while(choice != 7);
         
         sc.close();
     }

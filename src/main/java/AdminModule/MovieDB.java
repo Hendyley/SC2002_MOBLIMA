@@ -77,4 +77,15 @@ public class MovieDB {
         System.out.printf("\n\n");
 
     }
+
+    public static void printMovies() throws ClassNotFoundException, IOException{
+        ArrayList<Movie> movieList = getMovieListFromFile();
+
+        System.out.println();
+        System.out.println("Printing out Movie List");
+        for(int i = 0; i < movieList.size(); i++){
+            System.out.println(i+1 + ": " + movieList.get(i).getTitle());
+        }
+
+    }
 }
