@@ -555,11 +555,45 @@ public class MoblimaApp {
                     break;
 
                 case 7:
-                    System.out.println("testing case for now...");
-                    printTransList();
-                    ArrayList<Transaction> tLists = getTransListFromFile();
-                    ArrayList<Object> aLists = getAccountListsFromFile();
-                    ArrayList<Movie> mmLists = MovieDB.getMovieListFromFile();
+                    movieList = MovieDB.getMovieListFromFile();
+                    int i;
+                    int choose = -1;
+                    int rating = -1;
+
+                    System.out.println("7. Give a movie review");
+                    System.out.println("List of all current movie with rating");
+                    if(movieList.size() < 1){
+                        System.out.println("No movie available");
+                    }
+                    for (i= 0; i < movieList.size(); i++) {
+                        System.out.println(
+                                i + " Movie " + movieList.get(i).getTitle() + " current rating " + movieList.get(i).getRating()
+                                        + " number of reviewer: " + movieList.get(i).getnumberofreviewer());
+                    }
+                    //movie choice
+                    do {
+                        System.out.println("Choose a movie");
+                        choose = sc.nextInt();
+                    } while (choose < 0 || choose > i);
+                    //rating choice
+                    do {
+                        System.out.println("Give a rating from 1-5");
+                        rating = sc.nextInt();                       
+                    } while (rating < 1 || rating > 5);
+
+                    sc = new Scanner(System.in);
+                    System.out.println("Give a review");
+                    String review = sc.nextLine();
+
+                    Review rv = new Review(rating, review);
+                    movieList.get(choose).addReview(rv);
+                    ArrayList<Review> reviewlist = movieList.get(choose).getreviewlist();
+                    movieList.get(choose).updatereviewscore(reviewlist);
+
+                    //update review and rating into movie.txt
+                    MovieDB.addMovieListToFile(movieList);
+                    System.out.println("Thank you for the review.");
+
                     break;
 
                 case 8:
@@ -576,6 +610,12 @@ public class MoblimaApp {
                     break;
                     
                 default:
+                    System.out.println("testing case for now...");
+                    printTransList();
+                    ArrayList<Transaction> tLists = getTransListFromFile();
+                    ArrayList<Object> aLists = getAccountListsFromFile();
+                    ArrayList<Movie> mmLists = MovieDB.getMovieListFromFile();
+                    System.out.println("end of testing case...");
                     break;
             }
 

@@ -104,7 +104,7 @@ public class Movie implements Serializable{
 
     public String getRating(){
 
-        if(allreviews.size()>1){
+        if(allreviews.size()>=1){
             return df.format(rating);
         }else {
             return "Nan";
@@ -164,10 +164,6 @@ public class Movie implements Serializable{
 
     public Status getStatus(){
         return status;
-    }
-
-    public void incrementSales(double sale) {
-        this.sales += sale;
     }
 
     public void printDetails() {
