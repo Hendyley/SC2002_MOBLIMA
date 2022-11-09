@@ -558,16 +558,16 @@ public class MovieGoerModuleApp{
 
                     System.out.println(Qty + " Booking places!");
                     break;
-                // case 5:
-                //     System.out.println("5. View Booking History");
-                //     ArrayList<Transaction> temptrans = man.getTransactionHistory();
-                //     System.out.println("Here is your Transaction :");
-                //     for(int i=0;i<temptrans.size();i++){
-                //         System.out.println("Transaction "+temptrans.get(i).getId());
-                //         temptrans.get(i).printTickets();
-                //     }
+                case 5:
+                    System.out.println("5. View Booking History");
+                    ArrayList<Transaction> temptrans = man.getTransactionHistory();
+                    System.out.println("Here is your Transaction :");
+                    for(int i=0;i<temptrans.size();i++){
+                        System.out.println("Transaction "+temptrans.get(i).getId());
+                        temptrans.get(i).printTickets();
+                    }
 
-                //     break;
+                    break;
 
                 // case 6:
                 //     System.out.println("6. List Top 5 Movies by sales OR by overall ratings");

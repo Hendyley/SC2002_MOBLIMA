@@ -317,6 +317,8 @@ public class MoblimaApp {
 
             System.out.println("Enter Option");
             option = sc.nextInt();
+            //clear buffer
+            sc.nextLine();
 
             switch (option) {
                 case 1:
@@ -501,6 +503,51 @@ public class MoblimaApp {
                     break;
                 case 4:
                     switch_case_4(cathay);
+
+                    break;
+
+                case 5:
+                    if(isLogined){
+                        ArrayList<Object> accountLists = getAccountListsFromFile();
+                        ArrayList<MovieGoer> mgList = (ArrayList<MovieGoer>)accountLists.get(1);
+                        MovieGoer man = mgList.get(currentMGIndex);
+                        ArrayList<Transaction> temptrans = man.getTransactionHistory();
+
+                        System.out.println("Here is your Transaction :");
+                        if(temptrans.size() < 1){
+                            System.out.println("No past transactions found.");
+                            break;
+                        }
+                        for(int i=0;i<temptrans.size();i++){
+                            System.out.println("Transaction "+temptrans.get(i).getId());
+                            temptrans.get(i).printTickets();
+                        }
+                    }
+
+                    if(isGuest){
+                        ArrayList<Transaction> transList = getTransListFromFile();
+                        String transID;
+                        Boolean isFound = false;
+
+                        System.out.println("Please enter your transaction id");
+                        transID = sc.nextLine();
+            
+                        System.out.println("Here is your Transaction :");
+                        for(Transaction trans : transList){
+                            if(trans.getId().equals(transID)){
+                                System.out.println("Transaction "+trans.getId());
+                                trans.printTickets();
+                                isFound = true;
+                                break;
+                            }
+                        }     
+                        if(!isFound){
+                            System.out.println("No transaction found");
+                        }
+                         
+                    }
+
+
                     break;
                 case 7:
                     System.out.println("testing case for now...");
