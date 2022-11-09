@@ -81,8 +81,8 @@ public class viewTop {
         Scanner sc = new Scanner(System.in);
         int choice;
         do {
-            System.out.println("1. by sales");
-            System.out.println("2. by rating");
+            System.out.println("1. View by sales");
+            System.out.println("2. View by rating");
             System.out.println("3: Back");
             choice = sc.nextInt();
             sc.nextLine();  //clear buffer
@@ -117,6 +117,11 @@ public class viewTop {
                         top5m.set(j+1,keys);
                     }
                     break;
+
+                case 3:
+                    System.out.println("Going back...");
+                    System.out.println();
+                    return;
 
                  default:
                     System.out.println("Invalid input!");
