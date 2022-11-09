@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
@@ -895,11 +895,11 @@ public class MoblimaApp {
         Ticket[] t = new Ticket[Qty];
         ArrayList<Object> priceLists = getPricelistFromFile();
         //String ageprice = priceLists.get(0).toString();
-        HashMap<String,Double> ageList = (HashMap<String,Double>)priceLists.get(0);
-        HashMap<String,Double> seatTypeList = (HashMap<String,Double>)priceLists.get(1);
-        HashMap<String,Double> cinemaClassList = (HashMap<String,Double>)priceLists.get(2);
-        HashMap<String,Double> movieClassList = (HashMap<String,Double>)priceLists.get(3);
-        HashMap<String,Double> dayList = (HashMap<String,Double>)priceLists.get(4);
+        LinkedHashMap<String,Double> ageList = (LinkedHashMap<String,Double>)priceLists.get(0);
+        LinkedHashMap<String,Double> seatTypeList = (LinkedHashMap<String,Double>)priceLists.get(1);
+        LinkedHashMap<String,Double> cinemaClassList = (LinkedHashMap<String,Double>)priceLists.get(2);
+        LinkedHashMap<String,Double> movieClassList = (LinkedHashMap<String,Double>)priceLists.get(3);
+        LinkedHashMap<String,Double> dayList = (LinkedHashMap<String,Double>)priceLists.get(4);
 
         for(int i=0;i<Qty;i++){
             double ticketprice = 0;

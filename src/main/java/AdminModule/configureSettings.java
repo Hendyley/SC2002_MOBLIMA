@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class configureSettings {
     private final static String PRICELIST_FILE_NAME = "Pricelist.txt";
+    private final static String VIEW_TOP5_SETTINGS_FILE_NAME = "ViewTop5Settings.txt";
     public static void main(String[] args) throws ClassNotFoundException, IOException {
         Scanner sc = new Scanner(System.in);
         int choice;
@@ -22,7 +23,7 @@ public class configureSettings {
             System.out.println("1: Change ticket price");
             System.out.println("2: Add/Remove holiday");
             System.out.println("3: Add/Remove showtimes");
-            System.out.println("4: Change view listing permissions");
+            System.out.println("4: Change view top 5 settings for moviegoer");
             System.out.println("5: Back");
             choice = sc.nextInt();
             sc.nextLine();  //clear buffer
@@ -88,6 +89,7 @@ public class configureSettings {
                 case 4:
                     //change permissions to view
                     //admin can view both by sales and by ratings
+                    updateViewTop5Settings();
                     break;
 
                 case 5:
@@ -115,7 +117,7 @@ public class configureSettings {
             FileOutputStream fileOutputStream = new FileOutputStream(PRICELIST_FILE_NAME);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
-            priceList = generateDummyData();
+            priceList = generatePriceList();
             objectOutputStream.writeObject(priceList);
             objectOutputStream.flush();
             objectOutputStream.close();
@@ -135,13 +137,13 @@ public class configureSettings {
     }
 
 
-    private static ArrayList<Object> generateDummyData() throws ClassNotFoundException, IOException{
+    private static ArrayList<Object> generatePriceList() throws ClassNotFoundException, IOException{
         ArrayList<Object> priceList = new ArrayList<>();
-        HashMap<String,Double> ageList = new HashMap<String,Double>();
-        HashMap<String,Double> seatTypeList = new HashMap<String,Double>();
-        HashMap<String,Double> cinemaClassList = new HashMap<String,Double>();
-        HashMap<String,Double> movieTypeList = new HashMap<String,Double>();
-        HashMap<String,Double> dayList = new HashMap<String,Double>();
+        LinkedHashMap<String,Double> ageList = new LinkedHashMap<String,Double>();
+        LinkedHashMap<String,Double> seatTypeList = new LinkedHashMap<String,Double>();
+        LinkedHashMap<String,Double> cinemaClassList = new LinkedHashMap<String,Double>();
+        LinkedHashMap<String,Double> movieTypeList = new LinkedHashMap<String,Double>();
+        LinkedHashMap<String,Double> dayList = new LinkedHashMap<String,Double>();
 
         ageList.put("CHILD", 2.0);
         ageList.put("STUDENT", 3.0);
@@ -181,11 +183,11 @@ public class configureSettings {
 
     private static void printPricelist() throws ClassNotFoundException, IOException{
         ArrayList<Object> pricelist = getPricelistFromFile();
-        HashMap<String,Double> ageList = (HashMap<String,Double>)pricelist.get(0);
-        HashMap<String,Double> seatTypeList = (HashMap<String,Double>)pricelist.get(1);
-        HashMap<String,Double> cinemaClassList = (HashMap<String,Double>)pricelist.get(2);
-        HashMap<String,Double> movieTypeList = (HashMap<String,Double>)pricelist.get(3);
-        HashMap<String,Double> dayList = (HashMap<String,Double>)pricelist.get(4);
+        LinkedHashMap<String,Double> ageList = (LinkedHashMap<String,Double>)pricelist.get(0);
+        LinkedHashMap<String,Double> seatTypeList = (LinkedHashMap<String,Double>)pricelist.get(1);
+        LinkedHashMap<String,Double> cinemaClassList = (LinkedHashMap<String,Double>)pricelist.get(2);
+        LinkedHashMap<String,Double> movieTypeList = (LinkedHashMap<String,Double>)pricelist.get(3);
+        LinkedHashMap<String,Double> dayList = (LinkedHashMap<String,Double>)pricelist.get(4);
 
         System.out.println("Printing out Pricelist\n");
         System.out.println("Age");
@@ -240,11 +242,11 @@ public class configureSettings {
         int choice = 0;
         Scanner sc = new Scanner(System.in);
         ArrayList<Object> pricelist = getPricelistFromFile();
-        HashMap<String,Double> ageList = (HashMap<String,Double>)pricelist.get(0);
-        HashMap<String,Double> seatTypeList = (HashMap<String,Double>)pricelist.get(1);
-        HashMap<String,Double> cinemaClassList = (HashMap<String,Double>)pricelist.get(2);
-        HashMap<String,Double> movieTypeList = (HashMap<String,Double>)pricelist.get(3);
-        HashMap<String,Double> dayList = (HashMap<String,Double>)pricelist.get(4);
+        LinkedHashMap<String,Double> ageList = (LinkedHashMap<String,Double>)pricelist.get(0);
+        LinkedHashMap<String,Double> seatTypeList = (LinkedHashMap<String,Double>)pricelist.get(1);
+        LinkedHashMap<String,Double> cinemaClassList = (LinkedHashMap<String,Double>)pricelist.get(2);
+        LinkedHashMap<String,Double> movieTypeList = (LinkedHashMap<String,Double>)pricelist.get(3);
+        LinkedHashMap<String,Double> dayList = (LinkedHashMap<String,Double>)pricelist.get(4);
 
         
         //select category to change
@@ -287,7 +289,7 @@ public class configureSettings {
                     pricelist.set(4,dayList);
                     addPricelistToFile(pricelist);
                     System.out.println("Updated successfully!");
-                    switch_case_printUpdated();
+                    switch_case_printUpdatedPriceList();
                     
                 default:
                     break;
@@ -295,7 +297,7 @@ public class configureSettings {
         }while(choice != 6);
     }
 
-    private static HashMap<String,Double> switch_case_age(HashMap<String,Double> ageList){
+    private static LinkedHashMap<String,Double> switch_case_age(LinkedHashMap<String,Double> ageList){
         int choice = 0;
         double newPrice = 0;
         Scanner sc = new Scanner(System.in);
@@ -346,7 +348,7 @@ public class configureSettings {
         return ageList;
     }
 
-    private static HashMap<String,Double> switch_case_seatType(HashMap<String,Double> seatTypeList){
+    private static LinkedHashMap<String,Double> switch_case_seatType(LinkedHashMap<String,Double> seatTypeList){
         int choice = 0;
         double newPrice = 0;
         Scanner sc = new Scanner(System.in);
@@ -398,7 +400,7 @@ public class configureSettings {
         return seatTypeList;
     }
 
-    private static HashMap<String,Double> switch_case_cinemaClass(HashMap<String,Double> cinemaClassList){
+    private static LinkedHashMap<String,Double> switch_case_cinemaClass(LinkedHashMap<String,Double> cinemaClassList){
         int choice = 0;
         double newPrice = 0;
         Scanner sc = new Scanner(System.in);
@@ -443,7 +445,7 @@ public class configureSettings {
         return cinemaClassList;
     }   
 
-    private static HashMap<String,Double> switch_case_movieType(HashMap<String,Double> movieTypeList){
+    private static LinkedHashMap<String,Double> switch_case_movieType(LinkedHashMap<String,Double> movieTypeList){
         int choice = 0;
         double newPrice = 0;
         Scanner sc = new Scanner(System.in);
@@ -495,7 +497,7 @@ public class configureSettings {
     }   
 
 
-    private static HashMap<String,Double> switch_case_day(HashMap<String,Double> dayList){
+    private static LinkedHashMap<String,Double> switch_case_day(LinkedHashMap<String,Double> dayList){
         int choice = 0;
         double newPrice = 0;
         Scanner sc = new Scanner(System.in);
@@ -556,7 +558,7 @@ public class configureSettings {
         return dayList;
     }
 
-    private static void switch_case_printUpdated() throws ClassNotFoundException, IOException{
+    private static void switch_case_printUpdatedPriceList() throws ClassNotFoundException, IOException{
         int choice = 0;
         Scanner sc = new Scanner(System.in);
 
@@ -582,6 +584,162 @@ public class configureSettings {
 
     }
 
+    private static LinkedHashMap<String,Boolean> getViewTop5SettingsFromFile() throws IOException, ClassNotFoundException{
+        LinkedHashMap<String,Boolean> viewTop5Settings;
 
+        try {
+            FileInputStream fileInputStream2 = new FileInputStream(VIEW_TOP5_SETTINGS_FILE_NAME);
+            ObjectInputStream objectInputStream2 = new ObjectInputStream(fileInputStream2);
+            viewTop5Settings = (LinkedHashMap<String,Boolean>) objectInputStream2.readObject();
+            objectInputStream2.close();
+            System.out.println("viewTop5Settings retrieved from File");
+
+        } catch (FileNotFoundException e) {
+            FileOutputStream fileOutputStream = new FileOutputStream(VIEW_TOP5_SETTINGS_FILE_NAME);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+
+            viewTop5Settings = generateViewTop5Settings();
+            objectOutputStream.writeObject(viewTop5Settings);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+            System.out.println("viewTop5Settings File not found, creating new viewTop5Settings File");
+        }
+
+        return viewTop5Settings;
+    }
+
+    private static void addViewTop5SettingsToFile(LinkedHashMap<String,Boolean> viewTop5Settings) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(VIEW_TOP5_SETTINGS_FILE_NAME);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(viewTop5Settings);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+        System.out.printf("viewTop5Settings added to File\n");
+    }
+
+    private static LinkedHashMap<String,Boolean> generateViewTop5Settings(){
+        LinkedHashMap<String,Boolean> viewTop5Settings = new LinkedHashMap<String,Boolean>();
+        viewTop5Settings.put("VIEW_BY_SALES",true);
+        viewTop5Settings.put("VIEW_BY_RATING",true);
+        return viewTop5Settings;
+    }
+
+
+    private static void printViewTop5Settings() throws ClassNotFoundException, IOException{
+        LinkedHashMap<String,Boolean> viewTop5Settings = getViewTop5SettingsFromFile();
+
+        System.out.println("View Top 5 Settings for MovieGoer");
+        System.out.println("---------------------------------");
+        for (Map.Entry<String, Boolean> seatType : viewTop5Settings.entrySet()) {
+            String key = seatType.getKey();
+            Boolean value = seatType.getValue();
+            System.out.printf("%s: %s\n",key,value ? "true" : "false");
+        }
+        System.out.println("");
+    }
+
+    private static void updateViewTop5Settings() throws IOException, ClassNotFoundException{
+        int choice = 0;
+        Scanner sc = new Scanner(System.in);
+        LinkedHashMap<String,Boolean> viewTop5Settings = getViewTop5SettingsFromFile();
+        
+        System.out.println("Original Settings:");
+        //print view5topsettings
+        printViewTop5Settings();
+        do {
+            System.out.println("What would you like to change?");
+            System.out.println("1. View by Sales for MovieGoer");
+            System.out.println("2. View by Rating for MovieGoer");
+            System.out.println("3. Done");
+            choice = sc.nextInt();
+            //clear buffer
+            sc.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("View by Sales for MovieGoer");
+                    System.out.println("1. True");
+                    System.out.println("2. False");
+                    System.out.println("Select option:");
+                    choice = sc.nextInt();
+                    //clear buffer
+                    sc.nextLine();
+
+                    switch (choice) {
+                        case 1:
+                            viewTop5Settings.replace("VIEW_BY_SALES",true);
+                            break;
+                        
+                        case 2:
+                            viewTop5Settings.replace("VIEW_BY_SALES",false);
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    break;
+                
+                case 2:
+                    System.out.println("View by Rating for MovieGoer");
+                    System.out.println("1. True");
+                    System.out.println("2. False");
+                    System.out.println("Select option:");
+                    choice = sc.nextInt();
+                    //clear buffer
+                    sc.nextLine();
+                    switch (choice) {
+                        case 1:
+                            viewTop5Settings.replace("VIEW_BY_RATING",true);
+                            break;
+                        
+                        case 2:
+                            viewTop5Settings.replace("VIEW_BY_RATING",false);
+                            break;
+
+                        default:
+                            break;
+                    }
+                    break;
+
+                case 3:
+                    addViewTop5SettingsToFile(viewTop5Settings);
+                    System.out.println("Updated successfully!");
+                    switch_case_printUpdatedVT5S();
+                    break;
+
+                default:
+                    break;
+            }
+
+        } while (choice != 3);
+    }
+
+    private static void switch_case_printUpdatedVT5S() throws ClassNotFoundException, IOException{
+        int choice = 0;
+        Scanner sc = new Scanner(System.in);
+
+        do {
+            System.out.println("Print out updated view top 5 settings?");
+            System.out.println("1. Yes.");
+            System.out.println("2. No.");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    printViewTop5Settings();
+                    break;
+
+                case 2:
+                    break;
+
+                default:
+                    break;
+            }
+
+        } while (choice != 1 && choice != 2);       
+    }
 
 }
+
+
