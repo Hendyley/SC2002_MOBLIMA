@@ -44,6 +44,10 @@ public class Transaction implements Serializable{
         return tickets;
     }
 
+    public double getTotalPrice(){
+        return totalPrice;
+    }
+
 
     public void printTickets() {
         for (int i = 0; i < tickets.length; i++) {

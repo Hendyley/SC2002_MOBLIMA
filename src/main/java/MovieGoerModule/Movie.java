@@ -98,6 +98,10 @@ public class Movie implements Serializable{
         //return rating;
     }
     
+    public void setTimeSlot(int index, TimeSlot ts){
+        this.timeslots.set(index, ts);
+    }
+
     public String getRating(){
 
         if(allreviews.size()>1){
@@ -127,6 +131,7 @@ public class Movie implements Serializable{
     public ArrayList<TimeSlot> getTimeSlots(){
         return timeslots;
     }
+
 
     public int getMovieDurationMin(){
         return movieDurationMin;

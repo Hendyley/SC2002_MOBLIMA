@@ -43,19 +43,6 @@ public class MovieGoer extends Account{
         return email;
     }
 
-    public void setAge(int age){
-        //CHILD, ADULT, SENIOR, STUDENT
-        this.age = age;
-        if(age>50){
-            agetype = AgeOfMovieGoer.SENIOR;
-        } else if (age>20) {
-            agetype = AgeOfMovieGoer.ADULT;
-        } else if (age>10) {
-            agetype = AgeOfMovieGoer.STUDENT;
-        } else {
-            agetype = AgeOfMovieGoer.CHILD;
-        }
-    }
     public int getAge(){return age;}
 
 
@@ -77,6 +64,25 @@ public class MovieGoer extends Account{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    public void setAge(int age){
+        //CHILD, ADULT, SENIOR, STUDENT
+        this.age = age;
+        if(age>50){
+            agetype = AgeOfMovieGoer.SENIOR;
+        } else if (age>20) {
+            agetype = AgeOfMovieGoer.ADULT;
+        } else if (age>10) {
+            agetype = AgeOfMovieGoer.STUDENT;
+        } else {
+            agetype = AgeOfMovieGoer.CHILD;
+        }
+    }
+    
+    public void addTransaction(Transaction trans){
+        this.history.add(trans);
     }
 
 

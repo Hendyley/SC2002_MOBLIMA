@@ -144,7 +144,7 @@ public class cineplexDB {
         movie1 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
             ,TypeOfMovie.BLOCKBUSTER_2D,movieDurationMin,AgeOfMovieGoer.STUDENT);
         //movie2
-        movieTitle = "Kong Fu Hustle";
+        movieTitle = "Kung Fu Hustle";
         director ="Stephen Chow";
         cast = new ArrayList<String>(Arrays.asList("Stephen Chow","Danny Chan","Yuen Wah"));
         synopsis = "When the hapless Sing (Stephen Chow) and his dim-witted pal,\n"

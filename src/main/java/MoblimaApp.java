@@ -1,29 +1,31 @@
 import java.io.*;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
 
-import MovieGoerModule.Cineplex;
-import MovieGoerModule.Movie;
-import MovieGoerModule.MovieGoer;
-import MovieGoerModule.Review;
-import MovieGoerModule.Role;
-import MovieGoerModule.TimeSlot;
-import AdminModule.Staff;
-import AdminModule.cineplexDB;
+import MovieGoerModule.*;
+import AdminModule.*;
+import static AdminModule.configureSettings.getPricelistFromFile;
 
 public class MoblimaApp {
     private final static String ACCOUNT_FILE_NAME = "AccountList.txt";
-    private final static String CINEPLEX_FILE_NAME = "Cineplex.txt";
-    private final static String PRICELIST_FILE_NAME = "Pricelist.txt";
+    private final static String GUEST_TRANSACTION_FILE_NAME = "guestTransaction.txt";
     private static Scanner sc = new Scanner(System.in);
     private static Role currentRole;
     private static boolean isLogined = false;
     private static boolean isGuest = false;
-    public String[] holidays = { "01/01/2022", "01/02/2022", "02/02/2022", "15/04/2022", "01/05/2022", "03/05/2022",
+    private static int currentMGIndex = -1;
+    private static String[] holidays = { "01/01/2022", "01/02/2022", "02/02/2022", "15/04/2022", "01/05/2022", "03/05/2022",
     "15/05/2022", "10/07/2022", "09/08/2022", "24/10/2022", "25/12/2022" };
+    private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss");
+    private static DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
     public static void main(String[] args) throws ClassNotFoundException, IOException{
         
         int loginOption;
@@ -109,6 +111,14 @@ public class MoblimaApp {
         return false;
     }
 
+    private static int getMGIndex(ArrayList<MovieGoer> mgList, String username){
+        for(int i = 0; i < mgList.size(); i++){
+            if(mgList.get(i).getUsername().equals(username)){
+                return i;
+            }
+        }
+        return -1;
+    }
 
     private static void generateDummyData() throws ClassNotFoundException, IOException{
         ArrayList<Object> accountLists = getAccountListsFromFile();
@@ -179,6 +189,7 @@ public class MoblimaApp {
                     && mg.getPassword().equals(password)) {
                 System.out.println("Login Success");
                 System.out.println();
+                currentMGIndex = getMGIndex(mgList,username);
                 currentRole = Role.MOVIEGOER;
                 isLogined = true;
                 return true;
@@ -191,6 +202,62 @@ public class MoblimaApp {
         return false;
     }
 
+
+    public static ArrayList<Transaction> getTransListFromFile() throws IOException, ClassNotFoundException{
+        ArrayList<Transaction> transList = new ArrayList<Transaction>();
+    
+        try{
+            FileInputStream fileInputStream2 = new FileInputStream(GUEST_TRANSACTION_FILE_NAME);
+            ObjectInputStream objectInputStream2 = new ObjectInputStream(fileInputStream2);
+            transList = (ArrayList<Transaction>) objectInputStream2.readObject();
+            objectInputStream2.close();
+            System.out.println("Guest Transaction List retrieved from File");           
+        }catch(FileNotFoundException e){
+            FileOutputStream fileOutputStream = new FileOutputStream(GUEST_TRANSACTION_FILE_NAME);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(transList);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+            System.out.println("Guest Transaction List File not found, creating new Guest Transaction List File");           
+        }
+    
+        return transList;
+    }
+
+    public static void addTransListToFile(ArrayList<Transaction> transList) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(GUEST_TRANSACTION_FILE_NAME);
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(transList);
+        objectOutputStream.flush();
+        objectOutputStream.close();
+        System.out.printf("Guest Transaction List added to File\n");
+    }
+    
+    public static int getTransIndex(ArrayList<Transaction> transList, String transID){
+        String currentTransID = "";
+        for(int i = 0; i < transList.size(); i++){
+            currentTransID = transList.get(i).getId();
+           if(currentTransID.equals(transID)){
+                return i;
+           };
+        }
+        return -1;
+    }
+    
+    public static void printTransList() throws ClassNotFoundException, IOException{
+        ArrayList<Transaction> transList = getTransListFromFile();
+    
+        System.out.println();
+        System.out.println("Printing out Guest Transaction List");
+        for(Transaction trans : transList){
+            System.out.printf("Transaction ID: %s", trans.getId());
+            System.out.printf("Name: %s, Mobile: %d, Email: %s", trans.getMgName(), trans.getMgMobile(), trans.getMgEmail());
+            System.out.printf("$ %.2f",trans.getTotalPrice());
+            trans.printTickets();
+        }
+        System.out.printf("\n\n");
+    
+    }
 
     public static void switch_case_login() throws ClassNotFoundException, IOException{
         String username;
@@ -223,8 +290,6 @@ public class MoblimaApp {
     private static void switch_case_moviegoer() throws ClassNotFoundException, IOException{
         ArrayList<Cineplex> cathay = cineplexDB.getCineplexListFromFile();
         Scanner sc = new Scanner(System.in);
-
-
 
         int option = 0, cinema = 0, choice = 0, Qty = 0;
         float time;
@@ -434,8 +499,20 @@ public class MoblimaApp {
                     System.out.println(ulti);
 
                     break;
+                case 4:
+                    switch_case_4(cathay);
+                    break;
+                case 7:
+                    System.out.println("testing case for now...");
+                    printTransList();
+                    ArrayList<Transaction> tLists = getTransListFromFile();
+                    ArrayList<Object> aLists = getAccountListsFromFile();
+                    ArrayList<Movie> mmLists = MovieDB.getMovieListFromFile();
+                    break;
+
                 case 8:
                     if(isLogined){
+                        currentMGIndex= -1;
                         isLogined = false;
                         System.out.println("Logged Out Successfully!");
                     }
@@ -476,4 +553,386 @@ public class MoblimaApp {
     }
 
 
+    private static void switch_case_4(ArrayList<Cineplex> cathay) throws ClassNotFoundException, IOException{
+        LocalDateTime now = LocalDateTime.now();
+        ArrayList<String> datel = new ArrayList<String>();
+        String dateS = "", seatdesc, mgName = "", mgEmail = "";
+        int j = 0, choice = 0, Qty = 0, ageChoice = 0;
+        int mgMobile = 0;
+        int index = -1;
+        AgeOfMovieGoer guestAge = AgeOfMovieGoer.CHILD;
+        //account db
+        ArrayList<Object> accountLists = getAccountListsFromFile();
+        ArrayList<MovieGoer> mgList = (ArrayList<MovieGoer>)accountLists.get(1);
+        MovieGoer mg = new MovieGoer(mgName, mgEmail);
+        if(currentMGIndex != -1){
+            mg = mgList.get(currentMGIndex);
+        }
+         
+        //movie db
+        ArrayList<Movie> globalMovieList = MovieDB.getMovieListFromFile();
+        int globalMovieIndex;
+        Movie globalMovie;
+        //cineplex db
+        Cineplex cine = null;
+        int cineIndex;
+        ArrayList<Movie> movieList;
+        Movie movie;
+        int localMovieIndex;
+        String movieTitle;
+        ArrayList<TimeSlot> ts1 = null;
+        TimeSlot tss = null;
+        //guest Transaction db
+        ArrayList<Transaction> transList = getTransListFromFile();
+        
+        System.out.println("4. Book a ticket");
+        System.out.println("Cineplex List:");
+        for(Cineplex cineplex :cathay){
+            System.out.printf("%s. %s\n",j,cineplex.getName());
+            j++;
+        }
+        do {
+            System.out.println("Select one of the cineplex index");
+            index = sc.nextInt();
+        } while (index < 0 || index > cathay.size()-1);
+        cine = cathay.get(index);
+        cineIndex = index;
+        movieList = cine.getMovieList();
+
+        if(movieList.size()==0){
+            System.out.println("No Movie is airing in this cineplex");
+            return;
+        }
+
+        System.out.println("Which movie :");
+        for (int i = 0; i < movieList.size(); i++) {
+            if( (movieList.get(i).getStatus() == Status.NOW_SHOWING || movieList.get(i).getStatus() == Status.PREVIEW) ){
+                System.out.println(i + " " + movieList.get(i).getTitle() + " " + movieList.get(i).getStatus() );
+            }
+        }
+        int moviechoice = sc.nextInt();
+        if(moviechoice >= movieList.size()){
+            System.out.println("Please Choose appropriate Movie!");
+            return;
+        }
+        movie = movieList.get(moviechoice);
+        ts1 = movie.getTimeSlots();
+        movieTitle = movie.getTitle();
+        //Age requirement check
+        if (isLogined &&  mg.getAgetype().ordinal() < movie.getAge_restriction().ordinal() ) {
+            System.out.println("Age requirement required to watch " + movie.getAge_restriction() + " Movie");
+            return;
+        }
+
+        if(isGuest){
+            do {
+                System.out.println("Age List");
+                System.out.println("1. CHILD");
+                System.out.println("2. STUDENT");
+                System.out.println("3. SENIOR");
+                System.out.println("4. ADULT");   
+                System.out.println("Select your age");
+                ageChoice = sc.nextInt();
+    
+                switch (ageChoice) {
+                    case 1:
+                        guestAge = AgeOfMovieGoer.CHILD;
+                        break;
+    
+                    case 2:
+                        guestAge = AgeOfMovieGoer.STUDENT;
+                        break;
+                
+                    case 3:
+                        guestAge = AgeOfMovieGoer.SENIOR;
+                        break;
+    
+                    case 4:
+                        guestAge = AgeOfMovieGoer.ADULT;
+                        break;               
+                    default:
+                        break;
+                }                
+            } while (ageChoice < 1 || ageChoice > 4);
+
+            if (guestAge.ordinal() < movie.getAge_restriction().ordinal() ) {
+                System.out.println("Age requirement required to watch " + movie.getAge_restriction() + " Movie");
+                return;
+            }
+
+        }
+
+        //Check booking type
+        if(movie.getStatus() == Status.COMING_SOON || movie.getStatus() == Status.END_OF_SHOWING)
+        if (ts1.size() == 0) {
+            System.out.println("The movie is coming soon or not showing now");
+            return;
+        }
+
+        System.out.println("Select a date");
+        String firstDate = ts1.get(0).getStringDate();
+        System.out.println(0 + " " + ts1.get(0).getStringDate());
+        datel.add(firstDate);
+        for (int i = 1; i < ts1.size(); i++) {
+            if (ts1.get(i - 1).getStringDate() != ts1.get(i).getStringDate()) {
+                datel.add(ts1.get(i).getStringDate());
+                System.out.println(i + " " + ts1.get(i).getStringDate());
+            }
+        }
+
+        int input = sc.nextInt();
+        dateS = datel.get(input);
+
+
+        System.out.println("Select Timeslot");
+        ArrayList<Integer> tsnum = new ArrayList<>();
+        int slot = 0;
+        for (int i = 0; i < ts1.size(); i++) {
+            if (ts1.get(i).getStringDate() == dateS) {
+                System.out.println(slot + " " + ts1.get(i).getStartTime() + "-" +ts1.get(i).getEndTime());
+                tsnum.add(i); slot++;
+            }
+        }
+        choice = sc.nextInt();
+
+        if (choice >= tsnum.size()) {
+            System.out.println("Please Choose appropriate timeslot!");
+            return;
+        }
+        tss = ts1.get(tsnum.get(choice));
+        //System.out.println("selected "+tsnum.get(choice));
+        //tss.getRoom().printSeats();
+
+
+        System.out.println("Select Qty: ");
+        Qty = sc.nextInt();
+        ArrayList<Integer> ticketagelist= new ArrayList<>();
+        for(int i=0;i<Qty;i++){
+            System.out.println("Selecting Age Category for Customer "+i);
+            System.out.println("0 for CHILD");
+            System.out.println("1 for STUDENT");
+            System.out.println("2 for SENIOR");
+            System.out.println("3 for ADULT");
+            int age = sc.nextInt();
+            if( (age>3) || (age<0) || age<movie.getAge_restriction().ordinal() ){
+                Qty=-1;
+                break;
+            }
+            ticketagelist.add(age);
+        }
+        //clear buffer
+        sc.nextLine();
+        if(Qty == -1){
+            System.out.println("Age requirement required to watch " + movie.getAge_restriction() + " Movie");
+            return;
+        }
+
+        LocalDate dt = LocalDate.parse(dateS, df);
+        Day d;
+        Integer starttime = Integer.parseInt( tss.getStartTime().substring(0,2) );
+        Integer endtime = Integer.parseInt( tss.getEndTime().substring(0,2) );
+        if (dt.getDayOfWeek() == DayOfWeek.MONDAY || dt.getDayOfWeek() == DayOfWeek.TUESDAY || dt.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
+            d = Day.MON_TO_WED;
+        } else if (dt.getDayOfWeek() == DayOfWeek.FRIDAY && ( !(starttime <= 6 && 6 <= endtime) || (starttime>6) || (endtime<6)  ) ) {
+            d = Day.FRI_BEFORE_6;
+        } else if (dt.getDayOfWeek() == DayOfWeek.THURSDAY) {
+            d = Day.THURS;
+        }  else {
+            d = Day.REMAINING_DAYS;
+        }
+
+        for(int i=0; i<holidays.length;i++){
+            if(holidays[i].indexOf(dateS) > -1){
+                d = Day.HOLIDAY;
+            }
+        }
+
+        String transid = "Cinema :"+cine.getName()+" Movie title :"+movie.getTitle()+" "+tss.getairingtimeformat()+" "+d+" "+tss.getRoom().getCinemaClass()+" "+movie.getType();
+        System.out.println(transid);
+        seatdesc = tss.getRoom().getseattypedesc();
+        //System.out.println("Seatdesc : "+seatdesc);
+        String couples1 = seatdesc.substring(0,seatdesc.indexOf("Elite"));
+        String elite1 = seatdesc.substring(seatdesc.indexOf("Elite"),seatdesc.indexOf("Ulti"));
+        String ulti1 = seatdesc.substring(seatdesc.indexOf("Ulti"));
+        movie.getTimeSlots().get(tsnum.get(choice)).getRoom().printSeats();
+        //Cinema c = movie.getTimeSlots().get(tsnum.get(choice)).getRoom();
+        System.out.println(couples1);
+        System.out.println(elite1);
+        System.out.println(ulti1);
+        ArrayList<Seattype> selectedseattype = new ArrayList<>();
+        System.out.println("Select Seats: (Example: A12, B9 )");
+        for (int q = 0; q < Qty; q++) {
+            String selectseat = sc.nextLine();
+
+            int row = Integer.valueOf(selectseat.toLowerCase().substring(0, 1).charAt(0) - 96) - 1;
+            int col = Integer.parseInt(selectseat.substring(1)) - 1 ;
+            //System.out.println("Gettype : "+tss.getRoom().getseattype(row,col)+" "+row+" "+col+tss.getRoom().checkseat(row, col));
+            if ((row<10) && (col<12) ) {
+                if(!tss.getRoom().checkseat(row, col)){
+                    if(tss.getRoom().getseattype(row,col).ordinal() != Seattype.SEAT.ordinal()){
+                        q = q + 1;
+                        if((q) >= Qty){
+                            System.out.println("Sorry the seat required 2 seaters. Choose again!");
+                            q = q - 2;
+                        } else{
+                            tss.getRoom().book(row, col);
+                            selectedseattype.add(tss.getRoom().getseattype(row,col));
+                            selectedseattype.add(tss.getRoom().getseattype(row,col));
+                            System.out.println("Double seats selected!");
+                        }
+                    }
+
+                    if(tss.getRoom().getseattype(row,col).ordinal() == Seattype.SEAT.ordinal()){
+                        tss.getRoom().book(row, col);
+                        selectedseattype.add(tss.getRoom().getseattype(row,col));
+                        System.out.println("Seat selected!");
+                    }
+
+                }else{
+                    System.out.println("Sorry the seat is taken. Choose again!");
+                    q = q - 1;
+                }
+            } else {
+                System.out.println("Sorry the seat is taken. Choose again!");
+                q = q - 1;
+            }
+        }
+
+
+        //Ticket create part
+        Ticket[] t = new Ticket[Qty];
+        ArrayList<Object> priceLists = getPricelistFromFile();
+        //String ageprice = priceLists.get(0).toString();
+        HashMap<String,Double> ageList = (HashMap<String,Double>)priceLists.get(0);
+        HashMap<String,Double> seatTypeList = (HashMap<String,Double>)priceLists.get(1);
+        HashMap<String,Double> cinemaClassList = (HashMap<String,Double>)priceLists.get(2);
+        HashMap<String,Double> movieClassList = (HashMap<String,Double>)priceLists.get(3);
+        HashMap<String,Double> dayList = (HashMap<String,Double>)priceLists.get(4);
+
+        for(int i=0;i<Qty;i++){
+            double ticketprice = 0;
+            //Calculating price
+            for (Map.Entry<String, Double> age : ageList.entrySet()) {
+                String keys = age.getKey();
+                Double value = age.getValue();
+                //System.out.println(keys+" "+value+" "+ AgeOfMovieGoer.values()[ticketagelist.get(i)].toString());
+                if(keys.equals( AgeOfMovieGoer.values()[ticketagelist.get(i)].toString()) ){
+                    System.out.println("Calculating for "+AgeOfMovieGoer.values()[ticketagelist.get(i)].toString());
+                    ticketprice += value;
+                }
+            }
+            for (Map.Entry<String, Double> seatType : seatTypeList.entrySet()) {
+                String keys = seatType.getKey();
+                Double value = seatType.getValue();
+                if(keys.equals( selectedseattype.get(i).toString() )){
+                    System.out.println("Calculating for "+selectedseattype.get(i).toString());
+                    ticketprice += value;
+                }
+            }
+            for (Map.Entry<String, Double> cinemaClass : cinemaClassList.entrySet()) {
+                String keys = cinemaClass.getKey();
+                Double value = cinemaClass.getValue();
+                if(keys.equals( tss.getRoom().getCinemaClass().toString() )){
+                    System.out.println("Calculating for "+tss.getRoom().getCinemaClass().toString());
+                    ticketprice += value;
+                }
+            }
+            for (Map.Entry<String, Double> movieClass : movieClassList.entrySet()) {
+                String keys = movieClass.getKey();
+                Double value = movieClass.getValue();
+                if(keys.equals( movie.getType().toString() )){
+                    System.out.println("Calculating for "+movie.getType().toString());
+                    ticketprice += value;
+                }
+            }
+            for (Map.Entry<String, Double> day : dayList.entrySet()) {
+                String keys = day.getKey();
+                Double value = day.getValue();
+                //System.out.println(keys+" "+value+" "+ d.toString());
+                if(keys.equals( d.toString()) ){
+                    System.out.println("Calculating for "+d.toString());
+                    ticketprice += value;
+                }
+            }
+            t[i] = new Ticket(1, AgeOfMovieGoer.values()[ticketagelist.get(i)] , movie.getType(), tss.getRoom().getCinemaClass(), d, selectedseattype.get(i), ticketprice);
+            //movie.addsales(ticketprice); //add to movie
+        }
+        //Transaction trans = new Transaction(dtf.format(now).toString() +" "+ transid, t);
+        if(isLogined){
+            mgName = mg.getName();
+            mgMobile = mg.getMobile();
+            mgEmail = mg.getEmail();
+        }
+
+        if(isGuest){
+            System.out.println("Enter your name:");
+            mgName = sc.nextLine();
+            System.out.println("Enter your mobile:");
+            mgMobile = sc.nextInt();
+            //clear buffer
+            sc.nextLine();
+            System.out.println("Enter your email:");
+            mgEmail = sc.nextLine();
+        }
+        Transaction trans = new Transaction(dtf.format(now).toString() +" "+ transid,mgName,mgMobile,mgEmail,t);
+
+        if(isLogined){
+            //add transaction to account.txt
+                mg.addTransaction(trans);
+                //set mg to mgList
+                mgList.set(currentMGIndex,mg);
+                //set mgList to object.get(1) of account.txt
+                accountLists.set(1, mgList);
+                //saved object to account.txt
+                addAccountListsToFile(accountLists);
+        }
+
+        if(isGuest){
+            //add transaction to guestTransaction.txt
+                //add transaction to transactionList
+                transList.add(trans);
+                //add transactionList to file
+                addTransListToFile(transList);
+        }
+
+        //update time in cineplex.txt (local movie list inside cineplex)
+            //set timeslot to movie
+                int i = 0;
+                TimeSlot temp_ts;
+                for(i = 0; i < ts1.size(); i++){
+                    temp_ts = ts1.get(i);
+                    //since the timeslots arraylist is inside movie, which is inside of cineplex
+                    //we dont need to check movie and cineplex
+                    //and just check stringdate and starttime
+                    if(temp_ts.getStringDate().equals(tss.getStringDate()) 
+                        && temp_ts.getStartTime().equals(tss.getStartTime())){
+                            break;
+                        }
+                }
+            movie.setTimeSlot(i,tss);
+            //set cineplex.setmovie
+            localMovieIndex = MovieDB.getMovieIndex(movieList, movieTitle);
+            cine.setMovie(localMovieIndex,movie);
+            //set cineplex to cineplex List
+            cathay.set(cineIndex,cine);
+            //add cineplex list to file
+            cineplexDB.addCineplexListToFile(cathay);
+
+        //update sales in movie.txt (global movie list)
+            globalMovieIndex = MovieDB.getMovieIndex(globalMovieList, movieTitle);
+            globalMovie = globalMovieList.get(globalMovieIndex);
+            //set sales in movie
+            globalMovie.addsales(trans.getTotalPrice());
+            //set movie to movielist
+            globalMovieList.set(globalMovieIndex,globalMovie);
+            //add movielist to file
+            MovieDB.addMovieListToFile(globalMovieList);
+
+        System.out.println(Qty + " Booking places!");
+    }
+
+
+
+
+    
 }
