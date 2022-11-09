@@ -329,7 +329,7 @@ public class MoblimaApp {
 
                 case 6:
                     //view top
-                    viewTop.top5();
+                    viewTop.top5(isLogined,currentRole);
                     break;
 
                 case 7:
@@ -616,7 +616,7 @@ public class MoblimaApp {
 
                 case 6:
                     System.out.println("6. List Top 5 Movies by sales OR by overall ratings");
-                    viewTop.top5();
+                    viewTop.top5(isLogined,currentRole);
                     break;
 
                 case 7:

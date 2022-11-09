@@ -47,7 +47,7 @@ public class staffLogin {
 
                 case 6:
                     //view top
-                    viewTop.top5();
+                    // viewTop.top5();
                     break;
 
                 case 7:

@@ -584,7 +584,7 @@ public class configureSettings {
 
     }
 
-    private static LinkedHashMap<String,Boolean> getViewTop5SettingsFromFile() throws IOException, ClassNotFoundException{
+    public static LinkedHashMap<String,Boolean> getViewTop5SettingsFromFile() throws IOException, ClassNotFoundException{
         LinkedHashMap<String,Boolean> viewTop5Settings;
 
         try {
@@ -608,7 +608,7 @@ public class configureSettings {
         return viewTop5Settings;
     }
 
-    private static void addViewTop5SettingsToFile(LinkedHashMap<String,Boolean> viewTop5Settings) throws IOException {
+    public static void addViewTop5SettingsToFile(LinkedHashMap<String,Boolean> viewTop5Settings) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(VIEW_TOP5_SETTINGS_FILE_NAME);
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
         objectOutputStream.writeObject(viewTop5Settings);
