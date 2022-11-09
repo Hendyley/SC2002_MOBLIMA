@@ -21,13 +21,14 @@ public class MoblimaApp {
     private static boolean isLogined = false;
     private static boolean isGuest = false;
     private static int currentMGIndex = -1;
-    private static String[] holidays = { "01/01/2022", "01/02/2022", "02/02/2022", "15/04/2022", "01/05/2022", "03/05/2022",
-    "15/05/2022", "10/07/2022", "09/08/2022", "24/10/2022", "25/12/2022" };
+    // private static String[] holidays = { "01/01/2022", "01/02/2022", "02/02/2022", "15/04/2022", "01/05/2022", "03/05/2022",
+    // "15/05/2022", "10/07/2022", "09/08/2022", "24/10/2022", "25/12/2022" };
+    private static ArrayList<Holiday> holidayList;
     private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss");
     private static DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public static void main(String[] args) throws ClassNotFoundException, IOException{
-        
+        holidayList   = holidayTextDB.readHolidays();
         int loginOption;
 
         generateDummyData();
@@ -898,8 +899,9 @@ public class MoblimaApp {
             d = Day.REMAINING_DAYS;
         }
 
-        for(int i=0; i<holidays.length;i++){
-            if(holidays[i].indexOf(dateS) > -1){
+        for(int i=0; i<holidayList.size();i++){
+            String dateStr = holidayList.get(i).getDate();
+            if(dateStr.indexOf(dateS) > -1){
                 d = Day.HOLIDAY;
             }
         }
