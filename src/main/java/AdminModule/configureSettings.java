@@ -703,6 +703,11 @@ public class configureSettings {
                     break;
 
                 case 3:
+                    if((!viewTop5Settings.get("VIEW_BY_SALES")) && (!viewTop5Settings.get("VIEW_BY_RATING"))){
+                        System.out.println("Update Failed. One of the viewing option has to be true");
+                        choice = 0;
+                        break;
+                    }
                     addViewTop5SettingsToFile(viewTop5Settings);
                     System.out.println("Updated successfully!");
                     switch_case_printUpdatedVT5S();
