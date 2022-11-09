@@ -328,7 +328,7 @@ public class MoblimaApp {
                     System.out.println("Movie Duration: "+ movieList.get(choice).getMovieDurationMin()+ " minutes");
                     System.out.println("Movie Age Requirement: "+ movieList.get(choice).getAge_restriction());
                     System.out.println("Movie Type: "+ movieList.get(choice).getType());
-                    System.out.println("Movie Rating: " + movieList.get(choice).getRating());
+                    // System.out.println("Movie Rating: " + movieList.get(choice).getRating());
                     System.out.println("Movie Director: " + movieList.get(choice).getDirector());
                     System.out.println("Movie Synopsis: " + movieList.get(choice).getSynopsis());
                     System.out.println("Movie Airing time: ");
@@ -336,11 +336,11 @@ public class MoblimaApp {
                     for(int i=0; i<showair.size(); i++){
                         System.out.println(showair.get(i).getairingtimeformat()+" "+showair.get(i).getRoom().getCinemaClass());
                     }
-                    System.out.println("Movie Review: ");
-                    ArrayList<Review> showreview = movieList.get(choice).getreviewlist();
-                    for(int i=0; i<showreview.size(); i++){
-                        System.out.println("Comment: "+i+" "+showreview.get(i).getRemark());
-                    }
+                    // System.out.println("Movie Review: ");
+                    // ArrayList<Review> showreview = movieList.get(choice).getreviewlist();
+                    // for(int i=0; i<showreview.size(); i++){
+                    //     System.out.println("Comment: "+i+" "+showreview.get(i).getRemark());
+                    // }
                     System.out.println("");
                     break;
 
