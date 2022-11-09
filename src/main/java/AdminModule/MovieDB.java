@@ -25,6 +25,7 @@ public class MovieDB {
         }catch(FileNotFoundException e){
             FileOutputStream fileOutputStream = new FileOutputStream(MOVIE_FILE_NAME);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            movieList = generateDummyData();
             objectOutputStream.writeObject(movieList);
             objectOutputStream.flush();
             objectOutputStream.close();
@@ -87,5 +88,19 @@ public class MovieDB {
             System.out.println(i+1 + ": " + movieList.get(i).getTitle());
         }
 
+    }
+
+
+    private static ArrayList<Movie> generateDummyData(){
+        ArrayList<Movie> movieList = new ArrayList<>();
+        Movie movie;
+    
+        movie = new Movie("ONE PIECE FILM RED");
+        movieList.add(movie);
+    
+        movie = new Movie("Kung Fu Hustle");
+        movieList.add(movie);
+    
+        return movieList;
     }
 }
