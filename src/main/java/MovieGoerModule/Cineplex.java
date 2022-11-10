@@ -61,7 +61,7 @@ public class Cineplex implements Serializable{
     }
 
     public void setMovie(int index, Movie movie) {
-        this.listOfMovies.set(0, movie);
+        this.listOfMovies.set(index, movie);
     }
 
 
