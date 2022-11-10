@@ -417,7 +417,7 @@ public class MoblimaApp {
                             case 2:
                                 System.out.println("Movie lists:");
                                 for (int j = 0; j < movieList.size(); j++) {
-                                    System.out.println(j + ". " + movieList.get(j).getTitle());
+                                    System.out.println(j + ". " + movieList.get(j).getTitle()+" "+ movieList.get(j).getType()+" "+ movieList.get(j).getStatus()+" Duration:"+ movieList.get(j).getMovieDurationMin()+" Age restriction:"+  movieList.get(j).getAge_restriction());
                                     isNotFound = false;
                                 }
                                 break;
