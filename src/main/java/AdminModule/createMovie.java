@@ -13,6 +13,7 @@ import MovieGoerModule.Status;
 public class createMovie{
     public static void main(String[] args) throws ClassNotFoundException, IOException {
         create();
+        MovieDB.printMovieList();
     }
 
     public static void create() throws ClassNotFoundException, IOException{
@@ -25,58 +26,63 @@ public class createMovie{
         //if not in global, create and then add to global and local
         //else add inside local
 
-        //print out list of cineplex
+        //just check in global
+        //if not present, create
+        //then add into all cineplexes
+
         String title;
         Scanner sc = new Scanner(System.in);
-        ArrayList<Cineplex> cList = cineplexDB.getCineplexListFromFile();
-        cineplexDB.printCineplexList();
-
+        //cineplexDB.printCineplexList();
 
         //select cineplex (enter name and get index)
-        int cineplexindex;
-        Cineplex chosenCineplex;
-        while(true){
-            System.out.println("Enter the name of cineplex:");
-            String nameCineplex = sc.nextLine();
-            if(cineplexDB.isExistingCineplex(cList, nameCineplex)){
-                cineplexindex = cineplexDB.getCineplexIndex(cList, nameCineplex);
-                chosenCineplex = cList.get(cineplexindex);
-                break;
-            }
-            else{
-                System.out.println("Cineplex does not exist! Try again!");
-            }
-        }
+        // int cineplexindex;
+        // Cineplex chosenCineplex;
+        // while(true){
+        //     System.out.println("Enter the name of cineplex:");
+        //     String nameCineplex = sc.nextLine();
+        //     if(cineplexDB.isExistingCineplex(cList, nameCineplex)){
+        //         cineplexindex = cineplexDB.getCineplexIndex(cList, nameCineplex);
+        //         chosenCineplex = cList.get(cineplexindex);
+        //         break;
+        //     }
+        //     else{
+        //         System.out.println("Cineplex does not exist! Try again!");
+        //     }
+        // }
 
-        ArrayList<Movie> movieList = chosenCineplex.getMovieList();
-        while(true){
-            System.out.println("Enter movie title:");
-            title = sc.nextLine();
-            if(cineplexDB.isExistingMovie(movieList, title)){
-                System.out.println("Movie already in cineplex");
-                System.out.println("Returning...");
-                return;
-            }
-            else{
-                System.out.println("Movie not in cineplex!");
-                break;
-            }
-        }
+        // ArrayList<Movie> movieList = chosenCineplex.getMovieList();
+        // while(true){
+        //     System.out.println("Enter movie title:");
+        //     title = sc.nextLine();
+        //     if(cineplexDB.isExistingMovie(movieList, title)){
+        //         System.out.println("Movie already in cineplex");
+        //         System.out.println("Returning...");
+        //         return;
+        //     }
+        //     else{
+        //         System.out.println("Movie not in cineplex!");
+        //         break;
+        //     }
+        // }
 
         //check in global DB, if inside then add to cineplex
+        System.out.println("Enter title of movie:");
+        title = sc.nextLine();
         ArrayList<Movie> movieDBList = MovieDB.getMovieListFromFile();
         if(MovieDB.isExistingMovie(movieDBList,title)){
-            System.out.println("Movie in database");
-            int index = MovieDB.getMovieIndex(movieDBList, title);
-            Movie toAdd = movieDBList.get(index);
-            chosenCineplex.addMovie(toAdd);
-            cList.set(cineplexindex, chosenCineplex);
-            System.out.println("Adding movie from database into cineplex...");
-            cineplexDB.addCineplexListToFile(cList);
+            System.out.println("Movie is already database");
+            //int index = MovieDB.getMovieIndex(movieDBList, title);
+            //Movie toAdd = movieDBList.get(index);
+            // chosenCineplex.addMovie(toAdd);
+            // cList.set(cineplexindex, chosenCineplex);
+            // System.out.println("Adding movie from database into cineplex...");
+            // cineplexDB.addCineplexListToFile(cList);
+            System.out.println("Exiting createMovie...");
             return;
         }
         else{
             System.out.println("Movie does not exist");
+            System.out.println("Moving on to creation...");
         }
 
         String director, sypnosis;
@@ -168,7 +174,7 @@ public class createMovie{
         sypnosis = sc.nextLine();
 
         //duration
-        System.out.println("Enter the duration of the movie");
+        System.out.println("Enter the duration of the movie in minutes");
         while(true){
             movieDuration = sc.nextInt();
             if(movieDuration <= 0 || movieDuration > 480)
@@ -216,10 +222,14 @@ public class createMovie{
         MovieDB.addMovieListToFile(movieDBList);
         //MovieDB.printMovieList();
 
-        //add into cineplex
-        chosenCineplex.addMovie(toAdd);
-        cList.set(cineplexindex, chosenCineplex);
+        //add into cineplexes
         System.out.println("Adding movie into cineplex...");
+        ArrayList<Cineplex> cList = cineplexDB.getCineplexListFromFile();
+        for(int i = 0; i < cList.size(); i++){
+            Cineplex c = cList.get(i);
+            c.addMovie(toAdd);
+            cList.set(i, c);
+        }
         cineplexDB.addCineplexListToFile(cList);
 
         System.out.println("Movie successfully added!");

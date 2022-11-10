@@ -97,6 +97,14 @@ public class addTimeslot {
                 System.out.println("Movie in cineplex");
                 movieIndex = cineplexDB.getMovieIndex(movieList, title);
                 chosenMovie = movieList.get(movieIndex);
+                //check for status PREVIEW/NOW SHOWING
+                //if not do not allow addingtimeslot
+                Status status = chosenMovie.getStatus();
+                if(status == Status.END_OF_SHOWING || status == Status.COMING_SOON){
+                    System.out.println("Status of movie: " + status);
+                    System.out.println("Change the status of movie to PREVIEW/NOW_SHOWING to add time slots");
+                    System.out.println("Exiting add time slot...");
+                }
                 break;
             }
             else if(MovieDB.isExistingMovie(movieDBList, title)){
