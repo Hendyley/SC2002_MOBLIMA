@@ -920,7 +920,7 @@ public class MoblimaApp {
             if(seniorFB!=0){
                 x=x+seniorFB + " Free Tea / Coffee ";
             }
-        } else if (dt.getDayOfWeek() == DayOfWeek.FRIDAY && ( ( (starttime<18) && (endtime<18) ) || ( (starttime>18) && (endtime>18) )  ) ) {
+        } else if (dt.getDayOfWeek() == DayOfWeek.FRIDAY && ( ( (starttime<18) && (endtime<18) )   ) ) {
             d = Day.FRI_BEFORE_6;
             if(studentFB!=0){
                 x=x+studentFB + " Free 12oz Coke ";
