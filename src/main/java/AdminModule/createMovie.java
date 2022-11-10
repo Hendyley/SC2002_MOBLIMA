@@ -227,6 +227,7 @@ public class createMovie{
         ArrayList<Cineplex> cList = cineplexDB.getCineplexListFromFile();
         for(int i = 0; i < cList.size(); i++){
             Cineplex c = cList.get(i);
+            toAdd = new Movie(title, director, castList, sypnosis, status, type, movieDuration, restriction);
             c.addMovie(toAdd);
             cList.set(i, c);
         }
