@@ -934,6 +934,7 @@ public class MoblimaApp {
             d = Day.HOLIDAY;
         }
 
+
         for(int i=0; i<holidayList.size();i++){
             String dateStr = holidayList.get(i).getDate();
             if(dateStr.indexOf(dateS) > -1){
