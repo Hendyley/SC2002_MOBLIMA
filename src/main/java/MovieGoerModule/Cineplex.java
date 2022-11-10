@@ -64,6 +64,9 @@ public class Cineplex implements Serializable{
         this.listOfMovies.set(index, movie);
     }
 
+    public void removeMovie(int index){
+        this.listOfMovies.remove(index);
+    }
 
 
 }
