@@ -113,14 +113,13 @@ public class cineplexDB {
     public static ArrayList<Cineplex> generateDummyData(){
         ArrayList<Cineplex> cineplexList = new ArrayList<>();
         Cinema cinema1,cinema2,cinema3;
-        Movie movie1,movie2;
+        Movie movie1,movie2,movie3,movie4;
         String movieTitle;
         String director;
         ArrayList<String> cast;
         String synopsis;
         int movieDurationMin;
-        TimeSlot timeslot1;
-        TimeSlot timeslot2;
+        TimeSlot timeslot1,timeslot2,timeslot3,timeslot4;
         
 
         Cineplex cineplex1 = new Cineplex("Cathay AMK Hub");
@@ -152,17 +151,50 @@ public class cineplexDB {
         movieDurationMin = 98;
         movie2 = new Movie(movieTitle,director,cast,synopsis,Status.COMING_SOON
             ,TypeOfMovie.BLOCKBUSTER_2D, movieDurationMin,AgeOfMovieGoer.STUDENT);
+
+
+        //movie3
+        movieTitle = "Black Adam";
+        director ="Jaume Collet-Serra";
+        cast = new ArrayList<String>(Arrays.asList("The Rock","Sam Worthington"));
+        synopsis = "In 2600 BC, the tyrannical king Ahk-Ton of Kahndaq creates the Crown of Sabbac to attain great power. After attempting to stage a revolt, a young slave boy is given the powers of Shazam by the Council of Wizards, transforming him into Kahndaq's heroic champion, who kills Ahk-Ton and ends his reign.\n";
+        movieDurationMin = 125;
+        movie3 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
+                ,TypeOfMovie.BLOCKBUSTER_3D,movieDurationMin,AgeOfMovieGoer.ADULT);
+
+        //movie3
+        movieTitle = "Avatar: The Way of Water";
+        director ="James Cameron";
+        cast = new ArrayList<String>(Arrays.asList("Zoe Saldana","Sam Worthington"));
+        synopsis = "the second film in Cameron's Avatar franchise";
+        movieDurationMin = 190;
+        movie4 = new Movie(movieTitle,director,cast,synopsis,Status.PREVIEW
+                ,TypeOfMovie.REGULAR_2D,movieDurationMin,AgeOfMovieGoer.CHILD);
+
         //timeslot1
         timeslot1 = new TimeSlot("11/12/2022","1600",cinema1,movie1.getTitle()
             ,movie1.getMovieDurationMin(),movie1.getType());
         //timeslot2
-        timeslot2 = new TimeSlot("11/12/2022","1300",cinema3,movie2.getTitle()
+        timeslot2 = new TimeSlot("18/12/2022","1900",cinema3,movie2.getTitle()
             ,movie1.getMovieDurationMin(),movie1.getType());
+
+
+        //timeslot3
+        timeslot3 = new TimeSlot("09/08/2022","1500",cinema1,movie1.getTitle()
+                ,movie1.getMovieDurationMin(),movie1.getType());
+        //timeslot4
+        timeslot4 = new TimeSlot("14/12/2022","2000",cinema1,movie1.getTitle()
+                ,movie1.getMovieDurationMin(),movie1.getType());
+
         //settings
         movie1.addSlot(timeslot1);
         movie2.addSlot(timeslot2);
+        movie3.addSlot(timeslot3);
+        movie4.addSlot(timeslot4);
         cineplex1.addMovie(movie1);
         cineplex1.addMovie(movie2);
+        cineplex1.addMovie(movie3);
+        cineplex1.addMovie(movie4);
         
         Cineplex cineplex2 = new Cineplex("Cathay Parkway Parade");
         cinema1 = new Cinema("PP_001",ClassOfCinema.REGULAR);

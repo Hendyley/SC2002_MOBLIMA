@@ -77,10 +77,10 @@ public class addTimeslot {
         //printTimeSlot.printTS(timeslot_day);
 
         //loop movieList, print NOW_SHOWING
-        System.out.println("Movies NOW_SHOWING:");
+        System.out.println("Movies NOW_SHOWING/PREVIEW :");
         for(int i = 0; i < movieList.size(); i++){
             Movie m = movieList.get(i);
-            if(m.getStatus() == Status.NOW_SHOWING){
+            if(m.getStatus() == Status.NOW_SHOWING || m.getStatus() == Status.PREVIEW){
                 System.out.println(m.getTitle());
             }
         }
@@ -195,8 +195,8 @@ public class addTimeslot {
         //                          start---------------------end
         //start-----------------------------------------------end
 
-            TimeSlot toAdd = new TimeSlot(date, startTime, chosenRoom, title, 
-                chosenMovie.getMovieDurationMin(), chosenMovie.getType());
+            TimeSlot toAdd = new TimeSlot(date, startTime, chosenRoom, title,
+                    chosenMovie.getMovieDurationMin(), chosenMovie.getType());
             chosenMovie.addTimeSlot(toAdd);  //create set timeslot setTimeSlot(TimeSlot ts)
             chosenCineplex.setMovie(movieIndex, chosenMovie);     //add back movie w updated ts
             cList.set(cineplexindex, chosenCineplex);      //add back updated cineplex

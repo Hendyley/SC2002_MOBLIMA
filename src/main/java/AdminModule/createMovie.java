@@ -208,10 +208,10 @@ public class createMovie{
         Movie toAdd = new Movie(title, director, castList, sypnosis, status, type, movieDuration, restriction);
 
         //add into database
-        movieList.add(toAdd);
+        movieDBList.add(toAdd);
         System.out.println("Adding movie into database...");
-        MovieDB.addMovieListToFile(movieList);
-        MovieDB.printMovieList();
+        MovieDB.addMovieListToFile(movieDBList);
+        //MovieDB.printMovieList();
 
         //add into cineplex
         chosenCineplex.addMovie(toAdd);
