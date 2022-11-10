@@ -178,6 +178,5 @@ public class Movie implements Serializable{
         System.out.println(cast.get(cast.size()-1));
         System.out.println("Movie Type: " +type);
         System.out.println("Rating: " + rating);
-        System.out.println("");
     }
 }

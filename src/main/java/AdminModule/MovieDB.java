@@ -78,9 +78,8 @@ public class MovieDB {
             m.printDetails();
             System.out.printf("Ticket Sales: %s, ", m.getSales());
             System.out.printf("All Reviews: %s",m.getreviewlist());
-            System.out.printf("All Time Slots: %s",m.getTimeSlots());
+            System.out.printf("All Time Slots: %s\n\n\n",m.getTimeSlots());
         }
-        System.out.printf("\n\n");
 
     }
 

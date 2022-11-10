@@ -278,7 +278,7 @@ public class cineplexDB {
         director ="Goro Taniguchi";
         cast = new ArrayList<String>(Arrays.asList("Ikue Otani","Kaori Nazuka","Mayumi Tanaka"));
         synopsis = "Uta - the most beloved singer in the world.\n"
-        +"Her voice, which she sings with while concealing her true identity\n";
+        +"Her voice, which she sings with while concealing her true identity";
         movieDurationMin = 115;
         movie1 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
             ,TypeOfMovie.BLOCKBUSTER_2D,movieDurationMin,AgeOfMovieGoer.STUDENT);
@@ -287,7 +287,7 @@ public class cineplexDB {
         director ="Stephen Chow";
         cast = new ArrayList<String>(Arrays.asList("Stephen Chow","Danny Chan","Yuen Wah"));
         synopsis = "When the hapless Sing (Stephen Chow) and his dim-witted pal,\n"
-            +"Bone (Feng Xiaogang), try to scam the residents of Pig Sty Alley\n";
+            +"Bone (Feng Xiaogang), try to scam the residents of Pig Sty Alley";
         movieDurationMin = 98;
         movie2 = new Movie(movieTitle,director,cast,synopsis,Status.COMING_SOON
             ,TypeOfMovie.BLOCKBUSTER_2D, movieDurationMin,AgeOfMovieGoer.STUDENT);
@@ -296,7 +296,7 @@ public class cineplexDB {
         movieTitle = "Black Adam";
         director ="Jaume Collet-Serra";
         cast = new ArrayList<String>(Arrays.asList("The Rock","Sam Worthington"));
-        synopsis = "In 2600 BC, the tyrannical king Ahk-Ton of Kahndaq creates the Crown of Sabbac to attain great power. After attempting to stage a revolt, a young slave boy is given the powers of Shazam by the Council of Wizards, transforming him into Kahndaq's heroic champion, who kills Ahk-Ton and ends his reign.\n";
+        synopsis = "In 2600 BC, the tyrannical king Ahk-Ton of Kahndaq creates the Crown of Sabbac to attain great power. After attempting to stage a revolt, a young slave boy is given the powers of Shazam by the Council of Wizards, transforming him into Kahndaq's heroic champion, who kills Ahk-Ton and ends his reign.";
         movieDurationMin = 125;
         movie3 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
                 ,TypeOfMovie.BLOCKBUSTER_3D,movieDurationMin,AgeOfMovieGoer.ADULT);
