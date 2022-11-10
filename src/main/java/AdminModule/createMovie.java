@@ -120,10 +120,13 @@ public class createMovie{
         //do while loop for entering multiple cast
         //check for minimum 2 casts
         int min = 2;
-        System.out.println("Enter the cast: (0 to exit)");
-        while(min > 0){
+        System.out.println("Enter the cast (minimun 2): (0 to exit)");
+        while(true){
             String cast = sc.nextLine();
-            if(cast.equals("0")) break;
+            if(cast.equals("0") && min <= 0) break;
+            else if(cast.equals("0") &&& min > 0){
+                System.out.println("Need to enter " + min + " more cast");
+            }
             castList.add(cast);
             min--;
         }
