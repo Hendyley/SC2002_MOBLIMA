@@ -150,7 +150,6 @@ public class cineplexDB {
         movie2 = new Movie(movieTitle,director,cast,synopsis,Status.COMING_SOON
             ,TypeOfMovie.BLOCKBUSTER_2D, movieDurationMin,AgeOfMovieGoer.STUDENT);
 
-
         //movie3
         movieTitle = "Black Adam";
         director ="Jaume Collet-Serra";
@@ -160,7 +159,7 @@ public class cineplexDB {
         movie3 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
                 ,TypeOfMovie.BLOCKBUSTER_3D,movieDurationMin,AgeOfMovieGoer.ADULT);
 
-        //movie3
+        //movie4
         movieTitle = "Avatar: The Way of Water";
         director ="James Cameron";
         cast = new ArrayList<String>(Arrays.asList("Zoe Saldana","Sam Worthington"));
@@ -210,14 +209,42 @@ public class cineplexDB {
         cineplex2.setRoom(cinema2);
         cineplex2.setRoom(cinema3);
 
+        //movie1
+        movieTitle = "ONE PIECE FILM RED";
+        director ="Goro Taniguchi";
+        cast = new ArrayList<String>(Arrays.asList("Ikue Otani","Kaori Nazuka","Mayumi Tanaka"));
+        synopsis = "Uta - the most beloved singer in the world.\n"
+        +"Her voice, which she sings with while concealing her true identity\n";
+        movieDurationMin = 115;
         movie1 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
-        ,TypeOfMovie.BLOCKBUSTER_2D,movieDurationMin,AgeOfMovieGoer.STUDENT);
+            ,TypeOfMovie.BLOCKBUSTER_2D,movieDurationMin,AgeOfMovieGoer.STUDENT);
+        //movie2
+        movieTitle = "Kung Fu Hustle";
+        director ="Stephen Chow";
+        cast = new ArrayList<String>(Arrays.asList("Stephen Chow","Danny Chan","Yuen Wah"));
+        synopsis = "When the hapless Sing (Stephen Chow) and his dim-witted pal,\n"
+            +"Bone (Feng Xiaogang), try to scam the residents of Pig Sty Alley\n";
+        movieDurationMin = 98;
         movie2 = new Movie(movieTitle,director,cast,synopsis,Status.COMING_SOON
-        ,TypeOfMovie.BLOCKBUSTER_2D, movieDurationMin,AgeOfMovieGoer.STUDENT);
+            ,TypeOfMovie.BLOCKBUSTER_2D, movieDurationMin,AgeOfMovieGoer.STUDENT);
+
+        //movie3
+        movieTitle = "Black Adam";
+        director ="Jaume Collet-Serra";
+        cast = new ArrayList<String>(Arrays.asList("The Rock","Sam Worthington"));
+        synopsis = "In 2600 BC, the tyrannical king Ahk-Ton of Kahndaq creates the Crown of Sabbac to attain great power. After attempting to stage a revolt, a young slave boy is given the powers of Shazam by the Council of Wizards, transforming him into Kahndaq's heroic champion, who kills Ahk-Ton and ends his reign.\n";
+        movieDurationMin = 125;
         movie3 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
-        ,TypeOfMovie.BLOCKBUSTER_3D,movieDurationMin,AgeOfMovieGoer.ADULT);
+                ,TypeOfMovie.BLOCKBUSTER_3D,movieDurationMin,AgeOfMovieGoer.ADULT);
+
+        //movie4
+        movieTitle = "Avatar: The Way of Water";
+        director ="James Cameron";
+        cast = new ArrayList<String>(Arrays.asList("Zoe Saldana","Sam Worthington"));
+        synopsis = "the second film in Cameron's Avatar franchise";
+        movieDurationMin = 190;
         movie4 = new Movie(movieTitle,director,cast,synopsis,Status.PREVIEW
-        ,TypeOfMovie.REGULAR_2D,movieDurationMin,AgeOfMovieGoer.CHILD);
+                ,TypeOfMovie.REGULAR_2D,movieDurationMin,AgeOfMovieGoer.CHILD);
 
         cineplex2.addMovie(movie1);
         cineplex2.addMovie(movie2);
@@ -234,14 +261,42 @@ public class cineplexDB {
         cineplex3.setRoom(cinema2);
         cineplex3.setRoom(cinema3);
         
+        //movie1
+        movieTitle = "ONE PIECE FILM RED";
+        director ="Goro Taniguchi";
+        cast = new ArrayList<String>(Arrays.asList("Ikue Otani","Kaori Nazuka","Mayumi Tanaka"));
+        synopsis = "Uta - the most beloved singer in the world.\n"
+        +"Her voice, which she sings with while concealing her true identity\n";
+        movieDurationMin = 115;
         movie1 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
-        ,TypeOfMovie.BLOCKBUSTER_2D,movieDurationMin,AgeOfMovieGoer.STUDENT);
+            ,TypeOfMovie.BLOCKBUSTER_2D,movieDurationMin,AgeOfMovieGoer.STUDENT);
+        //movie2
+        movieTitle = "Kung Fu Hustle";
+        director ="Stephen Chow";
+        cast = new ArrayList<String>(Arrays.asList("Stephen Chow","Danny Chan","Yuen Wah"));
+        synopsis = "When the hapless Sing (Stephen Chow) and his dim-witted pal,\n"
+            +"Bone (Feng Xiaogang), try to scam the residents of Pig Sty Alley\n";
+        movieDurationMin = 98;
         movie2 = new Movie(movieTitle,director,cast,synopsis,Status.COMING_SOON
-        ,TypeOfMovie.BLOCKBUSTER_2D, movieDurationMin,AgeOfMovieGoer.STUDENT);
+            ,TypeOfMovie.BLOCKBUSTER_2D, movieDurationMin,AgeOfMovieGoer.STUDENT);
+
+        //movie3
+        movieTitle = "Black Adam";
+        director ="Jaume Collet-Serra";
+        cast = new ArrayList<String>(Arrays.asList("The Rock","Sam Worthington"));
+        synopsis = "In 2600 BC, the tyrannical king Ahk-Ton of Kahndaq creates the Crown of Sabbac to attain great power. After attempting to stage a revolt, a young slave boy is given the powers of Shazam by the Council of Wizards, transforming him into Kahndaq's heroic champion, who kills Ahk-Ton and ends his reign.\n";
+        movieDurationMin = 125;
         movie3 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
-        ,TypeOfMovie.BLOCKBUSTER_3D,movieDurationMin,AgeOfMovieGoer.ADULT);
+                ,TypeOfMovie.BLOCKBUSTER_3D,movieDurationMin,AgeOfMovieGoer.ADULT);
+
+        //movie4
+        movieTitle = "Avatar: The Way of Water";
+        director ="James Cameron";
+        cast = new ArrayList<String>(Arrays.asList("Zoe Saldana","Sam Worthington"));
+        synopsis = "the second film in Cameron's Avatar franchise";
+        movieDurationMin = 190;
         movie4 = new Movie(movieTitle,director,cast,synopsis,Status.PREVIEW
-        ,TypeOfMovie.REGULAR_2D,movieDurationMin,AgeOfMovieGoer.CHILD);
+                ,TypeOfMovie.REGULAR_2D,movieDurationMin,AgeOfMovieGoer.CHILD);
 
         cineplex3.addMovie(movie1);
         cineplex3.addMovie(movie2);
