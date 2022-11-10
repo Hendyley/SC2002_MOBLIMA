@@ -176,15 +176,15 @@ public class cineplexDB {
         timeslot1 = new TimeSlot("11/12/2022","1600",cinema1,movie1.getTitle()
             ,movie1.getMovieDurationMin(),movie1.getType());
         //timeslot2
-        timeslot2 = new TimeSlot("18/12/2022","1900",cinema3,movie2.getTitle()
+        timeslot2 = new TimeSlot("18/12/2022","1900",cinema2,movie2.getTitle()
             ,movie1.getMovieDurationMin(),movie1.getType());
 
 
         //timeslot3
-        timeslot3 = new TimeSlot("22/11/2022","1500",cinema1,movie1.getTitle()
+        timeslot3 = new TimeSlot("22/11/2022","1500",cinema3,movie3.getTitle()
                 ,movie1.getMovieDurationMin(),movie1.getType());
         //timeslot4
-        timeslot4 = new TimeSlot("14/12/2022","2000",cinema1,movie1.getTitle()
+        timeslot4 = new TimeSlot("14/12/2022","2000",cinema1,movie4.getTitle()
                 ,movie1.getMovieDurationMin(),movie1.getType());
 
         //settings

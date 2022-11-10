@@ -124,7 +124,7 @@ public class createMovie{
         while(true){
             String cast = sc.nextLine();
             if(cast.equals("0") && min <= 0) break;
-            else if(cast.equals("0") &&& min > 0){
+            else if(cast.equals("0") && min > 0){
                 System.out.println("Need to enter " + min + " more cast");
             }
             castList.add(cast);
