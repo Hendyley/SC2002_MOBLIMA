@@ -341,14 +341,15 @@ public class MoblimaApp {
                     break;
 
                 default:
-                    // System.out.println("testing case for now...");
-                    // printTransList();
-                    // ArrayList<Transaction> tLists = getTransListFromFile();
-                    // ArrayList<Object> aLists = getAccountListsFromFile();
-                    // ArrayList<Movie> mmLists = MovieDB.getMovieListFromFile();
-                    // ArrayList<Object> ppriceList = configureSettings.getPricelistFromFile();
-                    // LinkedHashMap<String,Boolean> vt5settings = configureSettings.getViewTop5SettingsFromFile();
-                    // System.out.println("end of testing case...");
+                // System.out.println("testing case for now...");
+                // printTransList();
+                // ArrayList<Cineplex> ccineList = cineplexDB.getCineplexListFromFile();
+                // ArrayList<Transaction> tLists = getTransListFromFile();
+                // ArrayList<Object> aLists = getAccountListsFromFile();
+                // ArrayList<Movie> mmLists = MovieDB.getMovieListFromFile();
+                // ArrayList<Object> ppriceList = configureSettings.getPricelistFromFile();
+                // LinkedHashMap<String,Boolean> vt5settings = configureSettings.getViewTop5SettingsFromFile();
+                // System.out.println("end of testing case...");
 
                     break;
             }
@@ -358,7 +359,7 @@ public class MoblimaApp {
     }
 
     private static void switch_case_moviegoer() throws ClassNotFoundException, IOException{
-        ArrayList<Cineplex> cathay = cineplexDB.getCineplexListFromFile();
+        ArrayList<Cineplex> cathay;
         Scanner sc = new Scanner(System.in);
 
         int option = 0, cinema = 0, choice = 0, Qty = 0;
@@ -368,6 +369,8 @@ public class MoblimaApp {
         ArrayList<Movie> movieList;
         Scanner s = new Scanner(System.in);
         do {
+            cathay  = cineplexDB.getCineplexListFromFile();
+
             System.out.println("********************");
             System.out.println("Movie Goer Module");
             System.out.println("1. Search/List movie");
@@ -680,14 +683,15 @@ public class MoblimaApp {
                     break;
                     
                 default:
-                    // System.out.println("testing case for now...");
-                    // printTransList();
-                    // ArrayList<Transaction> tLists = getTransListFromFile();
-                    // ArrayList<Object> aLists = getAccountListsFromFile();
-                    // ArrayList<Movie> mmLists = MovieDB.getMovieListFromFile();
-                    // ArrayList<Object> ppriceList = configureSettings.getPricelistFromFile();
-                    // LinkedHashMap<String,Boolean> vt5settings = configureSettings.getViewTop5SettingsFromFile();
-                    // System.out.println("end of testing case...");
+                    System.out.println("testing case for now...");
+                    printTransList();
+                    ArrayList<Cineplex> ccineList = cineplexDB.getCineplexListFromFile();
+                    ArrayList<Transaction> tLists = getTransListFromFile();
+                    ArrayList<Object> aLists = getAccountListsFromFile();
+                    ArrayList<Movie> mmLists = MovieDB.getMovieListFromFile();
+                    ArrayList<Object> ppriceList = configureSettings.getPricelistFromFile();
+                    LinkedHashMap<String,Boolean> vt5settings = configureSettings.getViewTop5SettingsFromFile();
+                    System.out.println("end of testing case...");
                     break;
             }
 
