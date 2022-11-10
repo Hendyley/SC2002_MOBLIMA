@@ -165,6 +165,7 @@ public class MoblimaApp {
         for(MovieGoer mg : mgList){
             System.out.printf("username: %s ,password: %s ,role: %s\n",mg.getUsername(),mg.getPassword(),mg.getRole());
             System.out.printf("name: %s ,email: %s ,mobile: %s\n",mg.getName(),mg.getEmail(),mg.getMobile());
+            System.out.printf("age: %s\n", String.valueOf(mg.getAge()) );
             System.out.printf("Transaction List: %s \n",mg.getTransactionHistory());
         }
         
