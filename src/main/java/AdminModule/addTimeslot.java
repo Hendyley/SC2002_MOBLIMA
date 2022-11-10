@@ -94,11 +94,13 @@ public class addTimeslot {
             System.out.println("Enter movie title:");
             title = sc.nextLine();
             if(cineplexDB.isExistingMovie(movieList, title)){
+                System.out.println("Movie in cineplex");
                 movieIndex = cineplexDB.getMovieIndex(movieList, title);
                 chosenMovie = movieList.get(movieIndex);
                 break;
             }
             else if(MovieDB.isExistingMovie(movieDBList, title)){
+                System.out.println("Movie in database");
                 int index = MovieDB.getMovieIndex(movieDBList, title);
                 chosenMovie = movieDBList.get(index);
             }
@@ -131,13 +133,13 @@ public class addTimeslot {
                 }
             }
             
-            if(flag) break;
+            if(flag) break; //break while loop when chosen room is correct
             else{
-                System.out.println("Room does not exist...");
+                System.out.println("Room does not exist...");   
             }
         }
 
-        //check for time slot clashes in same room
+        //get timeslots in the same room
         ArrayList<TimeSlot> roomTS = new ArrayList<TimeSlot>();
         for(TimeSlot ts : timeslot_day){
             if(ts.getRoom().equals(chosenRoom)){
@@ -152,7 +154,7 @@ public class addTimeslot {
         boolean clash = false;
         do{
             while(true){
-
+                clash = false;
                 System.out.println("Time slots:");
                 for(TimeSlot ts : roomTS){
                     System.out.println(ts.getairingtimeformat());
@@ -160,9 +162,16 @@ public class addTimeslot {
 
                 System.out.println("Enter start time:");
                 startTime = sc.nextLine();
-                if(timeChecker.isValidTime(startTime)){
+
+                //if user wants to exit
+                if(startTime.compareTo("0") == 0){
+                    System.out.println("Exiting from adding timeslot...");
+                    return; //back to configure settings
+                }
+                //check if time entered is valid format
+                else if(timeChecker.isValidTime(startTime)){
                     endTime = TimeSlot.calculateEndTime(startTime, chosenMovie.getMovieDurationMin());
-                    break;
+                    break;  //break while
                 }
                 else{
                     System.out.println("Invalid time. Try again");
@@ -175,6 +184,7 @@ public class addTimeslot {
             for(TimeSlot ts : roomTS){
                 int end = Integer.parseInt(ts.getEndTime());
                 int start = Integer.parseInt(ts.getStartTime());
+                //check for clash
                 if((startChosen >= start && startChosen <= end) || (endChosen >= start && endChosen <= end)
                     || (startChosen <= start && endChosen >= end)){
                     clash = true;
@@ -183,10 +193,9 @@ public class addTimeslot {
                 }
             }
 
-        } while(clash || startTime.compareTo("0") == 0 );
-
-        if(!clash){
-            System.out.println("Time slot successfully added!");
+        } while(clash);
+        
+        System.out.println("Time slot successfully added!");
 
         //cases for clashes
         //                  start----end
@@ -195,17 +204,12 @@ public class addTimeslot {
         //                          start---------------------end
         //start-----------------------------------------------end
 
-            TimeSlot toAdd = new TimeSlot(date, startTime, chosenRoom, title,
-                    chosenMovie.getMovieDurationMin(), chosenMovie.getType());
-            chosenMovie.addTimeSlot(toAdd);  //create set timeslot setTimeSlot(TimeSlot ts)
-            chosenCineplex.setMovie(movieIndex, chosenMovie);     //add back movie w updated ts
-            cList.set(cineplexindex, chosenCineplex);      //add back updated cineplex
-            cineplexDB.addCineplexListToFile(cList);    //write back to file
-        }
-        else{
-            System.out.println("Exiting...");
-            return; //user inputs 0 above
-        }
+        TimeSlot toAdd = new TimeSlot(date, startTime, chosenRoom, title,
+                chosenMovie.getMovieDurationMin(), chosenMovie.getType());
+        chosenMovie.addTimeSlot(toAdd);  //create set timeslot setTimeSlot(TimeSlot ts)
+        chosenCineplex.setMovie(movieIndex, chosenMovie);     //add back movie w updated ts
+        cList.set(cineplexindex, chosenCineplex);      //add back updated cineplex
+        cineplexDB.addCineplexListToFile(cList);    //write back to file
 
     }
 
