@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import MovieGoerModule.Cinema;
 import MovieGoerModule.Cineplex;
+import MovieGoerModule.ClassOfCinema;
 import MovieGoerModule.Movie;
 import MovieGoerModule.Status;
 import MovieGoerModule.TimeSlot;
@@ -129,6 +130,7 @@ public class addTimeslot {
 
         //staff enter roomID
         String chosenRoomID;
+        ClassOfCinema chosenRoomClass;
         boolean flag = false;
         Cinema chosenRoom = new Cinema();
         while(true){
@@ -136,7 +138,8 @@ public class addTimeslot {
             chosenRoomID = sc.nextLine();
             for(int i = 0; i < roomList.size(); i++){
                 if(roomList.get(i).getID().compareTo(chosenRoomID) == 0){
-                    chosenRoom = roomList.get(i);
+                    chosenRoomClass = roomList.get(i).getCinemaClass();
+                    chosenRoom = new Cinema(chosenRoomID,chosenRoomClass);
                     flag = true;
                 }
             }
