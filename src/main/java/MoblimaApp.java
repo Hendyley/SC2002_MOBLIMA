@@ -528,12 +528,13 @@ public class MoblimaApp {
                     } else {
                         System.out.println("Select a date");
                         String firstDate = slotList.get(0).getStringDate();
-                        System.out.println(0 + " " + slotList.get(0).getStringDate());
+                        System.out.println(0+" " + slotList.get(0).getStringDate());
                         dateList.add(firstDate);
                         for (int i = 1; i < slotList.size(); i++) {
                             if (slotList.get(i - 1).getStringDate() != slotList.get(i).getStringDate()) {
                                 dateList.add(slotList.get(i).getStringDate());
                                 System.out.println(i + " " + slotList.get(i).getStringDate());
+                                //System.out.println(" " + slotList.get(i).getStringDate());
                             }
                         }
 
@@ -839,12 +840,13 @@ public class MoblimaApp {
 
         System.out.println("Select a date");
         String firstDate = ts1.get(0).getStringDate();
-        System.out.println(0 + " " + ts1.get(0).getStringDate());
+        System.out.println(0+" " + ts1.get(0).getStringDate());
         datel.add(firstDate);
         for (int i = 1; i < ts1.size(); i++) {
             if (ts1.get(i - 1).getStringDate() != ts1.get(i).getStringDate()) {
                 datel.add(ts1.get(i).getStringDate());
                 System.out.println(i + " " + ts1.get(i).getStringDate());
+                //System.out.println(" " + ts1.get(i).getStringDate());
             }
         }
 
@@ -871,10 +873,11 @@ public class MoblimaApp {
         //System.out.println("selected "+tsnum.get(choice));
         //tss.getRoom().printSeats();
 
-
         System.out.println("Select Qty: ");
         Qty = sc.nextInt();
         ArrayList<Integer> ticketagelist= new ArrayList<>();
+        int studentFB = 0;
+        int seniorFB = 0;
         for(int i=0;i<Qty;i++){
             System.out.println("Selecting Age Category for Customer "+i);
             System.out.println("0 for CHILD");
@@ -886,6 +889,14 @@ public class MoblimaApp {
                 Qty=-1;
                 break;
             }
+
+            if(age==2){
+                seniorFB++;
+            }
+            if(age==1){
+                studentFB++;
+            }
+
             ticketagelist.add(age);
         }
         //clear buffer
@@ -897,16 +908,30 @@ public class MoblimaApp {
 
         LocalDate dt = LocalDate.parse(dateS, df);
         Day d;
+        String x=" ";
         Integer starttime = Integer.parseInt( tss.getStartTime().substring(0,2) );
         Integer endtime = Integer.parseInt( tss.getEndTime().substring(0,2) );
+        //System.out.println(starttime+endtime);
         if (dt.getDayOfWeek() == DayOfWeek.MONDAY || dt.getDayOfWeek() == DayOfWeek.TUESDAY || dt.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
             d = Day.MON_TO_WED;
-        } else if (dt.getDayOfWeek() == DayOfWeek.FRIDAY && ( !(starttime <= 6 && 6 <= endtime) || (starttime>6) || (endtime<6)  ) ) {
+            if(studentFB!=0){
+                x=x+studentFB + " Free 12oz Coke ";
+            }
+            if(seniorFB!=0){
+                x=x+seniorFB + " Free Tea / Coffee ";
+            }
+        } else if (dt.getDayOfWeek() == DayOfWeek.FRIDAY && ( ( (starttime<18) && (endtime<18) ) || ( (starttime>18) && (endtime>18) )  ) ) {
             d = Day.FRI_BEFORE_6;
+            if(studentFB!=0){
+                x=x+studentFB + " Free 12oz Coke ";
+            }
+            if(seniorFB!=0){
+                x=x+seniorFB + " Free Tea / Coffee ";
+            }
         } else if (dt.getDayOfWeek() == DayOfWeek.THURSDAY) {
             d = Day.THURS;
-        }  else {
-            d = Day.REMAINING_DAYS;
+        } else {//if (dt.getDayOfWeek() == DayOfWeek.SATURDAY || dt.getDayOfWeek() == DayOfWeek.SUNDAY) {
+            d = Day.HOLIDAY;
         }
 
         for(int i=0; i<holidayList.size();i++){
@@ -916,7 +941,9 @@ public class MoblimaApp {
             }
         }
 
-        String transid = "Cinema :"+cine.getName()+" Movie title :"+movie.getTitle()+" "+tss.getairingtimeformat()+" "+d+" "+tss.getRoom().getCinemaClass()+" "+movie.getType();
+
+
+        String transid = "Cinema :"+cine.getName()+" Movie title :"+movie.getTitle()+" "+tss.getairingtimeformat()+" "+d+" "+tss.getRoom().getCinemaClass()+" "+movie.getType()+x;
         System.out.println(transid);
         seatdesc = tss.getRoom().getseattypedesc();
         //System.out.println("Seatdesc : "+seatdesc);
@@ -1014,6 +1041,7 @@ public class MoblimaApp {
                     ticketprice += value;
                 }
             }
+
             for (Map.Entry<String, Double> day : dayList.entrySet()) {
                 String keys = day.getKey();
                 Double value = day.getValue();

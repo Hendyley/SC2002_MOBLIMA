@@ -70,7 +70,7 @@ public class MovieGoer extends Account{
     public void setAge(int age){
         //CHILD, ADULT, SENIOR, STUDENT
         this.age = age;
-        if(age>50){
+        if(age>54){
             agetype = AgeOfMovieGoer.SENIOR;
         } else if (age>20) {
             agetype = AgeOfMovieGoer.ADULT;

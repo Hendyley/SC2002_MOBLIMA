@@ -119,7 +119,7 @@ public class cineplexDB {
         ArrayList<String> cast;
         String synopsis;
         int movieDurationMin;
-        TimeSlot timeslot1,timeslot2,timeslot3,timeslot4;
+        TimeSlot timeslot1,timeslot2,timeslot3,timeslot4,timeslot5,timeslot6;
         
 
         ///////////////////////////// Cineplex 1
@@ -171,7 +171,7 @@ public class cineplexDB {
                 
         //timeslot1
         tempCinema =  new Cinema("AMK_001",ClassOfCinema.REGULAR);
-        timeslot1 = new TimeSlot("11/12/2022","1600",tempCinema
+        timeslot1 = new TimeSlot("18/11/2022","1600",tempCinema
             ,movie1.getTitle(),movie1.getMovieDurationMin(),movie1.getType());
 
         //timeslot2
@@ -187,14 +187,26 @@ public class cineplexDB {
 
         //timeslot4
         tempCinema = new Cinema("AMK_001",ClassOfCinema.REGULAR);
-        timeslot4 = new TimeSlot("14/12/2022","2000",tempCinema
+        timeslot4 = new TimeSlot("14/11/2022","2000",tempCinema
             ,movie4.getTitle(),movie4.getMovieDurationMin(),movie4.getType());
+
+        //timeslot5
+        tempCinema =  new Cinema("AMK_001",ClassOfCinema.REGULAR);
+        timeslot5 = new TimeSlot("18/11/2022","1200",tempCinema
+                ,movie1.getTitle(),movie1.getMovieDurationMin(),movie1.getType());
+
+        //timeslot6
+        tempCinema =  new Cinema("AMK_001",ClassOfCinema.REGULAR);
+        timeslot6 = new TimeSlot("12/11/2022","1200",tempCinema
+                ,movie1.getTitle(),movie1.getMovieDurationMin(),movie1.getType());
 
         //settings
         movie1.addSlot(timeslot1);
         movie2.addSlot(timeslot2);
         movie3.addSlot(timeslot3);
         movie4.addSlot(timeslot4);
+        movie1.addSlot(timeslot5);
+        movie1.addSlot(timeslot6);
         cineplex1.addMovie(movie1);
         cineplex1.addMovie(movie2);
         cineplex1.addMovie(movie3);
