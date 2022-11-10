@@ -122,6 +122,7 @@ public class cineplexDB {
         TimeSlot timeslot1,timeslot2,timeslot3,timeslot4;
         
 
+        ///////////////////////////// Cineplex 1
         Cineplex cineplex1 = new Cineplex("Cathay AMK Hub");
         cinema1 = new Cinema("AMK_001",ClassOfCinema.REGULAR);
         cinema2 = new Cinema("AMK_002",ClassOfCinema.DOLBY);
@@ -168,7 +169,6 @@ public class cineplexDB {
         movie4 = new Movie(movieTitle,director,cast,synopsis,Status.PREVIEW
                 ,TypeOfMovie.REGULAR_2D,movieDurationMin,AgeOfMovieGoer.CHILD);
                 
-
         //timeslot1
         tempCinema =  new Cinema("AMK_001",ClassOfCinema.REGULAR);
         timeslot1 = new TimeSlot("11/12/2022","1600",tempCinema
@@ -200,24 +200,55 @@ public class cineplexDB {
         cineplex1.addMovie(movie3);
         cineplex1.addMovie(movie4);
         
+        /////////////////////// Cineplex 2
         Cineplex cineplex2 = new Cineplex("Cathay Parkway Parade");
         cinema1 = new Cinema("PP_001",ClassOfCinema.REGULAR);
         cinema2 = new Cinema("PP_002",ClassOfCinema.DOLBY);
         cinema3 = new Cinema("PP_003",ClassOfCinema.PLATINUM);
-        //generate special seat
+
         cineplex2.setRoom(cinema1);
         cineplex2.setRoom(cinema2);
         cineplex2.setRoom(cinema3);
 
+        movie1 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
+        ,TypeOfMovie.BLOCKBUSTER_2D,movieDurationMin,AgeOfMovieGoer.STUDENT);
+        movie2 = new Movie(movieTitle,director,cast,synopsis,Status.COMING_SOON
+        ,TypeOfMovie.BLOCKBUSTER_2D, movieDurationMin,AgeOfMovieGoer.STUDENT);
+        movie3 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
+        ,TypeOfMovie.BLOCKBUSTER_3D,movieDurationMin,AgeOfMovieGoer.ADULT);
+        movie4 = new Movie(movieTitle,director,cast,synopsis,Status.PREVIEW
+        ,TypeOfMovie.REGULAR_2D,movieDurationMin,AgeOfMovieGoer.CHILD);
+
+        cineplex2.addMovie(movie1);
+        cineplex2.addMovie(movie2);
+        cineplex2.addMovie(movie3);
+        cineplex2.addMovie(movie4);
+
+        /////////////////////// Cineplex 3
         Cineplex cineplex3 = new Cineplex("Cathay West Mall");
         cinema1 = new Cinema("WM_001",ClassOfCinema.REGULAR);
         cinema2 = new Cinema("WM_002",ClassOfCinema.DOLBY);
         cinema3 = new Cinema("WM_003",ClassOfCinema.PLATINUM);
-        //generate special seat
+
         cineplex3.setRoom(cinema1);
         cineplex3.setRoom(cinema2);
         cineplex3.setRoom(cinema3);
         
+        movie1 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
+        ,TypeOfMovie.BLOCKBUSTER_2D,movieDurationMin,AgeOfMovieGoer.STUDENT);
+        movie2 = new Movie(movieTitle,director,cast,synopsis,Status.COMING_SOON
+        ,TypeOfMovie.BLOCKBUSTER_2D, movieDurationMin,AgeOfMovieGoer.STUDENT);
+        movie3 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
+        ,TypeOfMovie.BLOCKBUSTER_3D,movieDurationMin,AgeOfMovieGoer.ADULT);
+        movie4 = new Movie(movieTitle,director,cast,synopsis,Status.PREVIEW
+        ,TypeOfMovie.REGULAR_2D,movieDurationMin,AgeOfMovieGoer.CHILD);
+
+        cineplex3.addMovie(movie1);
+        cineplex3.addMovie(movie2);
+        cineplex3.addMovie(movie3);
+        cineplex3.addMovie(movie4);
+
+        ///////////////////// adding to cineplexlist
         cineplexList.add(cineplex1);
         cineplexList.add(cineplex2);
         cineplexList.add(cineplex3);
