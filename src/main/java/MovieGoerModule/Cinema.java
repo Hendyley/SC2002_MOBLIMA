@@ -20,17 +20,28 @@ public class Cinema implements Serializable{
                 seats[i][j].setSeatt(Seattype.SEAT);
             }
         }
+
+        seats[9][0].setSeatt(Seattype.COUPLE_SEAT);
+        seats[9][2].setSeatt(Seattype.COUPLE_SEAT);
+        seats[9][4].setSeatt(Seattype.COUPLE_SEAT);
+        seats[9][6].setSeatt(Seattype.COUPLE_SEAT);
+
+        seats[8][0].setSeatt(Seattype.ELITE_SEAT);
+        seats[8][2].setSeatt(Seattype.ELITE_SEAT);
+
+        seats[8][4].setSeatt(Seattype.ULTIMA_SEAT);
+        seats[8][6].setSeatt(Seattype.ULTIMA_SEAT);
     }
 
     // if different cinemas have different layouts?
-    public Cinema(int rows, int columns) {
-        seats = new Seat[rows][columns];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                seats[i][j] = new Seat();
-            }
-        }
-    }
+    // public Cinema(int rows, int columns) {
+    //     seats = new Seat[rows][columns];
+    //     for (int i = 0; i < rows; i++) {
+    //         for (int j = 0; j < columns; j++) {
+    //             seats[i][j] = new Seat();
+    //         }
+    //     }
+    // }
     public Cinema(String id, ClassOfCinema cinemaClass) {
         this.id = id;
         this.cinemaClass = cinemaClass;
@@ -41,6 +52,18 @@ public class Cinema implements Serializable{
                 seats[i][j].setSeatt(Seattype.SEAT);
             }
         }
+
+        seats[9][0].setSeatt(Seattype.COUPLE_SEAT);
+        seats[9][2].setSeatt(Seattype.COUPLE_SEAT);
+        seats[9][4].setSeatt(Seattype.COUPLE_SEAT);
+        seats[9][6].setSeatt(Seattype.COUPLE_SEAT);
+
+        seats[8][0].setSeatt(Seattype.ELITE_SEAT);
+        seats[8][2].setSeatt(Seattype.ELITE_SEAT);
+
+        seats[8][4].setSeatt(Seattype.ULTIMA_SEAT);
+        seats[8][6].setSeatt(Seattype.ULTIMA_SEAT);
+
     }
 
     public void printSeats() { // maybe a separate class?

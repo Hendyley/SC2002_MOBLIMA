@@ -112,7 +112,7 @@ public class cineplexDB {
     
     public static ArrayList<Cineplex> generateDummyData(){
         ArrayList<Cineplex> cineplexList = new ArrayList<>();
-        Cinema cinema1,cinema2,cinema3;
+        Cinema cinema1,cinema2,cinema3, tempCinema;
         Movie movie1,movie2,movie3,movie4;
         String movieTitle;
         String director;
@@ -127,9 +127,6 @@ public class cineplexDB {
         cinema2 = new Cinema("AMK_002",ClassOfCinema.DOLBY);
         cinema3 = new Cinema("AMK_003",ClassOfCinema.PLATINUM);
         //generate special seat
-        cinema1 = getGenerateSpecialSeats(cinema1);
-        cinema2 = getGenerateSpecialSeats(cinema2);
-        cinema3 = getGenerateSpecialSeats(cinema3);
         cineplex1.setRoom(cinema1);
         cineplex1.setRoom(cinema2);
         cineplex1.setRoom(cinema3);
@@ -170,22 +167,28 @@ public class cineplexDB {
         movieDurationMin = 190;
         movie4 = new Movie(movieTitle,director,cast,synopsis,Status.PREVIEW
                 ,TypeOfMovie.REGULAR_2D,movieDurationMin,AgeOfMovieGoer.CHILD);
-
+                
 
         //timeslot1
-        timeslot1 = new TimeSlot("11/12/2022","1600",cinema1,movie1.getTitle()
-            ,movie1.getMovieDurationMin(),movie1.getType());
+        tempCinema =  new Cinema("AMK_001",ClassOfCinema.REGULAR);
+        timeslot1 = new TimeSlot("11/12/2022","1600",tempCinema
+            ,movie1.getTitle(),movie1.getMovieDurationMin(),movie1.getType());
+
         //timeslot2
-        timeslot2 = new TimeSlot("18/12/2022","1900",cinema2,movie2.getTitle()
-            ,movie1.getMovieDurationMin(),movie1.getType());
+        tempCinema = new Cinema("AMK_002",ClassOfCinema.DOLBY);
+        timeslot2 = new TimeSlot("18/12/2022","1900",tempCinema
+            ,movie2.getTitle(),movie1.getMovieDurationMin(),movie1.getType());
 
 
         //timeslot3
-        timeslot3 = new TimeSlot("22/11/2022","1500",cinema3,movie3.getTitle()
-                ,movie1.getMovieDurationMin(),movie1.getType());
+        tempCinema = new Cinema("AMK_003",ClassOfCinema.PLATINUM);
+        timeslot3 = new TimeSlot("22/11/2022","1500",tempCinema
+            ,movie3.getTitle(),movie1.getMovieDurationMin(),movie1.getType());
+
         //timeslot4
-        timeslot4 = new TimeSlot("14/12/2022","2000",cinema1,movie4.getTitle()
-                ,movie1.getMovieDurationMin(),movie1.getType());
+        tempCinema = new Cinema("AMK_001",ClassOfCinema.REGULAR);
+        timeslot4 = new TimeSlot("14/12/2022","2000",tempCinema
+            ,movie4.getTitle(),movie1.getMovieDurationMin(),movie1.getType());
 
         //settings
         movie1.addSlot(timeslot1);
@@ -202,9 +205,6 @@ public class cineplexDB {
         cinema2 = new Cinema("PP_002",ClassOfCinema.DOLBY);
         cinema3 = new Cinema("PP_003",ClassOfCinema.PLATINUM);
         //generate special seat
-        cinema1 = getGenerateSpecialSeats(cinema1);
-        cinema2 = getGenerateSpecialSeats(cinema2);
-        cinema3 = getGenerateSpecialSeats(cinema3);
         cineplex2.setRoom(cinema1);
         cineplex2.setRoom(cinema2);
         cineplex2.setRoom(cinema3);
@@ -214,9 +214,6 @@ public class cineplexDB {
         cinema2 = new Cinema("WM_002",ClassOfCinema.DOLBY);
         cinema3 = new Cinema("WM_003",ClassOfCinema.PLATINUM);
         //generate special seat
-        cinema1 = getGenerateSpecialSeats(cinema1);
-        cinema2 = getGenerateSpecialSeats(cinema2);
-        cinema3 = getGenerateSpecialSeats(cinema3);
         cineplex3.setRoom(cinema1);
         cineplex3.setRoom(cinema2);
         cineplex3.setRoom(cinema3);
@@ -226,21 +223,6 @@ public class cineplexDB {
         cineplexList.add(cineplex3);
         
         return cineplexList;
-    }
-
-    private static Cinema getGenerateSpecialSeats(Cinema roomstyle){
-        roomstyle.setseattype(9,0,Seattype.COUPLE_SEAT);
-        roomstyle.setseattype(9,2,Seattype.COUPLE_SEAT);
-        roomstyle.setseattype(9,4,Seattype.COUPLE_SEAT);
-        roomstyle.setseattype(9,6,Seattype.COUPLE_SEAT);
-
-        roomstyle.setseattype(8,0,Seattype.ELITE_SEAT);
-        roomstyle.setseattype(8,2,Seattype.ELITE_SEAT);
-
-        roomstyle.setseattype(8,4,Seattype.ULTIMA_SEAT);
-        roomstyle.setseattype(8,6,Seattype.ULTIMA_SEAT);
-        
-        return roomstyle;
     }
 
 }
