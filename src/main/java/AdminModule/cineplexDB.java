@@ -171,6 +171,7 @@ public class cineplexDB {
         movie4 = new Movie(movieTitle,director,cast,synopsis,Status.PREVIEW
                 ,TypeOfMovie.REGULAR_2D,movieDurationMin,AgeOfMovieGoer.CHILD);
 
+
         //timeslot1
         timeslot1 = new TimeSlot("11/12/2022","1600",cinema1,movie1.getTitle()
             ,movie1.getMovieDurationMin(),movie1.getType());
