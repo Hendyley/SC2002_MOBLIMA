@@ -21,16 +21,16 @@ public class Cinema implements Serializable{
             }
         }
 
-        seats[9][0].setSeatt(Seattype.COUPLE_SEAT);
-        seats[9][2].setSeatt(Seattype.COUPLE_SEAT);
-        seats[9][4].setSeatt(Seattype.COUPLE_SEAT);
-        seats[9][6].setSeatt(Seattype.COUPLE_SEAT);
+        setseattype(9,0,Seattype.COUPLE_SEAT);
+        setseattype(9,2,Seattype.COUPLE_SEAT);
+        setseattype(9,4,Seattype.COUPLE_SEAT);
+        setseattype(9,6,Seattype.COUPLE_SEAT);
 
-        seats[8][0].setSeatt(Seattype.ELITE_SEAT);
-        seats[8][2].setSeatt(Seattype.ELITE_SEAT);
+        setseattype(8,0,Seattype.ELITE_SEAT);
+        setseattype(8,2,Seattype.ELITE_SEAT);
 
-        seats[8][4].setSeatt(Seattype.ULTIMA_SEAT);
-        seats[8][6].setSeatt(Seattype.ULTIMA_SEAT);
+        setseattype(8,4,Seattype.ULTIMA_SEAT);
+        setseattype(8,6,Seattype.ULTIMA_SEAT);
     }
 
     // if different cinemas have different layouts?
@@ -53,16 +53,16 @@ public class Cinema implements Serializable{
             }
         }
 
-        seats[9][0].setSeatt(Seattype.COUPLE_SEAT);
-        seats[9][2].setSeatt(Seattype.COUPLE_SEAT);
-        seats[9][4].setSeatt(Seattype.COUPLE_SEAT);
-        seats[9][6].setSeatt(Seattype.COUPLE_SEAT);
+        setseattype(9,0,Seattype.COUPLE_SEAT);
+        setseattype(9,2,Seattype.COUPLE_SEAT);
+        setseattype(9,4,Seattype.COUPLE_SEAT);
+        setseattype(9,6,Seattype.COUPLE_SEAT);
 
-        seats[8][0].setSeatt(Seattype.ELITE_SEAT);
-        seats[8][2].setSeatt(Seattype.ELITE_SEAT);
+        setseattype(8,0,Seattype.ELITE_SEAT);
+        setseattype(8,2,Seattype.ELITE_SEAT);
 
-        seats[8][4].setSeatt(Seattype.ULTIMA_SEAT);
-        seats[8][6].setSeatt(Seattype.ULTIMA_SEAT);
+        setseattype(8,4,Seattype.ULTIMA_SEAT);
+        setseattype(8,6,Seattype.ULTIMA_SEAT);
 
     }
 
