@@ -181,7 +181,7 @@ public class cineplexDB {
 
 
         //timeslot3
-        timeslot3 = new TimeSlot("09/08/2022","1500",cinema1,movie1.getTitle()
+        timeslot3 = new TimeSlot("22/11/2022","1500",cinema1,movie1.getTitle()
                 ,movie1.getMovieDurationMin(),movie1.getType());
         //timeslot4
         timeslot4 = new TimeSlot("14/12/2022","2000",cinema1,movie1.getTitle()
