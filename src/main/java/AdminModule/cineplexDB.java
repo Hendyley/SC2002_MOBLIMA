@@ -177,18 +177,18 @@ public class cineplexDB {
         //timeslot2
         tempCinema = new Cinema("AMK_002",ClassOfCinema.DOLBY);
         timeslot2 = new TimeSlot("18/12/2022","1900",tempCinema
-            ,movie2.getTitle(),movie1.getMovieDurationMin(),movie1.getType());
+            ,movie2.getTitle(),movie2.getMovieDurationMin(),movie2.getType());
 
 
         //timeslot3
         tempCinema = new Cinema("AMK_003",ClassOfCinema.PLATINUM);
         timeslot3 = new TimeSlot("22/11/2022","1500",tempCinema
-            ,movie3.getTitle(),movie1.getMovieDurationMin(),movie1.getType());
+            ,movie3.getTitle(),movie3.getMovieDurationMin(),movie3.getType());
 
         //timeslot4
         tempCinema = new Cinema("AMK_001",ClassOfCinema.REGULAR);
         timeslot4 = new TimeSlot("14/12/2022","2000",tempCinema
-            ,movie4.getTitle(),movie1.getMovieDurationMin(),movie1.getType());
+            ,movie4.getTitle(),movie4.getMovieDurationMin(),movie4.getType());
 
         //settings
         movie1.addSlot(timeslot1);
