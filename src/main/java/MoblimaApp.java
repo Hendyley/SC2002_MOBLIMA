@@ -346,7 +346,10 @@ public class MoblimaApp {
                     // ArrayList<Transaction> tLists = getTransListFromFile();
                     // ArrayList<Object> aLists = getAccountListsFromFile();
                     // ArrayList<Movie> mmLists = MovieDB.getMovieListFromFile();
+                    // ArrayList<Object> ppriceList = configureSettings.getPricelistFromFile();
+                    // LinkedHashMap<String,Boolean> vt5settings = configureSettings.getViewTop5SettingsFromFile();
                     // System.out.println("end of testing case...");
+
                     break;
             }
             
@@ -682,6 +685,8 @@ public class MoblimaApp {
                     // ArrayList<Transaction> tLists = getTransListFromFile();
                     // ArrayList<Object> aLists = getAccountListsFromFile();
                     // ArrayList<Movie> mmLists = MovieDB.getMovieListFromFile();
+                    // ArrayList<Object> ppriceList = configureSettings.getPricelistFromFile();
+                    // LinkedHashMap<String,Boolean> vt5settings = configureSettings.getViewTop5SettingsFromFile();
                     // System.out.println("end of testing case...");
                     break;
             }

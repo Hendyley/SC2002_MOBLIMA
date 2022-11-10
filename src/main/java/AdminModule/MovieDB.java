@@ -7,8 +7,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+
+import MovieGoerModule.AgeOfMovieGoer;
 import MovieGoerModule.Movie;
+import MovieGoerModule.Status;
+import MovieGoerModule.TypeOfMovie;
 
 public class MovieDB {
     private final static String MOVIE_FILE_NAME = "Movie.txt";
@@ -93,14 +98,56 @@ public class MovieDB {
 
     private static ArrayList<Movie> generateDummyData(){
         ArrayList<Movie> movieList = new ArrayList<>();
-        Movie movie;
+        Movie movie1,movie2,movie3,movie4;
+        String movieTitle;
+        String director;
+        ArrayList<String> cast;
+        String synopsis;
+        int movieDurationMin;
     
-        movie = new Movie("ONE PIECE FILM RED");
-        movieList.add(movie);
-    
-        movie = new Movie("Kung Fu Hustle");
-        movieList.add(movie);
-    
+        //movie1
+        movieTitle = "ONE PIECE FILM RED";
+        director ="Goro Taniguchi";
+        cast = new ArrayList<String>(Arrays.asList("Ikue Otani","Kaori Nazuka","Mayumi Tanaka"));
+        synopsis = "Uta - the most beloved singer in the world.\n"
+        +"Her voice, which she sings with while concealing her true identity\n";
+        movieDurationMin = 115;
+        movie1 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
+            ,TypeOfMovie.BLOCKBUSTER_2D,movieDurationMin,AgeOfMovieGoer.STUDENT);
+        //movie2
+        movieTitle = "Kung Fu Hustle";
+        director ="Stephen Chow";
+        cast = new ArrayList<String>(Arrays.asList("Stephen Chow","Danny Chan","Yuen Wah"));
+        synopsis = "When the hapless Sing (Stephen Chow) and his dim-witted pal,\n"
+         +"Bone (Feng Xiaogang), try to scam the residents of Pig Sty Alley\n";
+        movieDurationMin = 98;
+        movie2 = new Movie(movieTitle,director,cast,synopsis,Status.COMING_SOON
+            ,TypeOfMovie.BLOCKBUSTER_2D, movieDurationMin,AgeOfMovieGoer.STUDENT);
+
+
+        //movie3
+        movieTitle = "Black Adam";
+        director ="Jaume Collet-Serra";
+        cast = new ArrayList<String>(Arrays.asList("The Rock","Sam Worthington"));
+        synopsis = "In 2600 BC, the tyrannical king Ahk-Ton of Kahndaq creates the Crown of Sabbac to attain great power. After attempting to stage a revolt, a young slave boy is given the powers of Shazam by the Council of Wizards, transforming him into Kahndaq's heroic champion, who kills Ahk-Ton and ends his reign.\n";
+        movieDurationMin = 125;
+        movie3 = new Movie(movieTitle,director,cast,synopsis,Status.NOW_SHOWING
+                ,TypeOfMovie.BLOCKBUSTER_3D,movieDurationMin,AgeOfMovieGoer.ADULT);
+
+        //movie4
+        movieTitle = "Avatar: The Way of Water";
+        director ="James Cameron";
+        cast = new ArrayList<String>(Arrays.asList("Zoe Saldana","Sam Worthington"));
+        synopsis = "the second film in Cameron's Avatar franchise";
+        movieDurationMin = 190;
+        movie4 = new Movie(movieTitle,director,cast,synopsis,Status.PREVIEW
+                ,TypeOfMovie.REGULAR_2D,movieDurationMin,AgeOfMovieGoer.CHILD);
+        
+
+        movieList.add(movie1);
+        movieList.add(movie2);
+        movieList.add(movie3);
+        movieList.add(movie4);
         return movieList;
     }
 }
