@@ -12,6 +12,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class configureSettings {
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
+        configure();
+    }
     private final static String PRICELIST_FILE_NAME = "Pricelist.txt";
     private final static String VIEW_TOP5_SETTINGS_FILE_NAME = "ViewTop5Settings.txt";
     public static void configure() throws ClassNotFoundException, IOException {
@@ -38,21 +41,62 @@ public class configureSettings {
 
                 case 2:
                     //add holidays
-                    addHolidays ad = new addHolidays();
-                    String date;
-                    while(true){
-                        System.out.println("Enter a holiday date (DD/MM/YYYY) or 0 to exit:");
-                        date = sc.nextLine();
-                        if(dateChecker.check(date)){ //check format
-                            if(holidayTextDB.isExistingHoliday(date))
-                            ad.addDay(date);
-                            System.out.println("Holiday added successfully!");
-                        }
-                        else if(date.compareTo("0") == 0) break;
-                        else{
-                            System.out.println("Invalid date! Try again!");
-                        }
+                    changeHolidays change = new changeHolidays();
+                    
+                    System.out.println("Choose an option:");
+                    System.out.println("1: Add holiday");
+                    System.out.println("2: Remove holiday");
+                    System.out.println("3: Back");
+                    int addRemove = sc.nextInt();
+                    sc.nextLine();  //clear buffer
+
+                    switch(addRemove){
+                        case 1:
+                            String date;
+                            System.out.println("Holiday list: ");
+                            holidayTextDB.printHolidays();
+                            
+                            while(true){
+                                System.out.println("Enter a holiday date (DD/MM/YYYY) or 0 to exit:");
+                                date = sc.nextLine();
+                                if(dateChecker.check(date)){ //check format
+                                    if(!holidayTextDB.isExistingHoliday(date)){
+                                        change.addDay(date);
+                                        System.out.println("Holiday added successfully!");
+                                        System.out.println("Enter 1 to print updated list");
+                                        int print = 0;
+                                        print = sc.nextInt();
+                                        sc.nextLine();  //clear buffer
+                                        if(print == 1){
+                                            System.out.println("Updated list: ");
+                                            holidayTextDB.printHolidays();
+                                        }
+                                        break;      //successfully added
+                                    }
+                                    else{
+                                        System.out.println("Holiday already in database!");
+                                    }
+                                }
+                                else if(date.compareTo("0") == 0) break;
+                                else{
+                                    System.out.println("Invalid date! Try again!");
+                                }
+                            }
+                            break;  //break add
+
+                        case 2:
+                            change.removeDay();
+                            break;  //break remove
+
+                        case 3:
+                            System.out.println("Going back...");
+                            break;
+
+                        default:
+                            System.out.println("Invalid number! Try again!");
+                            break;
                     }
+
 
                     break;  //break case
                     

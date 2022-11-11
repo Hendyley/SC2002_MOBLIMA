@@ -14,7 +14,6 @@ import MovieGoerModule.Cinema;
 import MovieGoerModule.Cineplex;
 import MovieGoerModule.ClassOfCinema;
 import MovieGoerModule.Movie;
-import MovieGoerModule.Seattype;
 import MovieGoerModule.Status;
 import MovieGoerModule.TimeSlot;
 import MovieGoerModule.TypeOfMovie;

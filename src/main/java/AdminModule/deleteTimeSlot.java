@@ -18,23 +18,38 @@ public class deleteTimeSlot {
 
         //print out list of cineplex
         ArrayList<Cineplex> cList = cineplexDB.getCineplexListFromFile();
-        cineplexDB.printCineplexList();
+        //cineplexDB.printCineplexList();
 
         //select cineplex (enter name and get index)
-        int cineplexindex;
-        while(true){
-            System.out.println("Enter the name of cineplex:");
-            String nameCineplex = sc.nextLine();
-            if(cineplexDB.isExistingCineplex(cList, nameCineplex)){
-                cineplexindex = cineplexDB.getCineplexIndex(cList, nameCineplex);
-                break;
-            }
-            else{
-                System.out.println("Cineplex does not exist! Try again!");
-            }
+        for(int i = 0; i < cList.size(); i++){
+            System.out.println(i + ": " + cList.get(i).getName());
         }
 
-        Cineplex chosenCineplex = cList.get(cineplexindex);
+        int cineplexIndex = -1;
+        while(true){
+            System.out.println("Enter the index of cineplex: ");
+            cineplexIndex = sc.nextInt();
+            sc.nextLine(); //clear buffer
+            if(cineplexIndex >= cList.size() || cineplexIndex < 0){
+                System.out.println("Invalid index! Try again");
+            }
+            else break;
+        }
+
+        // int cineplexindex;
+        // while(true){
+        //     System.out.println("Enter the name of cineplex:");
+        //     String nameCineplex = sc.nextLine();
+        //     if(cineplexDB.isExistingCineplex(cList, nameCineplex)){
+        //         cineplexindex = cineplexDB.getCineplexIndex(cList, nameCineplex);
+        //         break;
+        //     }
+        //     else{
+        //         System.out.println("Cineplex does not exist! Try again!");
+        //     }
+        // }
+
+        Cineplex chosenCineplex = cList.get(cineplexIndex);
         ArrayList<Movie> movieList = chosenCineplex.getMovieList();
 
         //print movielist
@@ -93,7 +108,7 @@ public class deleteTimeSlot {
         //remove timeslot
         movieTS.remove(removeIndex);
         chosenCineplex.setMovie(removeIndex, chosenMovie);
-        cList.set(cineplexindex, chosenCineplex);
+        cList.set(cineplexIndex, chosenCineplex);
         cineplexDB.addCineplexListToFile(cList);
 
     }

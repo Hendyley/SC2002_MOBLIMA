@@ -20,21 +20,36 @@ public class addTimeslot {
 
         //print out list of cineplex
         ArrayList<Cineplex> cList = cineplexDB.getCineplexListFromFile();
-        cineplexDB.printCineplexList();
+        //cineplexDB.printCineplexList();
 
         //select cineplex (enter name and get index)
-        int cineplexindex;
-        while(true){
-            System.out.println("Enter the name of cineplex:");
-            String nameCineplex = sc.nextLine();
-            if(cineplexDB.isExistingCineplex(cList, nameCineplex)){
-                cineplexindex = cineplexDB.getCineplexIndex(cList, nameCineplex);
-                break;
-            }
-            else{
-                System.out.println("Cineplex does not exist! Try again!");
-            }
+        for(int i = 0; i < cList.size(); i++){
+            System.out.println(i + ": " + cList.get(i).getName());
         }
+
+        int cineplexIndex = -1;
+        while(true){
+            System.out.println("Enter the index of cineplex: ");
+            cineplexIndex = sc.nextInt();
+            sc.nextLine(); //clear buffer
+            if(cineplexIndex >= cList.size() || cineplexIndex < 0){
+                System.out.println("Invalid index! Try again");
+            }
+            else break;
+        }
+
+        // int cineplexindex;
+        // while(true){
+        //     System.out.println("Enter the name of cineplex:");
+        //     String nameCineplex = sc.nextLine();
+        //     if(cineplexDB.isExistingCineplex(cList, nameCineplex)){
+        //         cineplexindex = cineplexDB.getCineplexIndex(cList, nameCineplex);
+        //         break;
+        //     }
+        //     else{
+        //         System.out.println("Cineplex does not exist! Try again!");
+        //     }
+        // }
 
         //enter a date
         System.out.println("Enter the date for showtime (DD/MM/YYYY):");
@@ -50,7 +65,7 @@ public class addTimeslot {
         }
 
         //get whole movie list
-        Cineplex chosenCineplex = cList.get(cineplexindex);
+        Cineplex chosenCineplex = cList.get(cineplexIndex);
         ArrayList<Movie> movieList = chosenCineplex.getMovieList();
 
         //create timeslot array
@@ -90,7 +105,7 @@ public class addTimeslot {
         int movieIndex;
         String title;
         Movie chosenMovie;
-        ArrayList<Movie> movieDBList = MovieDB.getMovieListFromFile();
+        //ArrayList<Movie> movieDBList = MovieDB.getMovieListFromFile();
         while(true){
             System.out.println("Enter movie title:");
             title = sc.nextLine();
@@ -108,11 +123,11 @@ public class addTimeslot {
                 }
                 break;
             }
-            else if(MovieDB.isExistingMovie(movieDBList, title)){
-                System.out.println("Movie in database");
-                int index = MovieDB.getMovieIndex(movieDBList, title);
-                chosenMovie = movieDBList.get(index);
-            }
+            // else if(MovieDB.isExistingMovie(movieDBList, title)){
+            //     System.out.println("Movie in database");
+            //     int index = MovieDB.getMovieIndex(movieDBList, title);
+            //     chosenMovie = movieDBList.get(index);
+            // }
             else{
                 System.out.println("Movie does not exist. Try again.");
             }
@@ -219,7 +234,7 @@ public class addTimeslot {
                 chosenMovie.getMovieDurationMin(), chosenMovie.getType());
         chosenMovie.addTimeSlot(toAdd);  //create set timeslot setTimeSlot(TimeSlot ts)
         chosenCineplex.setMovie(movieIndex, chosenMovie);     //add back movie w updated ts
-        cList.set(cineplexindex, chosenCineplex);      //add back updated cineplex
+        cList.set(cineplexIndex, chosenCineplex);      //add back updated cineplex
         cineplexDB.addCineplexListToFile(cList);    //write back to file
 
     }

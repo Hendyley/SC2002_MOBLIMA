@@ -79,4 +79,12 @@ public class holidayTextDB {
 		}
 		return false; //holiday does not exist
 	}
+
+	public static void printHolidays() throws IOException{
+		ArrayList<Holiday> days = readHolidays();
+		for(Holiday h : days){
+			System.out.println(h.getDate());
+		}
+		System.out.println();
+	}
 }
