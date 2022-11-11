@@ -107,9 +107,16 @@ public class deleteTimeSlot {
         System.out.println("Time slot successfully removed!");
         //remove timeslot
         movieTS.remove(removeIndex);
-        chosenCineplex.setMovie(removeIndex, chosenMovie);
+
+        chosenCineplex.setMovie(movieIndex, chosenMovie);
         cList.set(cineplexIndex, chosenCineplex);
         cineplexDB.addCineplexListToFile(cList);
+
+        System.out.println("Updated timeslots for movie");
+        for(int i = 0; i < movieTS.size(); i++){
+            System.out.println(i + ": " + movieTS.get(i).getairingtimeformat());
+        }
+
 
     }
 }

@@ -168,7 +168,7 @@ public class addTimeslot {
         //get timeslots in the same room
         ArrayList<TimeSlot> roomTS = new ArrayList<TimeSlot>();
         for(TimeSlot ts : timeslot_day){
-            if(ts.getRoom().equals(chosenRoom)){
+            if(ts.getRoom().getID().equals(chosenRoomID)){
                 roomTS.add(ts);
             }
         }
@@ -236,6 +236,12 @@ public class addTimeslot {
         chosenCineplex.setMovie(movieIndex, chosenMovie);     //add back movie w updated ts
         cList.set(cineplexIndex, chosenCineplex);      //add back updated cineplex
         cineplexDB.addCineplexListToFile(cList);    //write back to file
+
+        //print to check
+        System.out.println("Updated timeslots for movie");
+        for(TimeSlot ts : chosenMovie.getTimeSlots()){
+            System.out.println(ts.getairingtimeformat());
+        }
 
     }
 
