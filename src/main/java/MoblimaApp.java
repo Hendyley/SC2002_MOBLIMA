@@ -514,7 +514,10 @@ public class MoblimaApp {
                     System.out.println("Which movie :");
 
                     for (int i = 0; i < cinename.getMovieList().size(); i++) {
-                        System.out.println(i + " " + cinename.getMovieList().get(i).getTitle());
+                        if((cinename.getMovieList().get(i).getStatus() == Status.NOW_SHOWING)
+                            || (cinename.getMovieList().get(i).getStatus() == Status.PREVIEW)){
+                            System.out.println(i + " " + cinename.getMovieList().get(i).getTitle());
+                        }
                     }
                     int movieSelection = sc.nextInt();
                     if (movieSelection >= cinename.getMovieList().size()) {
