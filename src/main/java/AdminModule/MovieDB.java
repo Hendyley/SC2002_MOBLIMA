@@ -76,11 +76,8 @@ public class MovieDB {
         System.out.println("Printing out Movie List");
         for(Movie m : movieList){
             m.printDetails();
-            System.out.printf("Ticket Sales: %s, ", m.getSales());
-            System.out.printf("All Reviews: %s",m.getreviewlist());
-            System.out.printf("All Time Slots: %s\n\n\n",m.getTimeSlots());
+            System.out.printf("Ticket Sales: %.2f, \n\n\n", m.getSales());
         }
-
     }
 
     public static void printMovies() throws ClassNotFoundException, IOException{
