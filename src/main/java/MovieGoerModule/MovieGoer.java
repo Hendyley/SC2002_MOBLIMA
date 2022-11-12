@@ -85,5 +85,11 @@ public class MovieGoer extends Account{
         this.history.add(trans);
     }
 
-
+    public void printUserDetails(){
+        System.out.printf("Username: %s\n",super.getUsername());
+        System.out.printf("Role: %s\n",super.getRole());
+        System.out.printf("Name: %s\n",this.name);
+        System.out.printf("Mobile: %d\n",this.mobile);
+        System.out.printf("Email: %s\n",this.email);
+    }
 }

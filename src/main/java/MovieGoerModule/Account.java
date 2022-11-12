@@ -3,7 +3,7 @@ package MovieGoerModule;
 import java.io.Serializable;
 import java.util.Set;
 
-public class Account implements Serializable{
+public abstract class Account implements Serializable{
     private String username;
     private String password;
     private Role role;
@@ -28,4 +28,6 @@ public class Account implements Serializable{
     public void setRole(Role role){
         this.role = role;
     }
+
+    public abstract void printUserDetails();
 }

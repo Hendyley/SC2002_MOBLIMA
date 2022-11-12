@@ -9,4 +9,8 @@ public class Staff extends Account {
         super.setRole(Role.ADMIN);
     }
 
+    public void printUserDetails(){
+        System.out.printf("Username: %s\n",super.getUsername());
+        System.out.printf("Role: %s\n",super.getRole());
+    }
 }

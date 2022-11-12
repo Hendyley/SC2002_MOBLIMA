@@ -177,6 +177,8 @@ public class MoblimaApp {
         for (Staff s : staffList) {
             if (s.getUsername().equals(username)
                     && s.getPassword().equals(password)) {
+                //for testing purpose
+                //s.printUserDetails();
                 System.out.println("Login Success");
                 System.out.println();
                 currentRole = Role.ADMIN;
@@ -188,6 +190,8 @@ public class MoblimaApp {
         for (MovieGoer mg : mgList) {
             if (mg.getUsername().equals(username)
                     && mg.getPassword().equals(password)) {
+                //for testing purpose
+                //mg.printUserDetails();
                 System.out.println("Login Success");
                 System.out.println();
                 currentMGIndex = getMGIndex(mgList,username);
